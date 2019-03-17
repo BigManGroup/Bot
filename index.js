@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const Attachment = require('discord.js');
 const config = require('./config.json');
-//const roasts = require('./roasts.json');
+const roasts = require('./roasts.json');
 const lennys = require('./lennys.json');
 const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
@@ -262,7 +262,7 @@ client.on('message', message => {
             
             break;
 
-        /*case ("roast"):
+        case ("roast"):
             var randomRoast = roasts[Math.floor(Math.random()*roasts.length)];
             if (!message.mentions.users.size){
                 return message.reply(randomRoast);
@@ -277,7 +277,7 @@ client.on('message', message => {
                 return message.channel.send(`${taggedUser}, ` + randomRoast);
             }
 
-            break;*/
+            break;
 
         case ("lenny"):
 
