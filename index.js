@@ -327,7 +327,7 @@ client.on('message', message => {
                 const taggedUser = message.mentions.users.first();
 
                 if(taggedUser == botId){
-                    return message.channel.reply("nice try faggot")
+                    return message.reply("nice try faggot")
                 }
 
                 return message.channel.send(`${taggedUser}, ` + randomRoast);
