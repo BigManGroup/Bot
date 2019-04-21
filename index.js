@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const Attachment = require('discord.js');
 const config = require('./config.json');
+const mysql = require('mysql');
 const roasts = require('./roasts.json');
 const lennys = require('./lennys.json');
 const { prefix, token } = require('./config.json');
@@ -62,7 +63,31 @@ client.once('ready', () => {
 
 client.login(token);
 
+var con = mysql.createConnection({
+  host: "remotemysql.com",
+  user: "EdKkBxI0w1",
+  password: "2eaNt36gNS",
+  database: "EdKkBxI0w1"
+});
+
+con.connect(function(err) {
+  	if (err){
+  		return console.error(err);
+  	}
+  	console.log(" Connected to MySQL..");
+
+		  	
+});
+
+
+
+
+
+
+
 const saidPlock = [];
+
+const wereChecked = [];
 
 
 
@@ -175,6 +200,37 @@ client.on('message', message => {
 
 
 
+    // Inserting:
+	// "INSERT INTO `userData` (`id`, `username`, `cash`) VALUES ('236541977863127041', 'Raven', '1000')";
+	// Creating table:
+	// "CREATE TABLE userData (id BIGINT, username VARCHAR(255), cash INT)";
+
+
+    //if(!wereChecked.includes(message.author.id)){
+
+
+
+		//var sql = "SEARCH * FROM 'userData'";
+
+	  	//con.query(sql, function (err, result, fields) {
+
+	  		/*Object.keys(result).forEach(function(key) {
+      			var row = result[key];
+	  			console.log(row);
+
+    		});*/
+	  		
+
+	    	//console.log(result);
+
+	  	//});
+
+
+    //}
+
+
+
+
 
 
 
@@ -271,7 +327,7 @@ client.on('message', message => {
                 const taggedUser = message.mentions.users.first();
 
                 if(taggedUser == botId){
-                    return message.channel.reply("nice try, faggot")
+                    return message.channel.reply("nice try faggot")
                 }
 
                 return message.channel.send(`${taggedUser}, ` + randomRoast);
@@ -314,7 +370,7 @@ client.on('message', message => {
 
         case ("help"):
 
-            message.channel.send("avatar - checccck your avatar or the person you mentioned \nroast - roast yourself or the person you mentioned \nlenny - gives you a random lenny ʕ ͡° ʖ̯ ͡°ʔ \nhownig - check how nig you are or the person you mentioned");
+            message.channel.send("avatar - check your avatar or the person you mentioned \nroast - roast yourself or the person you mentioned \nlenny - gives you a random lenny ʕ ͡° ʖ̯ ͡°ʔ \nhownig - check how nig you are or the person you mentioned \nsinners - check the list of sinners");
 
             break;
 
