@@ -724,7 +724,7 @@ client.on('message', message => {
 
         case ("help"):
 
-            message.channel.send("avatar - check your avatar or the person you mentioned \nroast - roast yourself or the person you mentioned \nlenny - gives you a random lenny ʕ ͡° ʖ̯ ͡°ʔ \nhownig - check how nig you are or the person you mentioned \nsinners - check the list of sinners");
+            message.channel.send("avatar - check your avatar or the person you mentioned \nroast - roast yourself or the person you mentioned \nlenny - gives you a random lenny ʕ ͡° ʖ̯ ͡°ʔ \nhownig - check how nig you are or the person you mentioned \nsinners - check the list of sinners \npeepee - checks out your peepee :wink: \nchangenig - change your or someone's nigrate \nchangepeepee - change the size of your or someone's schlong \nbank - check your balance");
 
             break;
 
