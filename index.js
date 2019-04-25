@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const Attachment = require('discord.js');
 const config = require('./config.json');
 const mysql = require('mysql');
-const async = require('async');
 const roasts = require('./roasts.json');
 const lennys = require('./lennys.json');
 const { prefix, token } = require('./config.json');
@@ -91,43 +90,6 @@ class Database {
         } );
     }
 }
-
-
-/*function countRows()
-{	
-	var queryResult;
-	database = new Database(mysqlConfig);
-
-  	return database.query("SELECT COUNT(*) FROM userData").then(result => {
-  		queryResult = result;
-  		return database.close();
-  	}).then(() => {
-  		console.log(queryResult);
-  	});
-};
-
-async function getNewId()
-{
-	var x = await countRows();
-	console.log(x);
-	
-	
-  	con.query("SELECT COUNT(*) FROM userData", function (err, result, fields) 
-  	{
-  		if(err) {
-	    	throw err;
-	  	} else {
-	    	console.log(result);
-	  	}
-  	});
-  	
-  	
-};*/
-
-
-
-
-
 
 
 
@@ -235,7 +197,7 @@ client.on('message', message => {
 
 
 
-    if (!message.content.startsWith(prefix) || message.author.bot/* || message.author.id != admin_id[0]*/) return;
+    if (!message.content.toLowerCase().startsWith(prefix) || message.author.bot/* || message.author.id != admin_id[0]*/) return;
     
 
     const args = message.content.slice(prefix.length).split(/ +/);
@@ -441,7 +403,7 @@ client.on('message', message => {
         		"SELECT cash FROM userData WHERE discord_id='" + `${message.author.id}` + "'"
         	).then(result => {
         		var currentCash = result[0].cash;
-        		message.channel.send(`${currentCash} Big Coins are present on your bank account`)
+        		message.reply("`" + `${currentCash}` + "`" + " Big Coins are present on your bank account")
         	}).then(() => {
         		database3.close();
         	});
@@ -631,7 +593,110 @@ client.on('message', message => {
 		break;
 		//if(message.member.roles.find(r => r.name === "big man"))
 
-		
+
+		case ("submit"):
+
+			var submittion = message.content.slice(13);
+
+			var database1 = new Database(mysqlConfig);
+			var newId2;
+			if(message.member.roles.find(r => r.name === "big man")){
+				database1.query(
+    				"SELECT COUNT(*) FROM `roasts`"
+    			).then(result => {
+    				newId2 = result[0]['COUNT(*)'] + 1;
+    				database1.query("INSERT IGNORE INTO `roasts` (`id`, `discord_id`, `username`, `roast`, `accepted`) VALUES " + "(" + "'" + `${newId2}` + "'" + "," + "'" + `${message.author.id}` + "', '" + `${message.author.username}` + "', '" + `${submittion}` + "'" + ",'1')");
+    			}).then(() => {
+    				message.reply("your roast was submitted and automatically accepted, cuz you a BIG MAN");
+    				database1.close();
+    			});
+			}else{
+				database1.query(
+    				"SELECT COUNT(*) FROM `roasts`"
+    			).then(result => {
+    				newId2 = result[0]['COUNT(*)'] + 1;
+    				database1.query("INSERT IGNORE INTO `roasts` (`id`, `discord_id`, `username`, `roast`) VALUES " + "(" + "'" + `${newId2}` + "'" + "," + "'" + `${message.author.id}` + "', '" + `${message.author.username}` + "', '" + `${submittion}` + "')");
+    			}).then(() => {
+    				message.reply("your roast was submitted to the Big Man council. Your roast will not be active until a Big Man accepts it. They may also reject it");
+    				database1.close();
+    			});
+			}
+
+		break;
+
+		case ("roasts"):
+
+			var database2 = new Database(mysqlConfig);
+
+			database2.query(
+				"SELECT COUNT(*) FROM roasts WHERE accepted=0 AND rejected=0"
+			).then(result => {
+				var pendingRoasts = result[0]["COUNT(*)"];
+				database2.query(
+					"SELECT COUNT(*) FROM roasts WHERE accepted=1"
+				).then(result => {
+					var acceptedRoasts = result[0]["COUNT(*)"];
+					message.channel.send("There are `" + `${acceptedRoasts}` + "` active roasts and `" + `${pendingRoasts}` + "` pending approval");
+					database2.close();
+				})
+			});
+
+		break;
+
+		/*case ("vote"):
+
+			if(message.member.roles.find(r => r.name === "big man")){
+				var database8 = new Database(mysqlConfig);
+				var realdIds = [];
+				if(!args.length){
+					database8.query("SELECT COUNT(*) FROM roasts WHERE accepted=0 AND rejected=0").then(result => {
+						var numberOfPending = result[0]["COUNT(*)"];
+						database8.query(
+							"SELECT * FROM roasts WHERE accepted=0 AND rejected=0"
+						).then(result => {
+							var voteReply = "";
+							console.log(result);
+							for (var iii = 0; iii < numberOfPending; iii++) {
+								realdIds.push(`${result[iii].id}`);
+								var displayId = iii + 1;
+								voteReply += "\n`" + `${displayId}` + "`" + ` ${result[iii].roast}` + "\nSubmitted by " + `<@${result[iii].discord_id}>`; 
+							};
+							message.channel.send(voteReply);
+							database8.close();
+						});	
+					});
+
+					database8.query(
+							"SELECT * FROM userData"
+						).then(result => {
+							console.log(result)
+							database8.close();
+						});
+				}else{
+					if(typeof args[0] == 'integer'){
+						return message.reply("that's not a number dumbass")
+					}
+					database8.query("SELECT COUNT(*) FROM roasts WHERE accepted=0 AND rejected=0").then(result => {
+						var numberOfPending = result[0]["COUNT(*)"];
+						if(args[0] <= 0 || args[0] > numberOfPending){
+							database8.close();
+							return message.reply("wrong id, can you fucking read?");
+						}else{
+							database8.query(
+								"SELECT * FROM roasts WHERE accepted=0 AND rejected=0"
+							).then(result => {
+								for (var iii = 0; iii < numberOfPending; iii++) {
+									realdIds.push(`${result[iii].id}`);
+								};
+							});	
+						};
+					});
+				};
+			}else{
+				message.reply("you are not allowed to vote, cuz you are not a Big Man");
+			}
+
+		break;*/
 
         case ("avatar"):
             
@@ -745,7 +810,7 @@ client.on('message', message => {
         case ("sinners"):
 
             if(saidPlock.isEmpty()){
-                return message.channel.send("Thanks to the ALMIGHTY GOD OF PLOCK, there are none");
+                return message.channel.send("Thanks to the ***ALMIGHTY GOD OF PLOCK***, there are none");
             }
 
             message.channel.send(`Unredeemed nignogs who used the p-word:\n${saidPlock}`);
