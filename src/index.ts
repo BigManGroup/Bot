@@ -2,23 +2,28 @@ import * as Discord from 'discord.js';
 import * as properties from '../resources/config.json'
 import CommandHandler from "./commands/CommandHandler";
 import Saving from "./database/DatabaseHandler";
+import RoastMiddleware from "./middleware/RoastMiddleware";
+import CentralizedMiddleware from "./middleware/CentralizedMiddleware";
 
 const client = new Discord.Client();
-const commandHandler = new CommandHandler(properties.bot.prefix);
+//const commandHandler = new CommandHandler(properties.bot.prefix, centralizedMiddleware);
 
+let commandHandler : CommandHandler;
+let centralizedMiddleware : CentralizedMiddleware;
 
-let saving : Saving;
-let connectionEstablished : Boolean = false;
-
-//TODO FIX: If server doesn't respond fast Saving is created before pool is built, resulting in error
 client.on("ready", async () => {
-    saving = new Saving();
+    //Init the middleware
+    centralizedMiddleware = new CentralizedMiddleware();
+    await centralizedMiddleware.buildCache();
+    //Init the roast middleware
+
+    commandHandler = new CommandHandler(properties.bot.prefix, centralizedMiddleware);
     //client.user.setPresence({ game: { name: 'with Big People!' }, status: 'online' }).catch(console.error); //Setting the bot status
     console.log("Bot has started");
 });
 
 client.on("message", async (message) => {
-    if(!connectionEstablished) return;
+    if(Saving.initialized && !RoastMiddleware.cacheBuild) return;
     commandHandler.execute(message);
 });
 

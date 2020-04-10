@@ -2,6 +2,7 @@ import {Message} from "discord.js";
 import * as LoadedCommands from '../../resources/commands.json';
 import Command from "./tools/Command";
 import FormattedMessage from "./tools/FormattedMessage";
+import CentralizedMiddleware from "../middleware/CentralizedMiddleware";
 
 export default class CommandHandler{
     readonly nonPrefixCommands: Map<string, Command>;
@@ -9,14 +10,16 @@ export default class CommandHandler{
     allCommands : Map <string, Command>;
 
     readonly prefixRegex : RegExp;
+    readonly centralizedMiddleware : CentralizedMiddleware;
 
 
-    constructor(prefix : string) {
+    constructor(prefix : string, centralizedMiddleware : CentralizedMiddleware) {
         Command.prefix = prefix; //Set the general prefix
         this.prefixRegex = new RegExp("^(["+prefix+"])"); //Set the regex
 
         this.nonPrefixCommands = new Map<string, Command>();
         this.prefixCommands = new Map<string, Command>();
+        this.centralizedMiddleware = centralizedMiddleware;
 
         this.loadCommands();
     }
@@ -92,7 +95,7 @@ export default class CommandHandler{
 
     private executeCommand(message : Message, formattedMessage : FormattedMessage) : void{
         if(formattedMessage === undefined || !this.allCommands.has(formattedMessage.command)) return; //Command does not exist
-        this.allCommands.get(formattedMessage.command).run(message, formattedMessage);
+        this.allCommands.get(formattedMessage.command).run(message, formattedMessage, this.centralizedMiddleware);
     }
 
     execute(message: Message) : void{

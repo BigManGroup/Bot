@@ -1,8 +1,9 @@
 import {Message} from "discord.js";
 import {MessageEmbed} from "discord.js";
 import FormattedMessage from "../tools/FormattedMessage";
+import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 
-function main(message : Message, formattedMessage : FormattedMessage) : void {
+function main(message : Message, formattedMessage : FormattedMessage, middleware : CentralizedMiddleware) : void {
     if (!message.mentions.users.size){
         const embed = new MessageEmbed()
             .setTitle(`${message.author.username}'s avatar`)

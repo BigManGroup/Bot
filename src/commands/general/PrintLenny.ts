@@ -1,11 +1,12 @@
 import {Message} from "discord.js";
 import FormattedMessage from "../tools/FormattedMessage";
 import * as Lenny from "../../../resources/lennys.json"
+import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 
-function main(message : Message, formattedMessage : FormattedMessage) : void{
+function main(message : Message, formattedMessage : FormattedMessage, middleware : CentralizedMiddleware) : void{
     let lenny = Lenny.accepted;
-
     let randomLenny = lenny[Math.floor(Math.random()*lenny.length)];
+
 
     if (!message.mentions.users.size)
         message.reply(randomLenny).catch(error => console.log(error));
