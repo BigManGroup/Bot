@@ -1,7 +1,7 @@
 import {ObjectId} from 'mongodb'
 
 export default class Roast{
-    _id : string
+    _id : ObjectId;
     readonly roast : string;
     readonly submitted : string;
     readonly timestamp: Date;
@@ -29,7 +29,8 @@ export default class Roast{
 
     static modelBuilder(object : any) : Roast{
         let roast = new Roast(object.roast, object.submitted, object.timestamp, object.accepted, object.pending);
-        if(object._id !== undefined) roast._id = object._id;
+        if(object._id !== undefined) roast._id = new ObjectId(object._id);
+        else roast._id = new ObjectId();
         return roast;
     }
 }
