@@ -7,10 +7,12 @@ const client = new Discord.Client();
 const commandHandler = new CommandHandler(properties.bot.prefix);
 
 
-const saving = new Saving(); //Initialize the database
+let saving : Saving;
 let connectionEstablished : Boolean = false;
 
+//TODO FIX: If server doesn't respond fast Saving is created before pool is built, resulting in error
 client.on("ready", async () => {
+    saving = new Saving();
     //client.user.setPresence({ game: { name: 'with Big People!' }, status: 'online' }).catch(console.error); //Setting the bot status
     console.log("Bot has started");
 });
