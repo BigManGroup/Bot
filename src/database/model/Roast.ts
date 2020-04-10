@@ -1,3 +1,5 @@
+import {ObjectId} from 'mongodb'
+
 export default class Roast{
     _id : string
     readonly roast : string;
@@ -12,6 +14,17 @@ export default class Roast{
         this.timestamp = timestamp;
         this.accepted = accepted;
         this.pending = pending;
+    }
+
+    toString() : object{
+        return {
+            _id: this._id,
+            roast: this.roast,
+            submitted: this.submitted,
+            timestamp: this.timestamp,
+            accepted: this.accepted,
+            pending: this.pending
+        }
     }
 
     static modelBuilder(object : any) : Roast{
