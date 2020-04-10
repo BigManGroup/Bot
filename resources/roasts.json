@@ -1,5 +1,5 @@
 {
-    "list": [
+    "accepted": [
         "You have your entire life to be a jerk. Why not take today off?",
         "Your ass must be pretty jealous of all the shit that comes out of your mouth.",
         "Remember when I asked for your opinion? Me neither.",
@@ -50,5 +50,6 @@
         "If I threw a stick, you’d leave, right?",
         "You’ll never be the man your mom is.",
         "Earth is full. Go home."
-    ]
+    ],
+    "pending": []
 }

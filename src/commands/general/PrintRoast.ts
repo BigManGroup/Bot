@@ -3,7 +3,7 @@ import FormattedMessage from "../tools/FormattedMessage";
 import * as Roasts from "../../../resources/roasts.json"
 
 function main(message : Message, formattedMessage : FormattedMessage) : void{
-    let roasts = Roasts.list;
+    let roasts = Roasts.accepted;
 
     let randomRoast = roasts[Math.floor(Math.random()*roasts.length)];
 
