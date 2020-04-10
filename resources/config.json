@@ -1,4 +1,10 @@
 {
-	"prefix": "plock ",
-	"token": "NTU1Nzk1NTU0MjMyMzAzNjI2.D21Yiw.6lp0_QdWU1oAfn6SBRe9RDhPHmA"
+    "bot": {
+        "prefix": "plock ",
+        "token": "NTU1Nzk1NTU0MjMyMzAzNjI2.D21Yiw.6lp0_QdWU1oAfn6SBRe9RDhPHmA"
+    },
+    "database": {
+        "username": "bigman",
+        "password": "J5Tkq7SLmKeb"
+    }
 }

@@ -3,7 +3,7 @@ import * as properties from '../resources/config.json'
 import CommandHandler from "./commands/CommandHandler";
 
 const client = new Discord.Client();
-const commandHandler = new CommandHandler(properties.prefix);
+const commandHandler = new CommandHandler(properties.bot.prefix);
 
 
 client.on("ready", () => {
@@ -15,4 +15,4 @@ client.on("message", async (message) => {
     commandHandler.execute(message);
 });
 
-client.login(properties.token).catch(error => console.log("Error logging in; " + error));
+client.login(properties.bot.token).catch(error => console.log("Error logging in; " + error));
