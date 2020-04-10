@@ -1,0 +1,29 @@
+{
+    "commands": [
+        {
+            "filename": "ShowAvatar.js",
+            "command": "avatar",
+            "description": "check your avatar or the person you mentioned",
+            "folder": "general",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "PrintRoast.js",
+            "command": "roast",
+            "description": "roast yourself or the person you mentioned",
+            "folder": "general",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "NoU.js",
+            "command": "no u",
+            "description": "sends no u after every command",
+            "folder": "general",
+            "hidden": true,
+            "prefix": false
+        }
+    ]
+
+}

@@ -1,10 +1,10 @@
 const Discord = require('discord.js');
 const Attachment = require('discord.js');
-const config = require('./config.json');
+const config = require('./resources/config.json');
 const mysql = require('mysql');
-const roasts = require('./roasts.json');
-const lennys = require('./lennys.json');
-const { prefix, token } = require('./config.json');
+const roasts = require('./resources/roasts.json');
+const lennys = require('./resources/lennys.json');
+const { prefix, token } = require('./resources/config.json');
 const client = new Discord.Client();
 const fs = require('fs');
 

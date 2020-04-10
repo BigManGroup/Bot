@@ -5,11 +5,8 @@
   "main": "index.js",
   "author": "Raven",
   "dependencies": {
-    "discord.js": "^11.4.2",
-    "libsodium": "^0.7.4",
-    "mysql": "^2.16.0",
-    "nodemon": "^1.18.10",
-    "opus": "0.0.0",
-    "uws": "^100.0.1"
+    "@types/node": "^13.11.1",
+    "discord.js": "^12.1.1",
+    "typescript": "^3.8.3"
   }
 }
