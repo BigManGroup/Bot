@@ -4,6 +4,7 @@
         "token": "NTU1Nzk1NTU0MjMyMzAzNjI2.D21Yiw.6lp0_QdWU1oAfn6SBRe9RDhPHmA"
     },
     "database": {
+        "address": "192.168.0.10",
         "username": "bigmanuser",
         "database": "bigman",
         "password": "J5Tkq7SLmKeb"
