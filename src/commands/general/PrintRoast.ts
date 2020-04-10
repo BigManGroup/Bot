@@ -1,6 +1,5 @@
 import {Message} from "discord.js";
 import FormattedMessage from "../tools/FormattedMessage";
-import * as Roasts from "../../../resources/roasts.json"
 import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 
 function main(message : Message, formattedMessage : FormattedMessage, middleware : CentralizedMiddleware) : void{
