@@ -3,10 +3,5 @@
         "prefix": "plock ",
         "token": "NTU1Nzk1NTU0MjMyMzAzNjI2.D21Yiw.6lp0_QdWU1oAfn6SBRe9RDhPHmA"
     },
-    "database": {
-        "address": "192.168.0.10",
-        "username": "bigmanuser",
-        "database": "bigman",
-        "password": "J5Tkq7SLmKeb"
-    }
+    "database": "mongodb://bigmanuser:J5Tkq7SLmKeb@192.168.0.10:27017/bigman"
 }

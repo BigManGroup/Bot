@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Raven",
   "dependencies": {
+    "@types/mongodb": "^3.5.5",
     "@types/node": "^13.11.1",
     "discord.js": "^12.1.1",
     "mongodb": "^3.5.5",
