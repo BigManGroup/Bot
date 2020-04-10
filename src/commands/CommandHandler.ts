@@ -3,7 +3,7 @@ import * as LoadedCommands from '../../resources/commands.json';
 import Command from "./tools/Command";
 import FormattedMessage from "./tools/FormattedMessage";
 
-class CommandHandler{
+export default class CommandHandler{
     readonly nonPrefixCommands: Map<string, Command>;
     readonly prefixCommands : Map<string, Command>;
     allCommands : Map <string, Command>;
@@ -99,5 +99,3 @@ class CommandHandler{
         this.executeCommand(message, this.formatMessage(message));
     }
 }
-
-export default CommandHandler;
