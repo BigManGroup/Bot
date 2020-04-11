@@ -5,7 +5,7 @@ export default class RoastCache{
     pendingRoasts : Roast[];
     declinedRoasts : Roast[];
 
-    setCache(acceptedRoasts : Roast[], pendingRoasts : Roast[], declinedRoasts : Roast[]) {
+    setCache(acceptedRoasts : Roast[], pendingRoasts : Roast[], declinedRoasts : Roast[]) : void {
         this.acceptedRoasts = acceptedRoasts;
         this.pendingRoasts = pendingRoasts;
         this.declinedRoasts = declinedRoasts;

@@ -4,7 +4,7 @@ export default class BadManCache{
     badMan : Map <string, BadMan>;
     forgivenBadMan : Map <string, BadMan>
 
-    setCache(badMan : Map <string, BadMan>, forgivenBadMan : Map <string, BadMan>){
+    setCache(badMan : Map <string, BadMan>, forgivenBadMan : Map <string, BadMan>) : void{
         this.badMan = badMan;
         this.forgivenBadMan = forgivenBadMan;
     }
