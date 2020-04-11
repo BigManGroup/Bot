@@ -99,6 +99,7 @@ export default class CommandHandler{
     }
 
     execute(message: Message) : void{
+        message.content = message.content.toLowerCase();
         this.executeCommand(message, this.formatMessage(message));
     }
 }
