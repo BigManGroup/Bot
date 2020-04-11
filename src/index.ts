@@ -2,11 +2,9 @@ import * as Discord from 'discord.js';
 import * as properties from '../resources/config.json'
 import CommandHandler from "./commands/CommandHandler";
 import Saving from "./database/DatabaseHandler";
-import RoastMiddleware from "./middleware/RoastMiddleware";
 import CentralizedMiddleware from "./middleware/CentralizedMiddleware";
 
 const client = new Discord.Client();
-//const commandHandler = new CommandHandler(properties.bot.prefix, centralizedMiddleware);
 
 let commandHandler : CommandHandler;
 let centralizedMiddleware : CentralizedMiddleware;
@@ -23,7 +21,7 @@ client.on("ready", async () => {
 });
 
 client.on("message", async (message) => {
-    if(Saving.initialized && !RoastMiddleware.cacheBuild) return;
+    if(!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
     commandHandler.execute(message);
 });
 

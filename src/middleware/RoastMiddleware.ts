@@ -5,7 +5,7 @@ import BaseMiddleware from "./BaseMiddleware";
 export default class RoastMiddleware extends BaseMiddleware{
     readonly roastCache : RoastCache;
     readonly roastWrapper : RoastWrapper;
-    static cacheBuild : Boolean;
+    cacheBuilt : boolean;
 
     constructor() {
         super();
@@ -19,6 +19,6 @@ export default class RoastMiddleware extends BaseMiddleware{
         let declined = await this.roastWrapper.getDeclinedRoasts();
         this.roastCache.setCache(accepted, pending, declined);
 
-        RoastMiddleware.cacheBuild = true;
+        this.cacheBuilt = true;
     }
 }

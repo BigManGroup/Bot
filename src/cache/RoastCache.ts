@@ -10,5 +10,4 @@ export default class RoastCache{
         this.pendingRoasts = pendingRoasts;
         this.declinedRoasts = declinedRoasts;
     }
-
 }
