@@ -34,22 +34,12 @@ export default class LennyWrapper extends BaseModel{
         await (this.collection.insertOne(lenny.toString()));
     }
 
-    async approveLenny(lenny : Lenny) : Promise<Lenny>{
+    async approveLenny(lenny : Lenny) : Promise<void>{
         await (this.collection.updateOne({_id :  lenny._id}, {$set: {"accepted": true, "pending": false}}));
-
-        lenny.pending = false;
-        lenny.accepted = true;
-
-        return lenny;
     }
 
-    async declineLenny(lenny : Lenny) : Promise<Lenny>{
+    async declineLenny(lenny : Lenny) : Promise<void>{
         await (this.collection.updateOne({_id :  lenny._id}, {$set: {"accepted": false, "pending": false}}));
-
-        lenny.pending = false;
-        lenny.accepted = false;
-
-        return lenny;
     }
 
 }
