@@ -6,6 +6,4 @@ export default class PeePeeCache{
     setCache(generatedPeePee : Map <string, PeePee>) : void{
         this.generatedPeePee = generatedPeePee;
     }
-
-
 }

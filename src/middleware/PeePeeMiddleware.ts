@@ -34,8 +34,17 @@ export default class PeePeeMiddleware extends BaseMiddleware{
         //Generate the peepee
 
         this.peePeeCache.generatedPeePee.set(userId, peePee);
-        this.peePeeWrapper.addPeePee(peePee).catch(error => error);
+        this.peePeeWrapper.addPeePee(peePee).catch(error => console.log(error));
 
         return peePee;
+    }
+
+    updatePeePeeSize(userId : string, isBigMan : boolean, newSize : number) : void{
+        let peePee = this.getPeePee(userId, isBigMan); //Get the PeePee
+
+        //New PeePee size
+        peePee.size = newSize;
+        this.peePeeWrapper.modifyPeePee(peePee).catch((error) => console.log(error));
+        //New PeePee size
     }
 }

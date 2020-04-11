@@ -41,6 +41,14 @@
             "prefix": true
         },
         {
+            "filename": "ChangePeePee.js",
+            "command": "change peepee",
+            "description": "changed the peepee size of you or the person tagged",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "Sinners.js",
             "command": "sinners",
             "description": "shows the people that have wronged our all-mighty plock god",

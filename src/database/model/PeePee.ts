@@ -3,7 +3,7 @@ import {ObjectId} from 'mongodb'
 export default class PeePee{
     _id : ObjectId;
     readonly userId : string;
-    readonly size: number;
+    size: number;
     readonly generatedDate : Date;
 
     constructor(userId: string, size: number, generatedDate: Date) {
