@@ -31,7 +31,14 @@
             "folder": "general",
             "hidden": false,
             "prefix": true
+        },
+        {
+            "filename": "Ping.js",
+            "command": "ping",
+            "description": "pings the bot",
+            "folder": "general",
+            "hidden": false,
+            "prefix": true
         }
     ]
-
 }
