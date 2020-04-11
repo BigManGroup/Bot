@@ -1,6 +1,14 @@
 {
     "commands": [
         {
+            "filename": "Ping.js",
+            "command": "ping",
+            "description": "pings the bot",
+            "folder": "tools",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "ShowAvatar.js",
             "command": "avatar",
             "description": "check your avatar or the person you mentioned",
@@ -12,6 +20,22 @@
             "filename": "PrintRoast.js",
             "command": "roast",
             "description": "roast yourself or the person you mentioned",
+            "folder": "general",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "PrintLenny.js",
+            "command": "lenny",
+            "description": "gives you or the person you tagged a random lenny",
+            "folder": "general",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "PeePee.js",
+            "command": "peepee",
+            "description": "Gives you the size of your peepee",
             "folder": "general",
             "hidden": false,
             "prefix": true
@@ -31,30 +55,6 @@
             "folder": "nou",
             "hidden": true,
             "prefix": false
-        },
-        {
-            "filename": "PrintLenny.js",
-            "command": "lenny",
-            "description": "gives you or the person you tagged a random lenny",
-            "folder": "general",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "Ping.js",
-            "command": "ping",
-            "description": "pings the bot",
-            "folder": "tools",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "PeePee.js",
-            "command": "peepee",
-            "description": "Gives you the size of your peepee",
-            "folder": "general",
-            "hidden": false,
-            "prefix": true
         }
     ]
 }
