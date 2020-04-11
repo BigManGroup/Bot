@@ -37,7 +37,10 @@ export default class BadManMiddleware extends BaseMiddleware{
         await this.badManWrapper.forgiveBadMan(badMan); //Update DB
     }
 
-     isBadMan(guildId : string, id : string) : boolean{
-        return this.badManCache.badMan.has(id);
+     isBadMan(guildId : string, userId : string) : boolean{
+        if(this.badManCache.badMan.has(userId)){
+            return  this.badManCache.badMan.get(userId).guildId === guildId;
+        }
+        return false;
     }
 }
