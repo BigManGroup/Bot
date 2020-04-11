@@ -23,16 +23,16 @@ export default class BadManMiddleware extends BaseMiddleware{
         this.cacheBuilt = true;
     }
 
-    async addBadMan(guildId : string, id : string) : Promise <void>{
-        let badMan = new BadMan(guildId, id, new Date(), undefined, false);
+    async addBadMan(guildId : string, userId : string) : Promise <void>{
+        let badMan = new BadMan(guildId, userId, new Date(), undefined, false);
         badMan._id = new ObjectId();
 
         this.badManCache.addBadMan(badMan);
         await this.badManWrapper.addBadMan(badMan);
     }
 
-    async forgiveBadMan(id : string) : Promise <void>{
-        let badMan = this.badManCache.badMan.get(id);
+    async forgiveBadMan(userId : string) : Promise <void>{
+        let badMan = this.badManCache.badMan.get(userId);
         this.badManCache.forgiveBadMan(badMan);
         await this.badManWrapper.forgiveBadMan(badMan); //Update DB
     }
