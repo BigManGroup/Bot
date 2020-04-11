@@ -13,7 +13,7 @@ client.on("ready", async () => {
     //Init the middleware
     centralizedMiddleware = new CentralizedMiddleware();
     await centralizedMiddleware.buildCache();
-    //Init the roast middleware
+    //Init the middleware
 
     commandHandler = new CommandHandler(properties.bot.prefix, centralizedMiddleware);
     client.user.setPresence({ activity: { name: 'with Big People!' }, status: 'online' }).catch(console.error); //Setting the bot status
