@@ -21,4 +21,9 @@ export default class LennyMiddleware extends BaseMiddleware{
 
         this.cacheBuilt = true;
     }
+
+    get randomLenny() : string{
+        let lenny = this.lennyCache.acceptedLennys;
+        return lenny[Math.floor(Math.random()*lenny.length)].lenny
+    }
 }

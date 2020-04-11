@@ -21,4 +21,9 @@ export default class RoastMiddleware extends BaseMiddleware{
 
         this.cacheBuilt = true;
     }
+
+    get randomRoast() : string{
+        let roasts = this.roastCache.acceptedRoasts;
+        return roasts[Math.floor(Math.random()*roasts.length)].roast
+    }
 }
