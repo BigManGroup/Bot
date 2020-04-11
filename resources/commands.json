@@ -25,6 +25,14 @@
             "prefix": false
         },
         {
+            "filename": "UrMumGay.js",
+            "command": "urmumgay",
+            "description": "sends no u after every command",
+            "folder": "general",
+            "hidden": true,
+            "prefix": false
+        },
+        {
             "filename": "PrintLenny.js",
             "command": "lenny",
             "description": "gives you or the person you tagged a random lenny",
