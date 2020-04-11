@@ -49,7 +49,7 @@ export default class MessageInterceptor{
 
         //If he is already a bad man
         if(this.centralizedMiddleware.badManMiddleware.isBadMan(message.guild.id, message.author.id) && !message.content.toLowerCase().includes("plock")){
-            message.delete().then(() => message.reply(`you still didn't correct yourself ${this.insults[Math.floor(Math.random()*this.insults.length)]}`)).catch((error) => console.log(error));
+            message.delete().then(() => message.reply(`you still didn't correct yourself, ${this.insults[Math.floor(Math.random()*this.insults.length)]}`)).catch((error) => console.log(error));
             return true;
         }else if(this.centralizedMiddleware.badManMiddleware.isBadMan(message.guild.id, message.author.id) && message.content.toLowerCase().includes("plock")){ //If he is forgiven
             await this.centralizedMiddleware.badManMiddleware.forgiveBadMan(message.author.id);
