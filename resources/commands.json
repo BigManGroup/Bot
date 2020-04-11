@@ -35,7 +35,15 @@
         {
             "filename": "PeePee.js",
             "command": "peepee",
-            "description": "Gives you the size of your peepee",
+            "description": "gives you or the person tagged the peepee",
+            "folder": "general",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "Sinners.js",
+            "command": "sinners",
+            "description": "shows the people that have wronged our all-mighty plock god",
             "folder": "general",
             "hidden": false,
             "prefix": true

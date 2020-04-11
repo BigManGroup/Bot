@@ -40,4 +40,12 @@ export default class BadManMiddleware extends BaseMiddleware{
      isBadMan(userId : string) : boolean{
         return this.badManCache.badMan.has(userId);
     }
+
+    get amountSinners() : number{
+        return this.badManCache.badMan.size;
+    }
+
+    get sinners() : BadMan[]{
+        return Array.from(this.badManCache.badMan.values());
+    }
 }
