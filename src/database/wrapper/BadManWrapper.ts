@@ -35,7 +35,7 @@ export default class BadManWrapper extends BaseWrapper{
     }
 
     async forgiveBadMan(badman : BadMan) : Promise<void>{
-        await (this.collection.updateOne({_id :  badman._id}, {$set: {"forgiven": true}}));
+        await (this.collection.updateOne({_id :  badman._id}, {$set: {"forgiven": true, "timestampEnd" : badman.timestampEnd}}));
     }
 }
 

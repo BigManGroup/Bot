@@ -8,4 +8,16 @@ export default class BadManCache{
         this.badMan = badMan;
         this.forgivenBadMan = forgivenBadMan;
     }
+
+    forgiveBadMan(badMan : BadMan) : void {
+        badMan.forgiven = true
+        badMan.timestampEnd = new Date();
+
+        this.badMan.delete(badMan.user); //Delete badman
+        this.forgivenBadMan.set(badMan.user, badMan); //Add to forgiven
+    }
+
+    addBadMan(badMan : BadMan) : void {
+        this.badMan.set(badMan.user, badMan);
+    }
 }

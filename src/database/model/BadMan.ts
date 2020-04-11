@@ -3,7 +3,7 @@ export default class BadMan{
     _id : ObjectId;
     readonly user : string;
     readonly timestampStart : Date;
-    readonly timestampEnd : Date;
+    timestampEnd : Date;
     forgiven : boolean;
 
     constructor(user: string, timestampStart: Date, timestampEnd: Date, forgiven: boolean) {
