@@ -16,7 +16,7 @@ client.on("ready", async () => {
     //Init the roast middleware
 
     commandHandler = new CommandHandler(properties.bot.prefix, centralizedMiddleware);
-    //client.user.setPresence({ game: { name: 'with Big People!' }, status: 'online' }).catch(console.error); //Setting the bot status
+    client.user.setPresence({ activity: { name: 'with Big People!' }, status: 'online' }).catch(console.error); //Setting the bot status
     console.log("Bot has started");
 });
 
