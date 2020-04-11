@@ -1,7 +1,7 @@
 import {Message} from "discord.js";
 import * as LoadedCommands from '../../resources/commands.json';
-import Command from "./tools/Command";
-import FormattedMessage from "./tools/FormattedMessage";
+import Command from "./model/Command";
+import FormattedMessage from "./model/FormattedMessage";
 import CentralizedMiddleware from "../middleware/CentralizedMiddleware";
 
 export default class CommandHandler{

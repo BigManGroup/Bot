@@ -1,6 +1,6 @@
 import {Message} from "discord.js";
 import {MessageEmbed} from "discord.js";
-import FormattedMessage from "../tools/FormattedMessage";
+import FormattedMessage from "../model/FormattedMessage";
 import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 
 function main(message : Message, formattedMessage : FormattedMessage, middleware : CentralizedMiddleware) : void {

@@ -4,7 +4,7 @@
             "filename": "ShowAvatar.js",
             "command": "avatar",
             "description": "check your avatar or the person you mentioned",
-            "folder": "general",
+            "folder": "tools",
             "hidden": false,
             "prefix": true
         },
@@ -20,7 +20,7 @@
             "filename": "NoU.js",
             "command": "no u",
             "description": "sends no u after every command",
-            "folder": "general",
+            "folder": "nou",
             "hidden": true,
             "prefix": false
         },
@@ -28,7 +28,7 @@
             "filename": "UrMumGay.js",
             "command": "urmumgay",
             "description": "sends no u after every command",
-            "folder": "general",
+            "folder": "nou",
             "hidden": true,
             "prefix": false
         },
@@ -44,7 +44,7 @@
             "filename": "Ping.js",
             "command": "ping",
             "description": "pings the bot",
-            "folder": "general",
+            "folder": "tools",
             "hidden": false,
             "prefix": true
         }
