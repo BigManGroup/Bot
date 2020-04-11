@@ -36,7 +36,6 @@ export default class PeePeeMiddleware extends BaseMiddleware{
         this.peePeeCache.generatedPeePee.set(userId, peePee);
         this.peePeeWrapper.addPeePee(peePee).catch(error => error);
 
-
         return peePee;
     }
 }

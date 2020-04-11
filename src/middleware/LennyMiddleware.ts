@@ -1,6 +1,7 @@
 import BaseMiddleware from "./BaseMiddleware";
 import LennyCache from "../cache/LennyCache";
 import LennyWrapper from "../database/wrapper/LennyWrapper";
+import Tools from "../tools";
 
 export default class LennyMiddleware extends BaseMiddleware{
     readonly lennyCache : LennyCache;
@@ -24,6 +25,6 @@ export default class LennyMiddleware extends BaseMiddleware{
 
     get randomLenny() : string{
         let lenny = this.lennyCache.acceptedLennys;
-        return lenny[Math.floor(Math.random()*lenny.length)].lenny
+        return lenny[Tools.getRandomNumber(0, lenny.length)].lenny
     }
 }

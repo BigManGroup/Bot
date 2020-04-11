@@ -1,6 +1,7 @@
 import RoastCache from "../cache/RoastCache";
 import RoastWrapper from "../database/wrapper/RoastWrapper";
 import BaseMiddleware from "./BaseMiddleware";
+import Tools from "../tools";
 
 export default class RoastMiddleware extends BaseMiddleware{
     readonly roastCache : RoastCache;
@@ -24,6 +25,6 @@ export default class RoastMiddleware extends BaseMiddleware{
 
     get randomRoast() : string{
         let roasts = this.roastCache.acceptedRoasts;
-        return roasts[Math.floor(Math.random()*roasts.length)].roast
+        return roasts[Tools.getRandomNumber(0, roasts.length)].roast
     }
 }
