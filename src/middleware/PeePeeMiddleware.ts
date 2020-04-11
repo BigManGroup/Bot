@@ -34,7 +34,7 @@ export default class PeePeeMiddleware extends BaseMiddleware{
         //Generate the peepee
 
         this.peePeeCache.generatedPeePee.set(userId, peePee);
-        this.peePeeWrapper.addPeePee(peePee).catch(error => "Error occurred in saving");
+        this.peePeeWrapper.addPeePee(peePee).catch(error => error);
 
 
         return peePee;
