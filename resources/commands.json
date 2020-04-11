@@ -47,6 +47,14 @@
             "folder": "tools",
             "hidden": false,
             "prefix": true
+        },
+        {
+            "filename": "PeePee.js",
+            "command": "peepee",
+            "description": "Gives you the size of your peepee",
+            "folder": "general",
+            "hidden": false,
+            "prefix": true
         }
     ]
 }
