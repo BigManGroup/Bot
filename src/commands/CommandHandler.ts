@@ -12,7 +12,6 @@ export default class CommandHandler{
     readonly prefixRegex : RegExp;
     readonly centralizedMiddleware : CentralizedMiddleware;
 
-
     constructor(prefix : string, centralizedMiddleware : CentralizedMiddleware) {
         Command.prefix = prefix; //Set the general prefix
         this.prefixRegex = new RegExp("^(["+prefix+"])"); //Set the regex
