@@ -37,13 +37,12 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
             submittedQuote._id = new ObjectId();
 
             let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} (${quoteYear})`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
-
-            message.delete({timeout: 10000})
-                .then(()=> message.reply("your submission was automatically accepted because you are a **BIGMAN**"))
-                .then((sentMessage) => message.delete({timeout: 10000}))
-                .then(() => middleware.quoteMiddleware.addQuote(submittedQuote))
-                .then(() => (<TextChannel> message.guild.channels.resolve(quotesChannel)).send(embed))
-                .catch(error => console.log(error));
+             message.reply("your submission was automatically accepted because you are a **BIGMAN**")
+                 .then(() => middleware.quoteMiddleware.addQuote(submittedQuote))
+                 .then(() => (<TextChannel> message.guild.channels.resolve(quotesChannel)).send(embed))
+                 .then((sentMessage) => message.delete({timeout: 10000}))
+                 .then(() => message.delete({timeout: 10000}))
+                 .catch(error => console.log(error));
         } else{
             message.reply("Feature in progress"); //TODO implement this
         }
