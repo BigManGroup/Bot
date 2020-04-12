@@ -15,7 +15,6 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
 
     let embed = new MessageEmbed()
         .setTitle("Help Command")
-        .setDescription("do i really have to explain what this command is?");
 
     for (let i = 0; i !== allCommands.length ; i++) {
         let currentCommand = allCommands[i];
@@ -31,8 +30,8 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
         if(isBigMan) embed.addField("admin commands", adminCommands)
 
         embed.addField("general commands", generalCommands);
-        embed.addField("tool commands", toolsCommands);
-        embed.addField("game commands", gameCommands);
+        embed.addField("tools", toolsCommands);
+        embed.addField("games", gameCommands);
 
         message.channel.send(embed).catch();
     });
