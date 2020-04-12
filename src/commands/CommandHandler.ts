@@ -38,7 +38,9 @@ export default class CommandHandler{
 
     //Extracts the command by searching for it using recursion
     extractCommand(currentlyApplicable: String[], command: string[], currentLocation: number, prefix : boolean): string | undefined {
-        if (command.length + 1 === currentLocation) return undefined; //Command not found
+        if (command.length + 1 === currentLocation) {
+            return undefined;
+        } //Command not found
 
         //First time running the recursion, set the keys of the command
         if (currentLocation === 0) {
@@ -66,7 +68,7 @@ export default class CommandHandler{
             if(this.allCommands.has(formattedCommand.join(" "))) return newApplicable[0];
             //Make sure that the commands exists
         }
-        else this.extractCommand(newApplicable, command, ++currentLocation, prefix);
+        else return this.extractCommand(newApplicable, command, ++currentLocation, prefix);
     }
     //Extracts the command by searching for it using recursion
 
