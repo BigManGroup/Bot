@@ -51,7 +51,7 @@ export default class MessageInterceptor{
         //If he is already a bad man
         if(this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && !message.content.toLowerCase().includes("plock")){
             message.delete()
-                .then(() => message.reply(`you still didn't correct yourself, ${this.insults[Tools.getRandomNumber(0, this.insults.length)]}`))
+                .then(() => message.reply(`you still didn't correct yourself, ${this.insults[Tools.getRandomNumber(0, this.insults.length - 1)]}`))
                 .then(sentMessage => sentMessage.delete({timeout: 10000}))
                 .catch((error) => console.log(error));
             return true;
@@ -64,7 +64,7 @@ export default class MessageInterceptor{
         //If he said p-word
         if(hasUsedPWord.intercepted){
             message.delete()
-                .then(() => message.reply(`It's not ${hasUsedPWord.usedWord}, it's plock, ${this.insults[Tools.getRandomNumber(0, this.insults.length)]}`))
+                .then(() => message.reply(`It's not ${hasUsedPWord.usedWord}, it's plock, ${this.insults[Tools.getRandomNumber(0, this.insults.length - 1)]}`))
                 .catch(error => console.log(error));
             await this.centralizedMiddleware.badManMiddleware.addBadMan(message.author.id);
 
