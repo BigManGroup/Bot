@@ -7,7 +7,7 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
     let number = Tools.getRandomNumber(0, 1);
 
     if(number === 0) message.reply("heads").catch((error) => console.log(error));
-    if(number === 1) message.reply("tails").catch((error) => console.log(error));
+    else if(number === 1) message.reply("tails").catch((error) => console.log(error));
 }
 
 export {main};
