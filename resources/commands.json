@@ -99,7 +99,7 @@
         {
             "filename": "RockPaperScissors.js",
             "command": "rps",
-            "description": "you can add your ",
+            "description": "a simple rock paper scissors game",
             "folder": "game",
             "hidden": false,
             "prefix": true
