@@ -21,8 +21,8 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
     Tools.isBigMan(message.guild, user).then(isBigMan => {
         let nig = middleware.nigMiddleware.getNig(user.id, isBigMan);
 
-        if(changed) message.channel.send(`here's ${user} nig amount\n**${nig.amount}**`).catch(error => console.log(error));
-        else message.channel.send(`here's your nig amount\n**${nig.amount}**`).catch(error => console.log(error));
+        if(changed) message.channel.send(`here's ${user} nig amount\n**${nig.amount}%**`).catch(error => console.log(error));
+        else message.channel.send(`here's your nig amount\n**${nig.amount}%**`).catch(error => console.log(error));
     });
 }
 
