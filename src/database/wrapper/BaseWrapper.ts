@@ -1,7 +1,7 @@
 import Saving from "../DatabaseHandler";
 import {Collection, MongoClient} from "mongodb";
 
-export default abstract class Base{
+export default abstract class BaseWrapper{
     readonly session : MongoClient;
     readonly collection : Collection;
 

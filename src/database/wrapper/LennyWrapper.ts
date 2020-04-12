@@ -1,7 +1,7 @@
-import BaseModel from "./BaseWrapper";
 import Lenny from "../model/Lenny";
+import BaseWrapper from "./BaseWrapper";
 
-export default class LennyWrapper extends BaseModel{
+export default class LennyWrapper extends BaseWrapper{
     constructor() {
         super("lennys");
     }
