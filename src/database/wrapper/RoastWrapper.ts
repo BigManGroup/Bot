@@ -35,11 +35,11 @@ export default class RoastWrapper extends BaseModel{
     }
 
     async approveRoast(roast : Roast) : Promise<void>{
-        await (this.collection.updateOne({_id :  roast._id}, {$set: {"accepted": true, "pending": false}}));
+        await (this.collection.updateOne({_id :  roast._id}, {$set: {"accepted": true, "pending": false, "updatedTimestamp" : roast.updatedTimestamp}}));
     }
 
     async declineRoast(roast : Roast) : Promise<void>{
-        await (this.collection.updateOne({_id :  roast._id}, {$set: {"accepted": false, "pending": false}}));
+        await (this.collection.updateOne({_id :  roast._id}, {$set: {"accepted": false, "pending": false, "updatedTimestamp" : roast.updatedTimestamp}}));
     }
 
 }

@@ -35,11 +35,11 @@ export default class LennyWrapper extends BaseWrapper{
     }
 
     async approveLenny(lenny : Lenny) : Promise<void>{
-        await (this.collection.updateOne({_id :  lenny._id}, {$set: {"accepted": true, "pending": false}}));
+        await (this.collection.updateOne({_id :  lenny._id}, {$set: {"accepted": true, "pending": false, "updatedTimestamp": lenny.updatedTimestamp}}));
     }
 
     async declineLenny(lenny : Lenny) : Promise<void>{
-        await (this.collection.updateOne({_id :  lenny._id}, {$set: {"accepted": false, "pending": false}}));
+        await (this.collection.updateOne({_id :  lenny._id}, {$set: {"accepted": false, "pending": false, "updatedTimestamp" : lenny.updatedTimestamp}}));
     }
 
 }
