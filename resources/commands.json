@@ -89,6 +89,14 @@
             "prefix": true
         },
         {
+            "filename": "RockPaperScissors.js",
+            "command": "rps",
+            "description": "you can add your ",
+            "folder": "game",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "NoU.js",
             "command": "no u",
             "description": "sends no u after every command",
