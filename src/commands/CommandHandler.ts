@@ -8,13 +8,10 @@ export default class CommandHandler{
     readonly nonPrefixCommands: Map<string, Command>;
     readonly prefixCommands : Map<string, Command>;
     allCommands : Map <string, Command>;
-
-    readonly prefixRegex : RegExp;
     readonly centralizedMiddleware : CentralizedMiddleware;
 
     constructor(prefix : string, centralizedMiddleware : CentralizedMiddleware) {
         Command.prefix = prefix; //Set the general prefix
-        this.prefixRegex = new RegExp("^(["+prefix+"])"); //Set the regex
 
         this.nonPrefixCommands = new Map<string, Command>();
         this.prefixCommands = new Map<string, Command>();
@@ -79,7 +76,7 @@ export default class CommandHandler{
         let command:string;
 
         //Check if commands exists, and if it doesn't cancel
-        if(this.prefixRegex.exec(message.content) !== null){
+        if(message.content.startsWith(Command.prefix)){
             content = (message.content.split(" ")).splice(1);
             command = this.extractCommand(undefined, content.slice(), 0, true); //Slice to pass by reference
         }else{
