@@ -13,6 +13,10 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
     let generalCommands : string = "";
     let toolsCommands : string = "";
 
+    let embed = new MessageEmbed()
+        .setTitle("Help Command")
+        .setDescription("do i really have to explain what this command is?");
+
     for (let i = 0; i !== allCommands.length ; i++) {
         let currentCommand = allCommands[i];
 
@@ -24,23 +28,11 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
 
 
     Tools.isBigMan(message.guild, message.author).then(isBigMan => {
-        let embed : MessageEmbed;
-        if(isBigMan) {
-            embed = new MessageEmbed()
-                .setTitle("Help Command")
-                .setDescription("do i really have to explain what this command is?")
-                .addField("admin commands", adminCommands)
-                .addField("general commands", generalCommands)
-                .addField("tool commands", toolsCommands)
-                .addField("game commands", gameCommands);
-        }else {
-            embed = new MessageEmbed()
-                .setTitle("Help Command")
-                .setDescription("do i really have to explain what this command is?")
-                .addField("general commands", generalCommands)
-                .addField("tool commands", toolsCommands)
-                .addField("game commands", gameCommands);
-        }
+        if(isBigMan) embed.addField("admin commands", adminCommands)
+
+        embed.addField("general commands", generalCommands);
+        embed.addField("tool commands", toolsCommands);
+        embed.addField("game commands", gameCommands);
 
         message.channel.send(embed).catch();
     });
