@@ -36,12 +36,12 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
             submittedQuote.updatedTimestamp = new Date();
             submittedQuote._id = new ObjectId();
 
-            let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} (${quoteYear})`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
+            let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
              message.reply("your submission was automatically accepted because you are a **BIGMAN**")
+                 .then((sentMessage) => sentMessage.delete({timeout: 10000}))
                  .then(() => middleware.quoteMiddleware.addQuote(submittedQuote))
                  .then(() => (<TextChannel> message.guild.channels.resolve(quotesChannel)).send(embed))
-                 .then((sentMessage) => message.delete({timeout: 10000}))
-                 .then(() => message.delete({timeout: 10000}))
+                 .then(() => message.delete())
                  .catch(error => console.log(error));
         } else{
             message.reply("Feature in progress"); //TODO implement this
