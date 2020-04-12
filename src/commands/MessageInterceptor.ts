@@ -63,7 +63,9 @@ export default class MessageInterceptor{
 
         //If he said p-word
         if(hasUsedPWord.intercepted){
-            message.reply(`It's not ${hasUsedPWord.usedWord}, it's plock, ${this.insults[Tools.getRandomNumber(0, this.insults.length)]}`).catch(error => console.log(error));
+            message.delete()
+                .then(() => message.reply(`It's not ${hasUsedPWord.usedWord}, it's plock, ${this.insults[Tools.getRandomNumber(0, this.insults.length)]}`))
+                .catch(error => console.log(error));
             await this.centralizedMiddleware.badManMiddleware.addBadMan(message.author.id);
 
             return true;
