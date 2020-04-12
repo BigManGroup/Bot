@@ -81,6 +81,14 @@
             "prefix": true
         },
         {
+            "filename": "TitsOrAss.js",
+            "command": "titsorass",
+            "description": "you are dumb if you don't understand this",
+            "folder": "game",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "NoU.js",
             "command": "no u",
             "description": "sends no u after every command",
