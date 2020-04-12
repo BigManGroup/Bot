@@ -20,14 +20,8 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
         let user : User;
 
         if(message.mentions.users.size === 0) user = message.author;
-        else {
-            user = message.mentions.users.first();
+        else user = message.mentions.users.first();
 
-            if(user.id === message.client.user.id){
-                message.reply(`ask ur mum`).catch(error => console.log(error));
-                return;
-            }
-        }
 
         middleware.peePeeMiddleware.updatePeePeeSize(user.id, isBigMan, +size);
         message.reply("peepee updated").catch((error) => console.log(error));
