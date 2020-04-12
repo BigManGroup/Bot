@@ -17,6 +17,14 @@
             "prefix": true
         },
         {
+            "filename": "Help.js",
+            "command": "help",
+            "description": "shows this, dumbass",
+            "folder": "tools",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "PrintRoast.js",
             "command": "roast",
             "description": "roast yourself or the person you mentioned",
