@@ -23,7 +23,7 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
 
 
         middleware.nigMiddleware.updateNigAmount(user.id, isBigMan, amount);
-        message.reply("peepee updated").catch((error) => console.log(error));
+        message.reply("nig updated").catch((error) => console.log(error));
     });
 }
 
