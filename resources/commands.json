@@ -43,7 +43,23 @@
         {
             "filename": "ChangePeePee.js",
             "command": "change peepee",
-            "description": "changed the peepee size of you or the person tagged",
+            "description": "changes the peepee size of you or the person you tagged",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "HowNig.js",
+            "command": "hownig",
+            "description": "tells you how nig you are",
+            "folder": "general",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "ChangeHowNig.js",
+            "command": "change hownig",
+            "description": "changes the nig amount of you or the person you tagged",
             "folder": "admin",
             "hidden": false,
             "prefix": true
