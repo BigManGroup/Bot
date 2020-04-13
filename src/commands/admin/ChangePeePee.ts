@@ -16,12 +16,11 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
             message.reply("i need a number dumbass").catch((error) => console.log(error));
             return;
         }else if(size > 10){
-            size = Math.floor(size);
             message.reply("max peepee size is 10").catch((error) => console.log(error));
             return;
         }
         //Check parameters
-
+        size = Math.floor(size);
         let user : User;
 
         if(message.mentions.users.size === 0) user = message.author;
