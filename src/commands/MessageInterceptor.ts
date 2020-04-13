@@ -32,18 +32,21 @@ export default class MessageInterceptor {
                 .then(sentMessage => sentMessage.delete({timeout: 10000}))
                 .catch((error) => console.log(error));
             return true;
-        }else if(this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && message.content.toLowerCase().includes("plock")){ //If he is forgiven
+        } else if (this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && message.content.toLowerCase().includes("plock")) { //If he is forgiven
             await this.centralizedMiddleware.badManMiddleware.forgiveBadMan(message.author.id);
-                message.reply("good job, don't say the p-word in the future... I'll be watching you").catch(error => console.log(error));
+            await message.member.roles.remove(message.guild.roles.cache.get("540859279197077504"))
+            message.reply("good job, don't say the p-word in the future... I'll be watching you").catch(error => console.log(error));
         }
         //If he is already a bad man
 
         //If he said p-word
-        if(hasUsedPWord.intercepted){
+        if (hasUsedPWord.intercepted) {
+            await message.member.roles.add(message.guild.roles.cache.get("540859279197077504"))
+            await this.centralizedMiddleware.badManMiddleware.addBadMan(message.author.id);
+
             message.delete()
                 .then(() => message.reply(`It's not ${hasUsedPWord.usedWord}, it's plock, ${this.insults[Tools.getRandomNumber(0, this.insults.length - 1)]}`))
                 .catch(error => console.log(error));
-            await this.centralizedMiddleware.badManMiddleware.addBadMan(message.author.id);
 
             return true;
         }
