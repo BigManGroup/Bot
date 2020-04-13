@@ -26,7 +26,7 @@ export default class MessageInterceptor {
         let hasUsedPWord = this.usedPWord(message);
 
         //If he is already a bad man
-        if(this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && !message.content.toLowerCase().includes("plock")){
+        if (this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && !message.content.toLowerCase().includes("plock")) {
             message.delete()
                 .then(() => message.reply(`you still didn't correct yourself, ${this.insults[Tools.getRandomNumber(0, this.insults.length - 1)]}`))
                 .then(sentMessage => sentMessage.delete({timeout: 10000}))
@@ -57,9 +57,9 @@ export default class MessageInterceptor {
     }
 }
 
-class UsedPWord{
-    readonly intercepted : boolean;
-    readonly usedWord : string;
+class UsedPWord {
+    readonly intercepted: boolean;
+    readonly usedWord: string;
 
 
     constructor(intercepted: boolean, usedWord: string) {
