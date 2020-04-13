@@ -14,8 +14,8 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     if (isNaN(size)) {
         message.reply("i need a number dumbass").catch((error) => console.log(error));
         return;
-    } else if (size > 10) {
-        message.reply("max peepee size is 10").catch((error) => console.log(error)); //todo < 0
+    } else if (size < 0 || size > 10) {
+        message.reply("max peepee size is 10").catch((error) => console.log(error));
         return;
     }
     //Check parameters

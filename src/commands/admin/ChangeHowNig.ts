@@ -14,7 +14,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     if (isNaN(amount)) {
         message.reply("i need a number dumbass").catch((error) => console.log(error));
         return;
-    } else if (amount > 100) {
+    } else if (amount < 0 || amount > 100) {
         message.reply("max nig size is 100").catch((error) => console.log(error));
         return;
     }
