@@ -11,25 +11,23 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
     else {
         user = message.mentions.users.first();
 
-        if(user.id === message.client.user.id){
+        if (user.id === message.client.user.id) {
             message.reply(`ask ur mum`).catch(error => console.log(error));
             return;
         }
         changed = true;
     }
 
-    Tools.isBigMan(message.guild, user).then(isBigMan => {
-        let peePee = middleware.peePeeMiddleware.getPeePee(user.id, isBigMan);
+    let peePee = middleware.peePeeMiddleware.getPeePee(user.id, Tools.isBigMan(message.guild, user));
 
-        let printPeePee : string = '8';
-        for (let i = 0; i != peePee.size ; i++) {
-            printPeePee += '='
-        }
-        printPeePee += 'D';
+    let printPeePee: string = '8';
+    for (let i = 0; i != peePee.size; i++) {
+        printPeePee += '='
+    }
+    printPeePee += 'D';
 
-        if(changed) message.channel.send(`here's ${user} peepee\n${printPeePee}`).catch(error => console.log(error));
-        else message.channel.send(`here's your peepee\n${printPeePee}`).catch(error => console.log(error));
-    });
+    if (changed) message.channel.send(`here's ${user} peepee\n${printPeePee}`).catch(error => console.log(error));
+    else message.channel.send(`here's your peepee\n${printPeePee}`).catch(error => console.log(error));
 }
 
 
