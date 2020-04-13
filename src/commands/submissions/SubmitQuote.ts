@@ -29,7 +29,6 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
     //Remove the last 3 things in array (year, user, -)
 
     Tools.isBigMan(message.guild, message.author).then(isBigMan => {
-        isBigMan = false;
         if(isBigMan){
             let submittedQuote = new Quote(quoteText, String(quoteYear), quoteUser, undefined, message.author.id, new Date(), true, false);
             submittedQuote.updatedTimestamp = new Date();
