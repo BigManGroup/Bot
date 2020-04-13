@@ -5,6 +5,10 @@ import Tools from "../../tools";
 
 function main(message : Message, formattedMessage : FormattedMessage, middleware : CentralizedMiddleware) : void {
     Tools.isBigMan(message.guild, message.author).then(isBigMan => {
+        if (!isBigMan) {
+            message.reply(`nice try, unprivileged ${message.member.roles.highest.name}`).catch(error => console.log(error));
+            return;
+        }
         //Check parameters
         let amount = Number(formattedMessage.parameters[0]);
 
