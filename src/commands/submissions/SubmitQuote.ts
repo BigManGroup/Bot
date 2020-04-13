@@ -29,6 +29,7 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
     //Remove the last 3 things in array (year, user, -)
 
     Tools.isBigMan(message.guild, message.author).then(isBigMan => {
+        isBigMan = false;
         if(isBigMan){
             let submittedQuote = new Quote(quoteText, String(quoteYear), quoteUser, undefined, message.author.id, new Date(), true, false);
             submittedQuote.updatedTimestamp = new Date();
@@ -42,14 +43,13 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
                  .then(() => message.delete()) //Deletes the user message
                  .catch(error => console.log(error));
         } else{
-            let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteUser}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setDescription("awaiting approval by bigman").setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
+            let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setDescription("awaiting approval by bigman").setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
             message.reply("your quote was submitted. bigman council wil have review it and accept/decline it") //Sends the message that the submission has been received
-                .then((sentMessage) => middleware.quoteMiddleware.addQuote(new Quote(quoteText, String(quoteYear), quoteUser, sentMessage.id, message.author.id, new Date(), false, true))  //Adds to the cache and db
-                        .then(() => sentMessage.delete({timeout: 10000})) //Remove the message to avoid bot-spam
-                        .catch((error) => console.log(error)))
+                .then((sentMessage) => sentMessage.delete({timeout: 10000})) //Remove the message to avoid bot-spam
                 .then(() => (<TextChannel> message.guild.channels.resolve(Tools.quoteSubmissionsChannel)).send(embed) //Sends the message to submissions channel
                     .then((submissionMessage) => submissionMessage.react("✅")) //Adds the reaction good
-                    .then(submissionMessage => submissionMessage.message.react("❎")))  //Adds the reaction bad
+                    .then((reactResponse) => reactResponse.message.react("❎"))  //Adds the reaction bad
+                    .then((reactResponse) => middleware.quoteMiddleware.addQuote(new Quote(quoteText, String(quoteYear), quoteUser, reactResponse.message.id, message.author.id, new Date(), false, true)))) //Saved to db
                 .then(() => message.delete()) //Deletes the user's submission request original message
                 .catch(error => console.log(error));
         }
