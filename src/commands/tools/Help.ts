@@ -12,6 +12,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let gameCommands: string = "";
     let generalCommands: string = "";
     let toolsCommands: string = "";
+    let submissionCommands: string = "";
 
     let embed = new MessageEmbed()
         .setTitle("Help Command")
@@ -20,6 +21,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         let currentCommand = allCommands[i];
 
         if (currentCommand.folder === 'tools' && !currentCommand.hidden) toolsCommands += `**${currentCommand.command}**\n${currentCommand.description}\n\n`;
+        else if (currentCommand.folder === 'submissions' && !currentCommand.hidden) submissionCommands += `**${currentCommand.command}**\n${currentCommand.description}\n\n`;
         else if (currentCommand.folder === 'general' && !currentCommand.hidden) generalCommands += `**${currentCommand.command}**\n${currentCommand.description}\n\n`;
         else if (currentCommand.folder === 'game' && !currentCommand.hidden) gameCommands += `**${currentCommand.command}**\n${currentCommand.description}\n\n`;
         else if (currentCommand.folder === 'admin' && !currentCommand.hidden) adminCommands += `**${currentCommand.command}**\n${currentCommand.description}\n\n`;
@@ -28,6 +30,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
 
     if (Tools.isBigMan(message.guild, message.author)) embed.addField("admin commands", adminCommands)
     embed.addField("general commands", generalCommands);
+    embed.addField("submissions", submissionCommands);
     embed.addField("tools", toolsCommands);
     embed.addField("games", gameCommands);
 
