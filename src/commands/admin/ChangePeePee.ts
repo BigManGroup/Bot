@@ -20,7 +20,7 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
             return;
         }
         //Check parameters
-        size = Math.floor(size);
+        size = Math.round(size);
         let user : User;
 
         if(message.mentions.users.size === 0) user = message.author;
