@@ -59,9 +59,11 @@ export default class QuoteMiddleware extends BaseMiddleware{
         await this.quoteWrapper.declineQuote(declinedQuote); //Update database
     }
 
-    isMessagePending (message : string) : boolean{
+    isMessagePending(message: string): boolean {
         return this.quoteCache.pendingQuotes.has(message);
     }
 
-
+    getApprovedQuote(message: string): Quote {
+        return this.quoteCache.approvedQuotes.get(message);
+    }
 }
