@@ -47,10 +47,24 @@ export default class QuoteWrapper extends BaseWrapper{
     }
 
     async approveQuote(quote : Quote) : Promise<void>{
-        await (this.collection.updateOne({_id :  quote._id}, {$set: {"accepted": true, "pending": false, "updateTimestamp": quote.updatedTimestamp}}));
+        await (this.collection.updateOne({_id: quote._id}, {
+            $set: {
+                "accepted": true,
+                "pending": false,
+                "updateTimestamp": quote.updatedTimestamp,
+                "message": quote.message
+            }
+        }));
     }
 
     async declineQuote(quote : Quote) : Promise<void>{
-        await (this.collection.updateOne({_id :  quote._id}, {$set: {"accepted": false, "pending": false, "updateTimestamp": quote.updatedTimestamp}}));
+        await (this.collection.updateOne({_id: quote._id}, {
+            $set: {
+                "accepted": false,
+                "pending": false,
+                "updateTimestamp": quote.updatedTimestamp,
+                "message": undefined
+            }
+        }));
     }
 }

@@ -4,9 +4,9 @@ export default class Quote{
     _id : ObjectId;
     readonly quoteText : string;
     readonly quoteYear : string;
-    readonly quoteUser : string;
-    readonly message : string;
-    readonly userSubmitted : string;
+    readonly quoteUser: string;
+    message: string;
+    readonly userSubmitted: string;
     readonly submittedTimestamp: Date;
     updatedTimestamp : Date;
     accepted : boolean;

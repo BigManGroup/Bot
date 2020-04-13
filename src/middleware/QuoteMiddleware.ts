@@ -38,6 +38,7 @@ export default class QuoteMiddleware extends BaseMiddleware{
         approvedQuote.pending = false;
         approvedQuote.accepted = true;
         approvedQuote.updatedTimestamp = new Date();
+        approvedQuote.message = message;
         this.quoteCache.pendingQuotes.delete(message);
         this.quoteCache.approvedQuotes.set(message, approvedQuote);
         //Update Cache
@@ -52,6 +53,7 @@ export default class QuoteMiddleware extends BaseMiddleware{
         declinedQuote.pending = false;
         declinedQuote.accepted = false;
         declinedQuote.updatedTimestamp = new Date();
+        declinedQuote.message = undefined;
         this.quoteCache.pendingQuotes.delete(message);
         this.quoteCache.declinedQuotes.set(message, declinedQuote);
         //Update Cache

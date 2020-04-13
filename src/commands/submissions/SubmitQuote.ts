@@ -32,15 +32,16 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let isBigMan = Tools.isBigMan(message.guild, message.author);
 
     if (isBigMan) {
-        let submittedQuote = new Quote(quoteText, String(quoteYear), quoteUser, undefined, message.author.id, new Date(), true, false);
-        submittedQuote.updatedTimestamp = new Date();
-        submittedQuote._id = new ObjectId();
-
         let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
         message.reply("your submission was automatically accepted because you are a **BIGMAN**") //sends the message that the quote has been added
             .then((sentMessage) => sentMessage.delete({timeout: 10000})) //Deletes the message to avoid bot spam
-            .then(() => middleware.quoteMiddleware.addQuote(submittedQuote)) //Adds the quote to database and cache
-            .then(() => (<TextChannel>message.guild.channels.resolve(QuoteVoteHandler.quoteChannel)).send(embed)) //Sends the embed in bot-council
+            .then(async () => {
+                let embedMessage = await (<TextChannel>message.guild.channels.resolve(QuoteVoteHandler.quoteChannel)).send(embed)
+                let submittedQuote = new Quote(quoteText, String(quoteYear), quoteUser, embedMessage.id, message.author.id, new Date(), true, false);
+                submittedQuote.updatedTimestamp = submittedQuote.submittedTimestamp;
+                submittedQuote._id = new ObjectId();
+                await middleware.quoteMiddleware.addQuote(submittedQuote); //Adds the quote to database and cache
+            }) //Sends the embed in bot-council
             .then(() => message.delete()) //Deletes the user message
             .catch(error => console.log(error));
     } else {
