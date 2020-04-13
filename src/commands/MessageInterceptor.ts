@@ -1,51 +1,28 @@
 import CentralizedMiddleware from "../middleware/CentralizedMiddleware";
 import {Message} from "discord.js";
 import Tools from "../tools";
+import * as PWords from '../../resources/pwords.json'
 
-export default class MessageInterceptor{
-    readonly centralizedMiddleware : CentralizedMiddleware;
-    readonly insults : string[] = ["cunt","bitch","retard","you cock","you fucker","you slow clubfooted bastard","you retarded scythe main kid","stupid stuck in gold"];
+export default class MessageInterceptor {
+    readonly centralizedMiddleware: CentralizedMiddleware;
+    readonly insults: string[] = ["cunt", "bitch", "retard", "you cock", "you fucker", "you slow clubfooted bastard", "you retarded scythe main kid", "stupid stuck in gold"];
 
     constructor(centralizedMiddleware: CentralizedMiddleware) {
         this.centralizedMiddleware = centralizedMiddleware;
     }
 
-    usedPWord(message : Message) : UsedPWord{
-        let intercepted : boolean = false;
-        let usedWord : string;
-
-        if(message.content.toLowerCase().includes("please")){
-            intercepted = true;
-            usedWord = "please";
-        }else if(message.content.toLowerCase().includes("plz")){
-            intercepted = true;
-            usedWord = "plz";
-        }else if(message.content.toLowerCase().includes("pleaze")){
-            intercepted = true;
-            usedWord = "pleaze";
-        }else if(message.content.toLowerCase().includes("plox")){
-            intercepted = true;
-            usedWord = "plox";
-        }else if(message.content.toLowerCase().includes("plx")){
-            intercepted = true;
-            usedWord = "plx";
-        }else if(message.content.toLowerCase().includes("plis")){
-            intercepted = true;
-            usedWord = "plis";
-        }else if(message.content.toLowerCase().includes("pliz")){
-            intercepted = true;
-            usedWord = "pliz";
-        }else if(message.content.toLowerCase().includes("pls")){
-            intercepted = true;
-            usedWord = "pls";
+    usedPWord(message: Message): UsedPWord {
+        for (let i = 0; i !== PWords.list.length; i++) {
+            let currentPWord = PWords.list[i];
+            if (message.content.toLowerCase().includes(currentPWord)) {
+                return new UsedPWord(true, currentPWord);
+            }
         }
 
-        return new UsedPWord(intercepted, usedWord);
-    } //TODO put these in a json file
+        return new UsedPWord(false, undefined);
+    }
 
-
-
-    private async plockInterception(message : Message) : Promise <boolean>{
+    private async plockInterception(message: Message): Promise<boolean> {
         let hasUsedPWord = this.usedPWord(message);
 
         //If he is already a bad man
