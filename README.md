@@ -4,10 +4,10 @@
 #### Admin Features:
     - [x] Change How Nig
     - [x] Change PeePee size
-    - [x] Delete an approved Quote
-    - [ ] Delete Quote 
-    - [ ] Delete Roast
-    - [ ] Delete Lenny
+    - [ ] Print quote submission leaderboard
+    - [ ] Delete approved quote 
+    - [ ] Delete approved roast
+    - [ ] Delete approved lenny
     
 #### General Features
     - [x] HowNig -> Generates or gets a nig number from database
