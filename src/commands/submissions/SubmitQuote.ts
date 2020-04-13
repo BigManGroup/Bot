@@ -5,8 +5,6 @@ import Tools from "../../tools";
 import Quote from "../../database/model/Quote";
 import { ObjectId } from "mongodb";
 
-let submissionChannel = '698923581832298617';
-let quotesChannel = "669245652664057867";
 
 function main(message : Message, formattedMessage : FormattedMessage, middleware : CentralizedMiddleware) : void {
     let roast = formattedMessage.parameters;
@@ -37,17 +35,25 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
             submittedQuote._id = new ObjectId();
 
             let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
-             message.reply("your submission was automatically accepted because you are a **BIGMAN**")
-                 .then((sentMessage) => sentMessage.delete({timeout: 10000}))
-                 .then(() => middleware.quoteMiddleware.addQuote(submittedQuote))
-                 .then(() => (<TextChannel> message.guild.channels.resolve(quotesChannel)).send(embed))
-                 .then(() => message.delete())
+             message.reply("your submission was automatically accepted because you are a **BIGMAN**") //sends the message that the quote has been added
+                 .then((sentMessage) => sentMessage.delete({timeout: 10000})) //Deletes the message to avoid bot spam
+                 .then(() => middleware.quoteMiddleware.addQuote(submittedQuote)) //Adds the quote to database and cache
+                 .then(() => (<TextChannel> message.guild.channels.resolve(Tools.quoteChannel)).send(embed)) //Sends the embed in bot-council
+                 .then(() => message.delete()) //Deletes the user message
                  .catch(error => console.log(error));
         } else{
-            message.reply("Feature in progress"); //TODO implement this
+            let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteUser}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setDescription("awaiting approval by bigman").setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
+            message.reply("your quote was submitted. bigman council wil have review it and accept/decline it") //Sends the message that the submission has been received
+                .then((sentMessage) => middleware.quoteMiddleware.addQuote(new Quote(quoteText, String(quoteYear), quoteUser, sentMessage.id, message.author.id, new Date(), false, true))  //Adds to the cache and db
+                        .then(() => sentMessage.delete({timeout: 10000})) //Remove the message to avoid bot-spam
+                        .catch((error) => console.log(error)))
+                .then(() => (<TextChannel> message.guild.channels.resolve(Tools.quoteSubmissionsChannel)).send(embed) //Sends the message to submissions channel
+                    .then((submissionMessage) => submissionMessage.react("✅")) //Adds the reaction good
+                    .then(submissionMessage => submissionMessage.message.react("❎")))  //Adds the reaction bad
+                .then(() => message.delete()) //Deletes the user's submission request original message
+                .catch(error => console.log(error));
         }
     })
-
 }
 
 
