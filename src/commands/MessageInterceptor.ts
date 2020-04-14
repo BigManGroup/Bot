@@ -22,8 +22,18 @@ export default class MessageInterceptor {
         return new UsedPWord(false, undefined);
     }
 
-    private async plockInterception(message: Message): Promise<boolean> {
+    async intercepted(message: Message, edited: boolean): Promise<boolean> {
+        return this.plockInterception(message, edited);
+    }
+
+    private async plockInterception(message: Message, edited: boolean): Promise<boolean> {
         let hasUsedPWord = this.usedPWord(message);
+
+        if (hasUsedPWord.intercepted && edited) {
+            message.reply("nice try lmao")
+                .then(sentMessage => sentMessage.delete({timeout: 2000}))
+                .catch(error => console.log(error));
+        }
 
         //If he is already a bad man
         if (this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && !message.content.toLowerCase().includes("plock")) {
@@ -53,10 +63,6 @@ export default class MessageInterceptor {
         //If he said p-word
 
         return false; //If it doesn't match, default to false
-    }
-
-    async intercepted(message : Message) : Promise <boolean>{
-        return this.plockInterception(message);
     }
 }
 

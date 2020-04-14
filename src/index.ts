@@ -31,13 +31,15 @@ client.on("ready", async () => {
 });
 
 client.on("message", async (message) => {
-    if (message.author.bot || !Saving.initialized || !centralizedMiddleware.cacheBuilt() || await messageInterceptor.intercepted(message)) return;
+    if (message.author.bot || !Saving.initialized || !centralizedMiddleware.cacheBuilt() || await messageInterceptor.intercepted(message, false)) return;
     commandHandler.execute(message);
 });
 
 client.on("messageUpdate", async (oldMessage: Message, newMessage: Message) => {
     if (newMessage.partial) newMessage = await newMessage.fetch();
-    if (newMessage.author.bot || !Saving.initialized || !centralizedMiddleware.cacheBuilt() || await messageInterceptor.intercepted(newMessage)) return;
+    if (newMessage.author.bot || !Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
+
+    await messageInterceptor.intercepted(newMessage, true);
 });
 
 client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: User) => {
