@@ -2,6 +2,7 @@ import RoastCache from "../cache/RoastCache";
 import RoastWrapper from "../database/wrapper/RoastWrapper";
 import BaseMiddleware from "./BaseMiddleware";
 import Tools from "../tools";
+import Roast from "../database/model/Roast";
 
 export default class RoastMiddleware extends BaseMiddleware{
     readonly roastCache : RoastCache;
@@ -23,8 +24,86 @@ export default class RoastMiddleware extends BaseMiddleware{
         this.cacheBuilt = true;
     }
 
-    get randomRoast() : string{
+    get randomRoast(): string {
         let roasts = this.roastCache.acceptedRoasts;
         return roasts[Tools.getRandomNumber(0, roasts.length)].roast
+    }
+
+    async addRoast(roast: Roast): Promise<void> {
+        if (roast.accepted) this.roastCache.acceptedRoasts.push(roast);
+        else this.roastCache.pendingRoasts.set(roast.message, roast);
+
+        await this.roastWrapper.submitRoast(roast);
+    }
+
+    async approveRoast(message: string): Promise<void> {
+        let approvedRoast = this.getPendingRoast(message);
+
+        //Update Cache
+        approvedRoast.pending = false;
+        approvedRoast.accepted = true;
+        approvedRoast.updatedTimestamp = new Date();
+        approvedRoast.message = undefined;
+        this.roastCache.pendingRoasts.delete(message);
+        this.roastCache.acceptedRoasts.push(approvedRoast);
+        //Update Cache
+
+        await this.roastWrapper.approveRoast(approvedRoast); //Update database
+    }
+
+    async deleteApprovedRoast(message: string): Promise<void> {
+        let deletedQuote: Roast;
+        let index: number;
+
+        for (let i = 0; i !== this.roastCache.acceptedRoasts.length; i++) {
+            if (this.roastCache.acceptedRoasts[i].message === message) {
+                deletedQuote = this.roastCache.acceptedRoasts[i];
+                index = i;
+                break;
+            }
+        }
+
+        //Update Cache
+        deletedQuote.pending = false;
+        deletedQuote.accepted = false;
+        deletedQuote.updatedTimestamp = new Date();
+        deletedQuote.message = undefined;
+        this.roastCache.acceptedRoasts.splice(index, 1);
+        this.roastCache.declinedRoasts.push(deletedQuote);
+        //Update Cache
+
+        await this.roastWrapper.declineRoast(deletedQuote); //Update database
+    }
+
+    async declineRoast(message: string): Promise<void> {
+        let declinedRoast = this.getPendingRoast(message);
+
+        //Update Cache
+        declinedRoast.pending = false;
+        declinedRoast.accepted = false;
+        declinedRoast.updatedTimestamp = new Date();
+        declinedRoast.message = undefined;
+        this.roastCache.pendingRoasts.delete(message);
+        this.roastCache.declinedRoasts.push(declinedRoast);
+        //Update Cache
+
+        await this.roastWrapper.declineRoast(declinedRoast); //Update database
+    }
+
+    isRoastPending(message: string): boolean {
+        return this.roastCache.pendingRoasts.has(message);
+    }
+
+    isRoastApproved(message: string): boolean {
+        return this.getApprovedRoast(message) !== undefined;
+    }
+
+    getPendingRoast(message: string): Roast {
+        return this.roastCache.pendingRoasts.get(message);
+    }
+
+    getApprovedRoast(message: string): Roast {
+        for (let i = 0; i !== this.roastCache.acceptedRoasts.length; i++) if (this.roastCache.acceptedRoasts[i].message === message) return this.roastCache.acceptedRoasts[i];
+        return undefined;
     }
 }

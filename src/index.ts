@@ -47,8 +47,10 @@ client.on("messageUpdate", async (oldMessage: Message, newMessage: Message) => {
 
 client.on("messageDelete", async (message: Message | PartialMessage) => {
     if (!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
+
     if (centralizedMiddleware.quoteMiddleware.isQuoteApproved(message.id)) await centralizedMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
-    else if (centralizedMiddleware.quoteMiddleware.isQuotePending(message.id)) await votingHandler.quoteVoteHandler.declineWithoutDeletion(message);
+    else if (centralizedMiddleware.quoteMiddleware.isQuotePending(message.id)) await centralizedMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
+    else if (centralizedMiddleware.roastMiddleware.isRoastPending(message.id)) await centralizedMiddleware.roastMiddleware.deleteApprovedRoast(message.id);
 });
 
 client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: User) => {
