@@ -46,7 +46,22 @@ export default class QuoteMiddleware extends BaseMiddleware{
         await this.quoteWrapper.approveQuote(approvedQuote); //Update database
     }
 
-    async declineQuote (message : string) : Promise <void>{
+    async deleteApprovedQuote(message: string): Promise<void> {
+        let deletedQuote = this.quoteCache.approvedQuotes.get(message);
+
+        //Update Cache
+        deletedQuote.pending = false;
+        deletedQuote.accepted = false;
+        deletedQuote.updatedTimestamp = new Date();
+        deletedQuote.message = undefined;
+        this.quoteCache.approvedQuotes.delete(message);
+        this.quoteCache.declinedQuotes.set(message, deletedQuote);
+        //Update Cache
+
+        await this.quoteWrapper.declineQuote(deletedQuote); //Update database
+    }
+
+    async declineQuote(message: string): Promise<void> {
         let declinedQuote = this.quoteCache.pendingQuotes.get(message);
 
         //Update Cache
@@ -63,6 +78,10 @@ export default class QuoteMiddleware extends BaseMiddleware{
 
     isMessagePending(message: string): boolean {
         return this.quoteCache.pendingQuotes.has(message);
+    }
+
+    isApprovedQuote(message: string): boolean {
+        return this.quoteCache.approvedQuotes.has(message);
     }
 
     getApprovedQuote(message: string): Quote {
