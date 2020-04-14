@@ -49,7 +49,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             .catch(error => console.log(error));
     } else {
         let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setDescription("awaiting approval by bigman").setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
-        message.reply("your quote was submitted. bigman council wil have review it and accept/decline it") //Sends the message that the submission has been received
+        message.reply("your quote was submitted. bigman council will review it and accept/decline it") //Sends the message that the submission has been received
             .then(async (sentMessage) => {
                 let submissionMessage = await (<TextChannel>message.guild.channels.resolve(QuoteVoteHandler.quoteSubmissionsChannel)).send(embed) //Sends the message to submissions channel
                 await submissionMessage.react(VotingHandler.approveReaction);

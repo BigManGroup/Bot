@@ -20,7 +20,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             await middleware.roastMiddleware.addRoast(submittedRoast);
         });
     } else {
-        message.reply("your roast was submitted. bigman council wil have review it and accept/decline it").then(async (sentMessage) => {  //Sends the message that the submission has been received
+        message.reply("your roast was submitted. bigman council will review it and accept/decline it").then(async (sentMessage) => {  //Sends the message that the submission has been received
             let embed = new MessageEmbed().setAuthor(`${message.member.displayName}`, message.member.user.avatarURL()).setTitle(roastText).setDescription("awaiting approval by bigman");
             let submissionMessage = await (<TextChannel>message.guild.channels.resolve(RoastVoteHandler.roastSubmissionChannel)).send(embed) //Sends the message to submissions channel
             await submissionMessage.react(VotingHandler.approveReaction);
