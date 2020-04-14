@@ -11,7 +11,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let roastText = formattedMessage.parameters.join(" ");
 
     let isBigMan = Tools.isBigMan(message.guild, message.author);
-    isBigMan = false;
+
     if (isBigMan) {
         message.reply("your roast was automatically submitted because you are **BIGMAN**").then(async (sentMessage) => {
             let submittedRoast = new Roast(roastText, undefined, message.author.id, new Date(), true, false);
