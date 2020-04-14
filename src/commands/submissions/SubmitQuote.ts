@@ -34,29 +34,33 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     if (isBigMan) {
         let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
         message.reply("your submission was automatically accepted because you are a **BIGMAN**") //sends the message that the quote has been added
-            .then((sentMessage) => sentMessage.delete({timeout: 10000})) //Deletes the message to avoid bot spam
-            .then(async () => {
+            .then(async (sentMessage) => {
                 let embedMessage = await (<TextChannel>message.guild.channels.resolve(QuoteVoteHandler.quoteChannel)).send(embed)
+
                 let submittedQuote = new Quote(quoteText, String(quoteYear), quoteUser, embedMessage.id, message.author.id, new Date(), true, false);
                 submittedQuote.updatedTimestamp = submittedQuote.submittedTimestamp;
                 submittedQuote._id = new ObjectId();
                 await middleware.quoteMiddleware.addQuote(submittedQuote); //Adds the quote to database and cache
-            }) //Sends the embed in bot-council
-            .then(() => message.delete()) //Deletes the user message
+
+                await sentMessage.delete({timeout: 10000}) //Deletes the message to avoid bot spam
+                await message.delete(); //Deletes the user message
+            })
             .catch(error => console.log(error));
     } else {
         let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setDescription("awaiting approval by bigman").setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
         message.reply("your quote was submitted. bigman council wil have review it and accept/decline it") //Sends the message that the submission has been received
-            .then((sentMessage) => sentMessage.delete({timeout: 10000})) //Remove the message to avoid bot-spam
-            .then(() => (<TextChannel>message.guild.channels.resolve(QuoteVoteHandler.quoteSubmissionsChannel)).send(embed) //Sends the message to submissions channel
-                .then((submissionMessage) => submissionMessage.react("✅")) //Adds the reaction good
-                .then((reactResponse) => reactResponse.message.react("❎"))  //Adds the reaction bad
-                .then(async (reactResponse) => {
-                    let quote = new Quote(quoteText, String(quoteYear), quoteUser, reactResponse.message.id, message.author.id, new Date(), false, true);
-                    quote._id = new ObjectId();
-                    await middleware.quoteMiddleware.addQuote(quote)
-                })) //Saved to db
-            .then(() => message.delete()) //Deletes the user's submission request original message
+            .then(async (sentMessage) => {
+                let submissionMessage = await (<TextChannel>message.guild.channels.resolve(QuoteVoteHandler.quoteSubmissionsChannel)).send(embed) //Sends the message to submissions channel
+                await submissionMessage.react("✅");
+                await submissionMessage.react("❎")
+
+                let quote = new Quote(quoteText, String(quoteYear), quoteUser, submissionMessage.id, message.author.id, new Date(), false, true);
+                quote._id = new ObjectId();
+                await middleware.quoteMiddleware.addQuote(quote)
+
+                await sentMessage.delete({timeout: 10000}) //Remove the message to avoid bot-spam
+                await message.delete();
+            })
             .catch(error => console.log(error));
     }
 }
