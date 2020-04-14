@@ -5,9 +5,6 @@
     - [x] Change How Nig
     - [x] Change PeePee size
     - [ ] Print quote submission leaderboard
-    - [ ] Delete approved quote 
-    - [ ] Delete approved roast
-    - [ ] Delete approved lenny
     
 #### General Features
     - [x] HowNig -> Generates or gets a nig number from database
@@ -31,7 +28,7 @@
 #### Other Features
     - [x] Message Interceptor, so that when people say the P Word they are muted until they say plock
     - [x] Message Interceptor on edit
-    - [ ] Multiple Prefixes
+    - [x] Multiple Prefixes
     
 #### Notable technical features
     - Ability to reset bot and still recieve reactions for messages and vote

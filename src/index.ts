@@ -6,6 +6,7 @@ import Saving from "./database/DatabaseHandler";
 import CentralizedMiddleware from "./middleware/CentralizedMiddleware";
 import MessageInterceptor from "./commands/MessageInterceptor";
 import VotingHandler from "./voting/VotingHandler";
+import Command from "./commands/model/Command";
 
 const client = new Discord.Client({partials: ['MESSAGE', 'REACTION']});
 
@@ -15,13 +16,15 @@ let centralizedMiddleware: CentralizedMiddleware;
 let votingHandler: VotingHandler;
 
 client.on("ready", async () => {
+    Command.prefixes = properties.bot.prefixes;
+
     //Init the centralizedMiddleware
     centralizedMiddleware = new CentralizedMiddleware();
     await centralizedMiddleware.buildCache();
     //Init the centralizedMiddleware
 
     //Init the Centralized Middleware and Command Interceptor
-    commandHandler = new CommandHandler(properties.bot.prefix, centralizedMiddleware);
+    commandHandler = new CommandHandler(centralizedMiddleware);
     messageInterceptor = new MessageInterceptor(centralizedMiddleware);
     votingHandler = new VotingHandler(centralizedMiddleware);
     //Init the Centralized Middleware and Command Interceptor

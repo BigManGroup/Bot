@@ -8,11 +8,9 @@ export default class CommandHandler{
     readonly nonPrefixCommands: Map<string, Command>;
     readonly prefixCommands : Map<string, Command>;
     allCommands : Map <string, Command>;
-    readonly centralizedMiddleware : CentralizedMiddleware;
+    readonly centralizedMiddleware: CentralizedMiddleware;
 
-    constructor(prefix : string, centralizedMiddleware : CentralizedMiddleware) {
-        Command.prefix = prefix; //Set the general prefix
-
+    constructor(centralizedMiddleware: CentralizedMiddleware) {
         this.nonPrefixCommands = new Map<string, Command>();
         this.prefixCommands = new Map<string, Command>();
         this.centralizedMiddleware = centralizedMiddleware;
@@ -20,28 +18,39 @@ export default class CommandHandler{
         this.loadCommands();
     }
 
-    loadCommands() : void{
+    private static hasPrefix(content: string): boolean {
+        for (let i = 0; i !== Command.prefixes.length; i++) {
+            console.log(Command.prefixes[i])
+            if (content.startsWith(Command.prefixes[i])) return true;
+        }
+
+        return false;
+    }
+
+    private loadCommands(): void {
         let loadedCommands = LoadedCommands.commands;
 
         for (let i = 0; i !== loadedCommands.length; i++) {
             let current = loadedCommands[i];
             let command = new Command(current.filename, current.command, current.description, current.folder, current.hidden, current.prefix);
 
-            if(command.prefix) this.prefixCommands.set(current.command, command);
+            if (command.prefix) this.prefixCommands.set(current.command, command);
             else this.nonPrefixCommands.set(current.command, command);
         }
-        this.allCommands = new Map <string, Command> ([... this.prefixCommands, ... this.nonPrefixCommands]);
+        this.allCommands = new Map<string, Command>([...this.prefixCommands, ...this.nonPrefixCommands]);
     }
 
     //Extracts the command by searching for it using recursion
-    extractCommand(currentlyApplicable: String[], command: string[], currentLocation: number, prefix : boolean): string | undefined {
+
+    //Extracts the command by searching for it using recursion
+    private extractCommand(currentlyApplicable: String[], command: string[], currentLocation: number, prefix: boolean): string | undefined {
         if (command.length + 1 === currentLocation) {
             return undefined;
         } //Command not found
 
         //First time running the recursion, set the keys of the command
         if (currentLocation === 0) {
-            if(prefix) currentlyApplicable = Array.from(this.prefixCommands.keys());
+            if (prefix) currentlyApplicable = Array.from(this.prefixCommands.keys());
             else currentlyApplicable = Array.from(this.nonPrefixCommands.keys());
         }
         //First time running the recursion, set the keys of the command
@@ -67,19 +76,18 @@ export default class CommandHandler{
         }
         else return this.extractCommand(newApplicable, command, ++currentLocation, prefix);
     }
-    //Extracts the command by searching for it using recursion
 
-    formatMessage(message : Message) : FormattedMessage {
-        if(message.author.bot) return; //If bot cancel
+    private formatMessage(message: Message): FormattedMessage {
+        if (message.author.bot) return; //If bot cancel
 
-        let content:string[];
-        let command:string;
+        let content: string[];
+        let command: string;
 
         //Check if commands exists, and if it doesn't cancel
-        if(message.content.startsWith(Command.prefix)){
+        if (CommandHandler.hasPrefix(message.content)) {
             content = (message.content.split(" ")).splice(1);
             command = this.extractCommand(undefined, content.slice(), 0, true); //Slice to pass by reference
-        }else{
+        } else {
             content = message.content.split(" ");
             command = this.extractCommand(undefined, content.slice(), 0, false); //Slice to pass by reference
         }
