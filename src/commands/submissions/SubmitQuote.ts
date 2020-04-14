@@ -12,10 +12,10 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
 
     //Make sure that the quote is in the correct template
     if (message.mentions.users.size === 0 || isNaN(Number(roast[roast.length - 2] || roast[roast.length - 3] !== '-'))) {
-        message.delete({timeout: 5000}).then(() =>
-            message.reply(`Template: 'quote-text' - 'year' 'author'`)
-                .then(messageReply => messageReply.delete({timeout: 10000}))
-        ).catch(error => console.log(error));
+        message.reply(`Template: 'quote-text' - 'year' 'author'`)
+            .then(messageReply => messageReply.delete({timeout: 10000}))
+            .then(() => message.delete())
+            .catch(error => console.log(error));
         return;
     }
     //Make sure that the quote is in the correct template
