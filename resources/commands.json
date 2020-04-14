@@ -129,6 +129,14 @@
             "prefix": true
         },
         {
+            "filename": "SubmitInsult.js",
+            "command": "submit insult",
+            "description": "Submit an insult, that can be accepted only by **BIGMAN**",
+            "folder": "submissions",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "NoU.js",
             "command": "no u",
             "description": "sends no u after every command",

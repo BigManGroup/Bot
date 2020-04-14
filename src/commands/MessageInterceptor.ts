@@ -1,11 +1,9 @@
 import CentralizedMiddleware from "../middleware/CentralizedMiddleware";
 import {Message} from "discord.js";
-import Tools from "../tools";
 import * as PWords from '../../resources/pwords.json'
 
 export default class MessageInterceptor {
     readonly centralizedMiddleware: CentralizedMiddleware;
-    readonly insults: string[] = ["cunt", "bitch", "retard", "you cock", "you fucker", "you slow clubfooted bastard", "you retarded scythe main kid", "stupid stuck in gold"];
 
     constructor(centralizedMiddleware: CentralizedMiddleware) {
         this.centralizedMiddleware = centralizedMiddleware;
@@ -38,7 +36,7 @@ export default class MessageInterceptor {
         //If he is already a bad man
         if (this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && !message.content.toLowerCase().includes("plock")) {
             message.delete()
-                .then(() => message.reply(`you still didn't correct yourself, ${this.insults[Tools.getRandomNumber(0, this.insults.length - 1)]}`))
+                .then(() => message.reply(`you still didn't correct yourself, ${this.centralizedMiddleware.insultMiddleware.randomInsult}`))
                 .then(sentMessage => sentMessage.delete({timeout: 10000}))
                 .catch((error) => console.log(error));
             return true;
@@ -55,7 +53,7 @@ export default class MessageInterceptor {
             await this.centralizedMiddleware.badManMiddleware.addBadMan(message.author.id);
 
             message.delete()
-                .then(() => message.reply(`It's not ${hasUsedPWord.usedWord}, it's plock, ${this.insults[Tools.getRandomNumber(0, this.insults.length - 1)]}`))
+                .then(() => message.reply(`It's not ${hasUsedPWord.usedWord}, it's plock, ${this.centralizedMiddleware.insultMiddleware.randomInsult}`))
                 .catch(error => console.log(error));
 
             return true;

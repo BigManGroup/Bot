@@ -4,6 +4,7 @@ import BadManMiddleware from "./BadManMiddleware";
 import PeePeeMiddleware from "./PeePeeMiddleware";
 import NigMiddleware from "./NigMiddleware";
 import QuoteMiddleware from "./QuoteMiddleware";
+import InsultMiddleware from "./InsultMiddleware";
 
 export default class CentralizedMiddleware{
     readonly roastMiddleware : RoastMiddleware;
@@ -11,7 +12,8 @@ export default class CentralizedMiddleware{
     readonly badManMiddleware : BadManMiddleware;
     readonly peePeeMiddleware : PeePeeMiddleware;
     readonly nigMiddleware : NigMiddleware;
-    readonly quoteMiddleware : QuoteMiddleware;
+    readonly quoteMiddleware: QuoteMiddleware;
+    readonly insultMiddleware: InsultMiddleware;
 
     constructor() {
         this.roastMiddleware = new RoastMiddleware();
@@ -20,6 +22,7 @@ export default class CentralizedMiddleware{
         this.peePeeMiddleware = new PeePeeMiddleware();
         this.nigMiddleware = new NigMiddleware();
         this.quoteMiddleware = new QuoteMiddleware();
+        this.insultMiddleware = new InsultMiddleware();
     }
 
     async buildCache() : Promise <void> {
@@ -29,6 +32,7 @@ export default class CentralizedMiddleware{
         await this.peePeeMiddleware.buildCache();
         await this.nigMiddleware.buildCache();
         await this.quoteMiddleware.buildCache();
+        await this.insultMiddleware.buildCache();
     }
 
     cacheBuilt() : boolean {
@@ -37,6 +41,7 @@ export default class CentralizedMiddleware{
             && this.badManMiddleware.cacheBuilt
             && this.peePeeMiddleware.cacheBuilt
             && this.nigMiddleware.cacheBuilt
-            && this.quoteMiddleware.cacheBuilt;
+            && this.quoteMiddleware.cacheBuilt
+            && this.insultMiddleware.cacheBuilt;
     }
 }
