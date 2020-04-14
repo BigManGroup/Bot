@@ -19,11 +19,7 @@ export default class CommandHandler{
     }
 
     private static hasPrefix(content: string): boolean {
-        for (let i = 0; i !== Command.prefixes.length; i++) {
-            console.log(Command.prefixes[i])
-            if (content.startsWith(Command.prefixes[i])) return true;
-        }
-
+        for (let i = 0; i !== Command.prefixes.length; i++) if (content.startsWith(Command.prefixes[i])) return true;
         return false;
     }
 
