@@ -38,7 +38,7 @@ export default class QuoteVoteHandler {
         let quote = this.centralizedMiddleware.quoteMiddleware.getApprovedQuote(message.id);
         await message.delete();
 
-        let embed = new MessageEmbed().setAuthor(`${guild.members.cache.get(quote.quoteUser).displayName} - ${quote.quoteYear}`, guild.members.cache.get(quote.quoteUser).user.avatarURL()).setTitle(quote.quoteText).setFooter(`Submitted by ${guild.members.cache.get(message.author.id).displayName}`);
+        let embed = new MessageEmbed().setAuthor(`${guild.members.cache.get(quote.quoteUser).displayName} - ${quote.quoteYear}`, guild.members.cache.get(quote.quoteUser).user.avatarURL()).setTitle(quote.quoteText).setFooter(`Submitted by ${guild.members.cache.get(quote.userSubmitted).displayName}`);
         await (<TextChannel>(await guild.channels.resolve(QuoteVoteHandler.quoteChannel))).send(embed);
     }
 
