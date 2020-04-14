@@ -18,6 +18,8 @@
 
 #### Submission Features
     - [x] Submit Quote -> Ability to submit a quote, and have bigman vote if it gets approved
+        - [x] -> If the user that submitted the quote, presses X, it will automatically decline and delete the quote
+        - [x] -> If a message is deleted from the big-man-quotes or big-man-quotes-submissions, it will automatically decline and delete the quote 
     - [ ] Submit Roast -> Ability to submit a roast, and have bigman vote if it gets approved
     - [ ] Submit Lenny -> Ability to submit a lenny, and have bigman vote if it gets approved
 

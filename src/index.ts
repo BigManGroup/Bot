@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import {Message, MessageReaction, User} from 'discord.js';
+import {Message, MessageReaction, PartialMessage, User} from 'discord.js';
 import * as properties from '../resources/config.json'
 import CommandHandler from "./commands/CommandHandler";
 import Saving from "./database/DatabaseHandler";
@@ -42,9 +42,10 @@ client.on("messageUpdate", async (oldMessage: Message, newMessage: Message) => {
     await messageInterceptor.intercepted(newMessage, true);
 });
 
-client.on("messageDelete", async (message) => {
+client.on("messageDelete", async (message: Message | PartialMessage) => {
     if (!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
-    if (centralizedMiddleware.quoteMiddleware.isApprovedQuote(message.id)) await centralizedMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
+    if (centralizedMiddleware.quoteMiddleware.isQuoteApproved(message.id)) await centralizedMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
+    else if (centralizedMiddleware.quoteMiddleware.isQuotePending(message.id)) await votingHandler.quoteVoteHandler.declineWithoutDeletion(message);
 });
 
 client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: User) => {

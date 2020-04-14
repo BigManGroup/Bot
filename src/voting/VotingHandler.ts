@@ -24,7 +24,7 @@ export default class VotingHandler {
     }
 
     private isReactionPending(messageId: string): PendingReaction {
-        if (this.centralizedMiddleware.quoteMiddleware.isMessagePending(messageId)) return new PendingReaction(true, "quote");
+        if (this.centralizedMiddleware.quoteMiddleware.isQuotePending(messageId)) return new PendingReaction(true, "quote");
         return new PendingReaction(false, undefined);
     }
 }
