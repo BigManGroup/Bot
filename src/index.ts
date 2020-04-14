@@ -42,6 +42,11 @@ client.on("messageUpdate", async (oldMessage: Message, newMessage: Message) => {
     await messageInterceptor.intercepted(newMessage, true);
 });
 
+client.on("messageDelete", async (message) => {
+    if (!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
+    if (centralizedMiddleware.quoteMiddleware.isApprovedQuote(message.id)) await centralizedMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
+});
+
 client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: User) => {
     if (!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
     await votingHandler.handleVote(messageReaction, user);
