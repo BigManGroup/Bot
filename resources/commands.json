@@ -106,7 +106,7 @@
         },
         {
             "filename": "SubmitQuote.js",
-            "command": "submit",
+            "command": "submit quote",
             "description": "Submit a quote, that can be accepted only by **BIGMAN**",
             "folder": "submissions",
             "hidden": false,
