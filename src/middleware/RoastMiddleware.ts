@@ -26,7 +26,7 @@ export default class RoastMiddleware extends BaseMiddleware{
 
     get randomRoast(): string {
         let roasts = this.roastCache.acceptedRoasts;
-        return roasts[Tools.getRandomNumber(0, roasts.length)].roast
+        return roasts[Tools.getRandomNumber(0, roasts.length - 1)].roast
     }
 
     async addRoast(roast: Roast): Promise<void> {
