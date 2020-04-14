@@ -55,7 +55,7 @@ export default class QuoteMiddleware extends BaseMiddleware{
         deletedQuote.updatedTimestamp = new Date();
         deletedQuote.message = undefined;
         this.quoteCache.approvedQuotes.delete(message);
-        this.quoteCache.declinedQuotes.set(message, deletedQuote);
+        this.quoteCache.declinedQuotes.push(deletedQuote);
         //Update Cache
 
         await this.quoteWrapper.declineQuote(deletedQuote); //Update database
@@ -70,7 +70,7 @@ export default class QuoteMiddleware extends BaseMiddleware{
         declinedQuote.updatedTimestamp = new Date();
         declinedQuote.message = undefined;
         this.quoteCache.pendingQuotes.delete(message);
-        this.quoteCache.declinedQuotes.set(message, declinedQuote);
+        this.quoteCache.declinedQuotes.push(declinedQuote);
         //Update Cache
 
         await this.quoteWrapper.declineQuote(declinedQuote); //Update database

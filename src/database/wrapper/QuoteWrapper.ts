@@ -30,14 +30,12 @@ export default class QuoteWrapper extends BaseWrapper{
         return formattedResults;
     }
 
-    async getDeclinedQuotes() : Promise<Map <string, Quote>>{
+    async getDeclinedQuotes(): Promise<Quote[]> {
         let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": false}]})).toArray();
 
-        let formattedResults : Map<string, Quote> = new Map<string, Quote>();
-        for (let i = 0; i !== results.length ; i++){
-            let currentQuote = Quote.modelBuilder(results[i]);
-            formattedResults.set(currentQuote.message, currentQuote);
-        }
+        let formattedResults: Quote[] = [];
+        for (let i = 0; i !== results.length; i++) formattedResults.push(Quote.modelBuilder(results[i]));
+
 
         return formattedResults;
     }

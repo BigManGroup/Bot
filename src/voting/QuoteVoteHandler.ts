@@ -36,10 +36,6 @@ export default class QuoteVoteHandler {
         else if (valid <= -3 || deleteQuote) await this.decline(message);
     }
 
-    async declineWithoutDeletion(message: Message | PartialMessage): Promise<void> {
-        await this.centralizedMiddleware.quoteMiddleware.declineQuote(message.id);
-    }
-
     private async approve(message: Message, guild: Guild): Promise<void> {
         await this.centralizedMiddleware.quoteMiddleware.approveQuote(message.id);
         let quote = this.centralizedMiddleware.quoteMiddleware.getApprovedQuote(message.id);
@@ -52,5 +48,9 @@ export default class QuoteVoteHandler {
     private async decline(message: Message): Promise<void> {
         await this.centralizedMiddleware.quoteMiddleware.declineQuote(message.id);
         await message.delete();
+    }
+
+    async declineWithoutDeletion(message: Message | PartialMessage): Promise<void> {
+        await this.centralizedMiddleware.quoteMiddleware.declineQuote(message.id);
     }
 }
