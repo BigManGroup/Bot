@@ -43,7 +43,7 @@ export default class RoastWrapper extends BaseModel {
                 "accepted": true,
                 "pending": false,
                 "updatedTimestamp": roast.updatedTimestamp,
-                "message": roast.message
+                "message": undefined
             }
         }));
     }
