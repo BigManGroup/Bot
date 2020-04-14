@@ -57,6 +57,14 @@
             "prefix": true
         },
         {
+            "filename": "QuoteLeadership.js",
+            "command": "quote leadership",
+            "description": "prints leadership of quotes",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "HowNig.js",
             "command": "hownig",
             "description": "tells you how nig you are",

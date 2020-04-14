@@ -4,7 +4,7 @@
 #### Admin Features:
     - [x] Change How Nig
     - [x] Change PeePee size
-    - [ ] Print quote submission leaderboard
+    - [x] Print quote submission leaderboard
     
 #### General Features
     - [x] HowNig -> Generates or gets a nig number from database
