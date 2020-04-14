@@ -28,6 +28,7 @@
     
 #### Other Features
     - [x] Message Interceptor, so that when people say the P Word they are muted until they say plock
+    - [x] Message Interceptor on edit
     - [ ] Multiple Prefixes
     
 #### Notable technical features
