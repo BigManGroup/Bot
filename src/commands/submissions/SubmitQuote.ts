@@ -5,6 +5,7 @@ import Tools from "../../tools";
 import Quote from "../../database/model/Quote";
 import {ObjectId} from "mongodb";
 import QuoteVoteHandler from "../../voting/QuoteVoteHandler";
+import VotingHandler from "../../voting/VotingHandler";
 
 
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
@@ -51,8 +52,8 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         message.reply("your quote was submitted. bigman council wil have review it and accept/decline it") //Sends the message that the submission has been received
             .then(async (sentMessage) => {
                 let submissionMessage = await (<TextChannel>message.guild.channels.resolve(QuoteVoteHandler.quoteSubmissionsChannel)).send(embed) //Sends the message to submissions channel
-                await submissionMessage.react("✅");
-                await submissionMessage.react("❎")
+                await submissionMessage.react(VotingHandler.approveReaction);
+                await submissionMessage.react(VotingHandler.declineReaction);
 
                 let quote = new Quote(quoteText, String(quoteYear), quoteUser, submissionMessage.id, message.author.id, new Date(), false, true);
                 quote._id = new ObjectId();
