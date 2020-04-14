@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import {MessageReaction, User} from 'discord.js';
+import {Message, MessageReaction, User} from 'discord.js';
 import * as properties from '../resources/config.json'
 import CommandHandler from "./commands/CommandHandler";
 import Saving from "./database/DatabaseHandler";
@@ -35,6 +35,10 @@ client.on("message", async (message) => {
     commandHandler.execute(message);
 });
 
+client.on("messageUpdate", async (oldMessage: Message, newMessage: Message) => {
+    if (newMessage.partial) newMessage = await newMessage.fetch();
+    if (newMessage.author.bot || !Saving.initialized || !centralizedMiddleware.cacheBuilt() || await messageInterceptor.intercepted(newMessage)) return;
+});
 
 client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: User) => {
     if (!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
