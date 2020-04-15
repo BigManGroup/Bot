@@ -1,5 +1,5 @@
 import CentralizedMiddleware from "../middleware/CentralizedMiddleware";
-import {Guild, Message, MessageReaction, PartialMessage, User} from "discord.js";
+import {Guild, Message, MessageReaction, User} from "discord.js";
 import VotingHandler from "./VotingHandler";
 import Tools from "../tools";
 
@@ -32,10 +32,6 @@ export default class InsultVoteHandler {
 
         if (valid >= 3) await this.approve(message, guild);
         else if (valid <= -3 || deleteInsult) await this.decline(message);
-    }
-
-    async declineWithoutDeletion(message: Message | PartialMessage): Promise<void> {
-        await this.centralizedMiddleware.insultMiddleware.declineInsult(message.id);
     }
 
     private async approve(message: Message, guild: Guild): Promise<void> {
