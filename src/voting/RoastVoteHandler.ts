@@ -3,7 +3,7 @@ import {Guild, Message, MessageReaction, PartialMessage, User} from "discord.js"
 import VotingHandler from "./VotingHandler";
 import Tools from "../tools";
 
-export default class QuoteVoteHandler {
+export default class RoastVoteHandler {
     static roastSubmissionChannel: string = "699630344604876871";
 
     centralizedMiddleware: CentralizedMiddleware;
