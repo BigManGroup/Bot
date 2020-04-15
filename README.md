@@ -18,8 +18,7 @@
         - [x] -> If the user that submitted the quote, presses X, it will automatically decline and delete the quote
         - [x] -> If a message is deleted from the big-man-quotes or big-man-quotes-submissions, it will automatically decline and delete the quote 
     - [x] Submit Roast -> Ability to submit a roast, and have bigman vote if it gets approved
-    - [ ] Submit Insult
-    - [ ] Submit Lenny? 
+    - [x] Submit Insult -> Ability to submit an insult, and have bigman vote if it gets approved
     
 #### Tools
     - [x] Help -> Prints out a list of commands
