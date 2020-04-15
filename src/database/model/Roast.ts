@@ -20,7 +20,7 @@ export default class Roast{
     }
 
     static modelBuilder(object: any): Roast {
-        let roast = new Roast(object.roast, object.messgae, object.user, object.createdTimestamp, object.accepted, object.pending);
+        let roast = new Roast(object.roast, object.message, object.user, object.createdTimestamp, object.accepted, object.pending);
         if (object._id !== undefined) roast._id = new ObjectId(object._id);
         else roast._id = new ObjectId();
         roast.updatedTimestamp = object.updatedTimestamp;
