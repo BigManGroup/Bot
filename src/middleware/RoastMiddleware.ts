@@ -52,27 +52,27 @@ export default class RoastMiddleware extends BaseMiddleware{
     }
 
     async deleteApprovedRoast(message: string): Promise<void> {
-        let deletedQuote: Roast;
+        let deletedRoast: Roast;
         let index: number;
 
         for (let i = 0; i !== this.roastCache.acceptedRoasts.length; i++) {
             if (this.roastCache.acceptedRoasts[i].message === message) {
-                deletedQuote = this.roastCache.acceptedRoasts[i];
+                deletedRoast = this.roastCache.acceptedRoasts[i];
                 index = i;
                 break;
             }
         }
 
         //Update Cache
-        deletedQuote.pending = false;
-        deletedQuote.accepted = false;
-        deletedQuote.updatedTimestamp = new Date();
-        deletedQuote.message = undefined;
+        deletedRoast.pending = false;
+        deletedRoast.accepted = false;
+        deletedRoast.updatedTimestamp = new Date();
+        deletedRoast.message = undefined;
         this.roastCache.acceptedRoasts.splice(index, 1);
-        this.roastCache.declinedRoasts.push(deletedQuote);
+        this.roastCache.declinedRoasts.push(deletedRoast);
         //Update Cache
 
-        await this.roastWrapper.declineRoast(deletedQuote); //Update database
+        await this.roastWrapper.declineRoast(deletedRoast); //Update database
     }
 
     async declineRoast(message: string): Promise<void> {
