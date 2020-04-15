@@ -17,7 +17,9 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             let submittedInsult = new Insult(insultText, undefined, message.author.id, new Date(), true, false);
             submittedInsult.updatedTimestamp = new Date();
             submittedInsult._id = new ObjectId();
-            await middleware.insultMiddleware.addInsult(submittedInsult);
+
+            await sentMessage.delete({timeout: 10000}) //Deletes the message to avoid bot spam
+            await message.delete(); //Deletes the user message
         });
     } else {
         message.reply("your insult was submitted. bigman council will review it and accept/decline it").then(async (sentMessage) => {  //Sends the message that the submission has been received

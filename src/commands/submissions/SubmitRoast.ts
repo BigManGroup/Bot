@@ -18,6 +18,9 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             submittedRoast.updatedTimestamp = new Date();
             submittedRoast._id = new ObjectId();
             await middleware.roastMiddleware.addRoast(submittedRoast);
+
+            await sentMessage.delete({timeout: 10000}) //Deletes the message to avoid bot spam
+            await message.delete(); //Deletes the user message
         });
     } else {
         message.reply("your roast was submitted. bigman council will review it and accept/decline it").then(async (sentMessage) => {  //Sends the message that the submission has been received
