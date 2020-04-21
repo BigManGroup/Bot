@@ -49,7 +49,7 @@ client.on("messageDelete", async (message: Message | PartialMessage) => {
     if (!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
 
     if (centralizedMiddleware.quoteMiddleware.isQuoteApproved(message.id)) await centralizedMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
-    else if (centralizedMiddleware.quoteMiddleware.isQuotePending(message.id)) await centralizedMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
+    else if (centralizedMiddleware.quoteMiddleware.isQuotePending(message.id)) await centralizedMiddleware.quoteMiddleware.declineQuote(message.id);
     else if (centralizedMiddleware.roastMiddleware.isRoastPending(message.id)) await centralizedMiddleware.roastMiddleware.deleteApprovedRoast(message.id);
     else if (centralizedMiddleware.insultMiddleware.isInsultPending(message.id)) await centralizedMiddleware.insultMiddleware.deleteApprovedInsult(message.id);
 });
