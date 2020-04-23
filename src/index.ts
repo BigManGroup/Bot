@@ -1,68 +1,58 @@
 import * as Discord from 'discord.js';
 import {Message, MessageReaction, PartialMessage, User} from 'discord.js';
 import * as properties from '../resources/config.json'
-import CommandHandler from "./commands/CommandHandler";
 import Saving from "./database/DatabaseHandler";
-import CentralizedMiddleware from "./middleware/CentralizedMiddleware";
-import MessageInterceptor from "./commands/MessageInterceptor";
-import VotingHandler from "./voting/VotingHandler";
 import Command from "./commands/model/Command";
+import MiddlewareHandler from "./middleware/MiddlewareHandler";
 
 const client = new Discord.Client({partials: ['MESSAGE', 'REACTION']});
-
-let commandHandler : CommandHandler;
-let messageInterceptor : MessageInterceptor;
-let centralizedMiddleware: CentralizedMiddleware;
-let votingHandler: VotingHandler;
+let middlewareHandler: MiddlewareHandler;
 
 client.on("ready", async () => {
-    console.log(await client.generateInvite(['ADMINISTRATOR']));
     Command.prefixes = properties.bot.prefixes;
 
-    //Init the centralizedMiddleware
-    centralizedMiddleware = new CentralizedMiddleware();
-    await centralizedMiddleware.buildCache();
-    //Init the centralizedMiddleware
-
-    //Init the Centralized Middleware and Command Interceptor
-    commandHandler = new CommandHandler(centralizedMiddleware);
-    messageInterceptor = new MessageInterceptor(centralizedMiddleware);
-    votingHandler = new VotingHandler(centralizedMiddleware);
-    //Init the Centralized Middleware and Command Interceptor
+    middlewareHandler = new MiddlewareHandler(); //Init the guild MiddlewareHandler
 
     client.user.setPresence({activity: {name: 'with Big People!'}, status: 'online'}).catch(console.error); //Setting the bot status
     console.log("Bot has started");
 });
 
 client.on("message", async (message) => {
-    if (message.author.bot || !Saving.initialized || !centralizedMiddleware.cacheBuilt() || await messageInterceptor.intercepted(message, false)) return;
+    let messageInterceptor = await middlewareHandler.getGuildMessageInterceptor(message.guild.id);
+    let commandHandler = await middlewareHandler.getGuildCommandHandler(message.guild.id);
+    if (message.author.bot || !Saving.initialized || await messageInterceptor.intercepted(message, false)) return;
     commandHandler.execute(message);
 });
 
 client.on("messageUpdate", async (oldMessage: Message, newMessage: Message) => {
     if (newMessage.partial) newMessage = await newMessage.fetch();
-    if (newMessage.author.bot || !Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
+    if (newMessage.author.bot || !Saving.initialized) return;
+    let messageInterceptor = await middlewareHandler.getGuildMessageInterceptor(newMessage.guild.id);
 
     await messageInterceptor.intercepted(newMessage, true);
 });
 
 client.on("messageDelete", async (message: Message | PartialMessage) => {
-    if (!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
+    if (!Saving.initialized) return;
+    let guildMiddleware = await middlewareHandler.getGuildMiddleware(message.guild.id);
 
-    if (centralizedMiddleware.quoteMiddleware.isQuoteApproved(message.id)) await centralizedMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
-    else if (centralizedMiddleware.quoteMiddleware.isQuotePending(message.id)) await centralizedMiddleware.quoteMiddleware.declineQuote(message.id);
-    else if (centralizedMiddleware.roastMiddleware.isRoastPending(message.id)) await centralizedMiddleware.roastMiddleware.deleteApprovedRoast(message.id);
-    else if (centralizedMiddleware.insultMiddleware.isInsultPending(message.id)) await centralizedMiddleware.insultMiddleware.deleteApprovedInsult(message.id);
-});
+    if (guildMiddleware.quoteMiddleware.isQuoteApproved(message.id)) await guildMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
+    else if (guildMiddleware.quoteMiddleware.isQuotePending(message.id)) await guildMiddleware.quoteMiddleware.declineQuote(message.id);
+    else if (guildMiddleware.roastMiddleware.isRoastPending(message.id)) await guildMiddleware.roastMiddleware.deleteApprovedRoast(message.id);
+    else if (guildMiddleware.insultMiddleware.isInsultPending(message.id)) await guildMiddleware.insultMiddleware.deleteApprovedInsult(message.id);
+}); //todo move these to VotingHandler
 
 client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: User) => {
-    if (!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
+    if (!Saving.initialized) return;
+    let votingHandler = await middlewareHandler.getGuildVotingHandler(messageReaction.message.guild.id);
     await votingHandler.handleVote(messageReaction, user);
 })
 
 client.on('messageReactionRemove', async (messageReaction: MessageReaction, user: User) => {
-    if (!Saving.initialized || !centralizedMiddleware.cacheBuilt()) return;
+    if (!Saving.initialized) return;
+    let votingHandler = await middlewareHandler.getGuildVotingHandler(messageReaction.message.guild.id);
     await votingHandler.handleVote(messageReaction, user);
 })
 
 client.login(properties.bot.token).catch(error => console.log("Error logging in; " + error));
+
