@@ -1,7 +1,6 @@
 import * as Discord from 'discord.js';
 import {Message, MessageReaction, PartialMessage, User} from 'discord.js';
 import * as properties from '../resources/config.json'
-import Saving from "./database/DatabaseHandler";
 import Command from "./commands/model/Command";
 import GuildHandler from "./GuildHandler";
 
@@ -20,36 +19,36 @@ client.on("ready", async () => {
 client.on("message", async (message) => {
     let messageInterceptor = await guildHandler.getGuildMessageInterceptor(message.guild.id);
     let commandHandler = await guildHandler.getGuildCommandHandler(message.guild.id);
-    if (message.author.bot || !Saving.initialized || await messageInterceptor.intercepted(message, false)) return;
+    if (message.author.bot || await messageInterceptor.intercepted(message, false)) return;
     commandHandler.execute(message);
 });
 
 client.on("messageUpdate", async (oldMessage: Message, newMessage: Message) => {
     if (newMessage.partial) newMessage = await newMessage.fetch();
-    if (newMessage.author.bot || !Saving.initialized) return;
+    if (newMessage.author.bot) return;
     await (await guildHandler.getGuildMessageInterceptor(newMessage.guild.id)).intercepted(newMessage, true);
 });
 
 client.on("messageDelete", async (message: Message | PartialMessage) => {
-    if (!Saving.initialized) return;
     await (await guildHandler.getGuildVotingHandler(message.guild.id)).handleMessageDelete(await guildHandler.getGuildMiddleware(message.guild.id), message.id)
 });
 
 
 client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: User) => {
-    if (!Saving.initialized) return;
     let votingHandler = await guildHandler.getGuildVotingHandler(messageReaction.message.guild.id);
     await votingHandler.handleVote(messageReaction, user);
 })
 
 client.on('messageReactionRemove', async (messageReaction: MessageReaction, user: User) => {
-    if (!Saving.initialized) return;
     let votingHandler = await guildHandler.getGuildVotingHandler(messageReaction.message.guild.id);
     await votingHandler.handleVote(messageReaction, user);
 })
 
-client.login(properties.bot.token).catch(error => console.log("Error logging in; " + error));
+function startBot() {
+    client.login(properties.bot.token).catch(error => console.log("Error logging in; " + error));
+}
 
+export {startBot}
 
 /*
 ASAP: TODO refine the saving structure and stop using the static method in such a bad way
