@@ -16,7 +16,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         return;
     }
 
-    middleware.guildMiddleware.setInsultSubmissionChannel(channel).then(() => message.reply("BigMan role has been updated")).catch(error => console.log(error));
+    middleware.guildMiddleware.setInsultSubmissionChannel(channel).then(() => message.reply("Insult Submission Channel updated")).catch(error => console.log(error));
 }
 
 export {main};

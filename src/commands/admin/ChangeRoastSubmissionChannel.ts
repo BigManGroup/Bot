@@ -16,7 +16,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         return;
     }
 
-    middleware.guildMiddleware.setRoastSubmissionChannel(channel).then(() => message.reply("BigMan role has been updated")).catch(error => console.log(error));
+    middleware.guildMiddleware.setRoastSubmissionChannel(channel).then(() => message.reply("Roast submission channel updated")).catch(error => console.log(error));
 }
 
 export {main};

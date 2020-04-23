@@ -18,7 +18,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     }
     //Check parameters
 
-    middleware.guildMiddleware.setBigmanRole(role).then(() => message.reply("BigMan role has been updated")).catch(error => console.log(error));
+    middleware.guildMiddleware.setBigmanRole(role).then(() => message.reply("BigMan role updated")).catch(error => console.log(error));
 }
 
 export {main};

@@ -16,7 +16,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         return;
     }
 
-    middleware.guildMiddleware.setQuoteChannel(channel).then(() => message.reply("BigMan role has been updated")).catch(error => console.log(error));
+    middleware.guildMiddleware.setQuoteChannel(channel).then(() => message.reply("Quote channel updated")).catch(error => console.log(error));
 }
 
 export {main};
