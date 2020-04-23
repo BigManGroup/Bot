@@ -12,7 +12,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let size = Number(formattedMessage.parameters[0]);
 
     if (isNaN(size)) {
-        message.reply("i need a number dumbass").catch((error) => console.log(error));
+        message.reply(`i need a number ${middleware.insultMiddleware.randomInsult}`).catch((error) => console.log(error));
         return;
     } else if (size < 0 || size > 10) {
         message.reply("max peepee size is 10").catch((error) => console.log(error));
