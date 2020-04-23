@@ -1,16 +1,16 @@
 import Quote from "../model/Quote";
 import BaseWrapper from "./BaseWrapper";
 
-export default class QuoteWrapper extends BaseWrapper{
-    constructor() {
-        super("quotes");
+export default class QuoteWrapper extends BaseWrapper {
+    constructor(guild: string) {
+        super("quotes", guild);
     }
 
-    async getApprovedQuotes() : Promise<Map <string, Quote>>{
-        let results = await (this.collection.find({"accepted" : true})).toArray(); //Search where accepted is true
+    async getApprovedQuotes(): Promise<Map<string, Quote>> {
+        let results = await (this.collection.find({$and: [{"accepted": true}, {"guild": this.guild}]})).toArray(); //Search where accepted is true
 
-        let formattedResults : Map<string, Quote> = new Map<string, Quote>();
-        for (let i = 0; i !== results.length ; i++){
+        let formattedResults: Map<string, Quote> = new Map<string, Quote>();
+        for (let i = 0; i !== results.length; i++) {
             let currentQuote = Quote.modelBuilder(results[i]);
             formattedResults.set(currentQuote.message, currentQuote);
         }
@@ -19,7 +19,7 @@ export default class QuoteWrapper extends BaseWrapper{
     }
 
     async getPendingQuotes() : Promise<Map <string, Quote>> {
-        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": true}]})).toArray();
+        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": true}, {"guild": this.guild}]})).toArray();
 
         let formattedResults : Map<string, Quote> = new Map<string, Quote>();
         for (let i = 0; i !== results.length ; i++){
@@ -31,7 +31,7 @@ export default class QuoteWrapper extends BaseWrapper{
     }
 
     async getDeclinedQuotes(): Promise<Quote[]> {
-        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": false}]})).toArray();
+        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": false}, {"guild": this.guild}]})).toArray();
 
         let formattedResults: Quote[] = [];
         for (let i = 0; i !== results.length; i++) formattedResults.push(Quote.modelBuilder(results[i]));

@@ -2,12 +2,12 @@ import Roast from "../model/Roast";
 import BaseModel from "./BaseWrapper";
 
 export default class RoastWrapper extends BaseModel {
-    constructor() {
-        super("roasts");
+    constructor(guild: string) {
+        super("roasts", guild);
     }
 
     async getApprovedRoasts(): Promise<Roast[]> {
-        let results = await (this.collection.find({"accepted": true})).toArray(); //Search where accepted is true
+        let results = await (this.collection.find({$and: [{"accepted": true}, {"guild": this.guild}]})).toArray(); //Search where accepted is true
         let formattedResults: Roast[] = [];
         for (let i = 0; i !== results.length; i++) formattedResults.push(Roast.modelBuilder(results[i]));
 
@@ -15,7 +15,7 @@ export default class RoastWrapper extends BaseModel {
     }
 
     async getPendingRoasts(): Promise<Map<string, Roast>> {
-        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": true}]})).toArray();
+        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": true}, {"guild": this.guild}]})).toArray();
         let formattedResults: Map<string, Roast> = new Map<string, Roast>();
         for (let i = 0; i !== results.length; i++) {
             let currentRoast = Roast.modelBuilder(results[i]);
@@ -26,7 +26,7 @@ export default class RoastWrapper extends BaseModel {
     }
 
     async getDeclinedRoasts(): Promise<Roast[]> {
-        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": false}]})).toArray();
+        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": false}, {"guild": this.guild}]})).toArray();
         let formattedResults: Roast[] = [];
         for (let i = 0; i !== results.length; i++) formattedResults.push(Roast.modelBuilder(results[i]));
 

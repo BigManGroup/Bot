@@ -1,15 +1,15 @@
 import BaseWrapper from "./BaseWrapper";
 import PeePee from "../model/PeePee";
 
-export default class PeePeeWrapper extends BaseWrapper{
-    constructor() {
-        super("peepee");
+export default class PeePeeWrapper extends BaseWrapper {
+    constructor(guild: string) {
+        super("peepee", guild);
     }
 
-    async getPeePee() : Promise<Map<string, PeePee>>{
-        let results = await (this.collection.find()).toArray(); //Search where accepted is true
-        let formattedResults : Map <string, PeePee> = new Map<string, PeePee>();
-        for (let i = 0; i !== results.length ; i++) formattedResults.set(results[i].user, PeePee.modelBuilder(results[i]));
+    async getPeePee(): Promise<Map<string, PeePee>> {
+        let results = await (this.collection.find({"guild": this.guild})).toArray(); //Search where accepted is true
+        let formattedResults: Map<string, PeePee> = new Map<string, PeePee>();
+        for (let i = 0; i !== results.length; i++) formattedResults.set(results[i].user, PeePee.modelBuilder(results[i]));
 
         return formattedResults;
     }

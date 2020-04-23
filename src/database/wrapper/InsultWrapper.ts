@@ -2,12 +2,12 @@ import BaseWrapper from "./BaseWrapper";
 import Insult from "../model/Insult";
 
 export default class InsultWrapper extends BaseWrapper {
-    constructor() {
-        super("insults");
+    constructor(guild: string) {
+        super("insults", guild);
     }
 
     async getApprovedInsult(): Promise<Insult[]> {
-        let results = await (this.collection.find({"accepted": true})).toArray(); //Search where accepted is true
+        let results = await (this.collection.find({$and: [{"accepted": true}, {"guild": this.guild}]})).toArray(); //Search where accepted is true
 
         let formattedResults: Insult [] = [];
         for (let i = 0; i !== results.length; i++) formattedResults.push(Insult.modelBuilder(results[i]));
@@ -16,7 +16,7 @@ export default class InsultWrapper extends BaseWrapper {
     }
 
     async getPendingInsults(): Promise<Map<string, Insult>> {
-        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": true}]})).toArray();
+        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": true}, {"guild": this.guild}]})).toArray();
 
         let formattedResults: Map<string, Insult> = new Map<string, Insult>();
         for (let i = 0; i !== results.length; i++) {
@@ -28,7 +28,7 @@ export default class InsultWrapper extends BaseWrapper {
     }
 
     async getDeclinedInsults(): Promise<Insult[]> {
-        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": false}]})).toArray();
+        let results = await (this.collection.find({$and: [{"accepted": false}, {"pending": false}, {"guild": this.guild}]})).toArray();
 
         let formattedResults: Insult[] = [];
         for (let i = 0; i !== results.length; i++) formattedResults.push(Insult.modelBuilder(results[i]));
