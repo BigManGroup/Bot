@@ -20,22 +20,27 @@ export default class GuildWrapper extends BaseWrapper {
     }
 
     async setQuoteSubmissionChannel(channel: string) {
-        await this.setChannel("quoteSubmission", channel);
+        await this.setVariable("quoteSubmission", channel);
     }
 
     async setQuoteChannel(channel: string) {
-        await this.setChannel("quoteChannel", channel);
+        await this.setVariable("quoteChannel", channel);
     }
 
     async setRoastSubmissionChannel(channel: string) {
-        await this.setChannel("roastSubmission", channel);
+        await this.setVariable("roastSubmission", channel);
     }
 
     async setInsultSubmissionChannel(channel: string) {
-        await this.setChannel("insultSubmission", channel);
+        await this.setVariable("insultSubmission", channel);
     }
 
-    private async setChannel(varName: string, channel: string) {
+    async setBigmanRole(channel: string) {
+        await this.setVariable("insultSubmission", channel);
+    }
+
+    //todo publicize this and use this for general queries and name it performQuery with (filter, query) and use also pre-made queries
+    private async setVariable(varName: string, channel: string) {
         await (this.collection.updateOne({"guild": this.guild}, {[varName]: channel}))
     }
 }

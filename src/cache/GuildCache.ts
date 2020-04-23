@@ -22,4 +22,8 @@ export default class GuildCache {
     setInsultSubmissionChannel(channel: string) {
         this.guild.insultSubmission = channel;
     }
+
+    setBigmanRole(role: string) {
+        this.guild.bigmanRole = role;
+    }
 }
