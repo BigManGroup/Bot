@@ -38,9 +38,10 @@ client.on("messageDelete", async (message: Message | PartialMessage) => {
 
     if (guildMiddleware.quoteMiddleware.isQuoteApproved(message.id)) await guildMiddleware.quoteMiddleware.deleteApprovedQuote(message.id);
     else if (guildMiddleware.quoteMiddleware.isQuotePending(message.id)) await guildMiddleware.quoteMiddleware.declineQuote(message.id);
-    else if (guildMiddleware.roastMiddleware.isRoastPending(message.id)) await guildMiddleware.roastMiddleware.deleteApprovedRoast(message.id);
-    else if (guildMiddleware.insultMiddleware.isInsultPending(message.id)) await guildMiddleware.insultMiddleware.deleteApprovedInsult(message.id);
+    else if (guildMiddleware.roastMiddleware.isRoastPending(message.id)) await guildMiddleware.roastMiddleware.declineRoast(message.id);
+    else if (guildMiddleware.insultMiddleware.isInsultPending(message.id)) await guildMiddleware.insultMiddleware.declineInsult(message.id);
 }); //todo move these to VotingHandler
+
 
 client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: User) => {
     if (!Saving.initialized) return;

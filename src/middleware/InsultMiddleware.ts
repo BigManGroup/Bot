@@ -51,30 +51,6 @@ export default class InsultMiddleware extends BaseMiddleware {
         await this.insultWrapper.approveInsult(approvedInsult); //Update database
     }
 
-    async deleteApprovedInsult(message: string): Promise<void> {
-        let deletedInsult: Insult;
-        let index: number;
-
-        for (let i = 0; i !== this.insultCache.acceptedInsult.length; i++) {
-            if (this.insultCache.acceptedInsult[i].message === message) {
-                deletedInsult = this.insultCache.acceptedInsult[i];
-                index = i;
-                break;
-            }
-        }
-
-        //Update Cache
-        deletedInsult.pending = false;
-        deletedInsult.accepted = false;
-        deletedInsult.updatedTimestamp = new Date();
-        deletedInsult.message = undefined;
-        this.insultCache.acceptedInsult.splice(index, 1);
-        this.insultCache.declinedInsult.push(deletedInsult);
-        //Update Cache
-
-        await this.insultWrapper.declineInsult(deletedInsult); //Update database
-    }
-
     async declineInsult(message: string): Promise<void> {
         let declinedInsult = this.getPendingInsult(message);
 
