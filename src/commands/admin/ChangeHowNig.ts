@@ -4,7 +4,7 @@ import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 import Tools from "../../tools";
 
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
-    if (!Tools.isBigMan(message.guild, message.author)) {
+    if (!Tools.isBigMan(message.guild, middleware, message.author.id)) {
         message.reply(`nice try, unprivileged ${message.member.roles.highest.name}`).catch(error => console.log(error));
         return;
     }
@@ -12,7 +12,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let amount = Number(formattedMessage.parameters[0]);
 
     if (isNaN(amount)) {
-        message.reply("i need a number dumbass").catch((error) => console.log(error));
+        message.reply(`i need a number ${middleware.insultMiddleware.randomInsult}`).catch((error) => console.log(error));
         return;
     } else if (amount < 0 || amount > 100) {
         message.reply("max nig size is 100").catch((error) => console.log(error));
