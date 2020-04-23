@@ -63,7 +63,8 @@ ASAP: TODO refine the saving structure and stop using the static method in such 
 TODO refine middleware stuff and dynamic loading of cache
         * Unload cache if a guild is not used for x amount of time for the sake of RAM
         * Don't get all the cache at once, only get the needed cache and unload it when finished from it
-TODO Disable the functionality of the bot if a used channel is not assigned -> Have a way of loading general insults and lennys
-TODO onChannelDelete, make sure that it is not a channel used by the bot
+TODO Disable the functionality of the bot if a used channel is not assigned
+ASAP: TODO Have a way of loading general insults and lennys
+TODO onChannelDelete, make sure that it is not a channel used by the bot -> make a way to un-assign a channel as well
 
  */
