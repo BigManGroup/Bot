@@ -10,7 +10,7 @@ import VotingHandler from "../../voting/VotingHandler";
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
     let roastText = formattedMessage.parameters.join(" ");
 
-    let isBigMan = Tools.isBigMan(message.guild, message.author);
+    let isBigMan = Tools.isBigMan(message.guild, middleware.guildMiddleware.guild, message.author.id);
 
     if (isBigMan) {
         message.reply("your roast was automatically submitted because you are **BIGMAN**").then(async (sentMessage) => {

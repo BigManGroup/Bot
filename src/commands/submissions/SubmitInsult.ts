@@ -10,7 +10,7 @@ import InsultVoteHandler from "../../voting/InsultVoteHandler";
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
     let insultText = formattedMessage.parameters.join(" ");
 
-    let isBigMan = Tools.isBigMan(message.guild, message.author);
+    let isBigMan = Tools.isBigMan(message.guild, middleware.guildMiddleware.guild, message.author.id);
 
     if (isBigMan) {
         message.reply("your insult was automatically submitted because you are **BIGMAN**").then(async (sentMessage) => {

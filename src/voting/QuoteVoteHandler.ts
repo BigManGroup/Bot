@@ -21,14 +21,14 @@ export default class QuoteVoteHandler {
         let likedUsers = (await message.reactions.resolve(VotingHandler.approveReaction).users.fetch()).array(); //Get the amount of liked users
         let dislikedUsers = (await message.reactions.resolve(VotingHandler.declineReaction).users.fetch()).array(); //Get the amount of disliked users
 
-        let guild = await user.client.guilds.resolve(Tools.bigmanGuild).fetch(); //Get the guild (load to cache)
+        let guild = await user.client.guilds.resolve(this.centralizedMiddleware.guildMiddleware.guildCache.guild.guild).fetch(); //Get the guild (load to cache)
         let currentQuote = this.centralizedMiddleware.quoteMiddleware.getPendingQuote(message.id);
 
         let deleteQuote = false;
         let valid: number = 0;
-        for (let i = 0; i !== likedUsers.length; i++) if (Tools.isBigMan(guild, likedUsers[i])) valid++; //If they are bigman, vote is valid
+        for (let i = 0; i !== likedUsers.length; i++) if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.guild, likedUsers[i].id)) valid++; //If they are bigman, vote is valid
         for (let i = 0; i !== dislikedUsers.length; i++) {
-            if (Tools.isBigMan(guild, dislikedUsers[i])) valid--; //If they are bigman, vote is valid
+            if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.guild, dislikedUsers[i].id)) valid--; //If they are bigman, vote is valid
             if (dislikedUsers[i].id === currentQuote.user) deleteQuote = true; //If the user that submitted presses x, the quote is deleted
         }
 

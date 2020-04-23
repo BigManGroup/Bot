@@ -1,11 +1,9 @@
-import {Guild, User} from "discord.js";
+import {Guild} from "discord.js";
 
 export default class Tools {
-    static bigmanRole: string = "296754695295205376";
-    static bigmanGuild: string = "264032838712688640";
-
-    static isBigMan(guild: Guild, user: User): boolean {
-        return guild.roles.cache.get(this.bigmanRole).members.has(user.id);
+    static isBigMan(guild: Guild, bigmanRole: string, user: string): boolean {
+        if (guild.roles.cache.get(bigmanRole) === undefined) return guild.ownerID === user;
+        else return guild.ownerID === user || guild.roles.cache.get(bigmanRole).members.has(user);
     }
 
     static getRandomNumber(minimum: number, maximum: number): number {

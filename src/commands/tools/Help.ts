@@ -28,7 +28,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     }
 
 
-    if (Tools.isBigMan(message.guild, message.author)) embed.addField("admin commands", adminCommands)
+    if (Tools.isBigMan(message.guild, middleware.guildMiddleware.guild, message.author.id)) embed.addField("admin commands", adminCommands)
     embed.addField("general commands", generalCommands);
     embed.addField("submissions", submissionCommands);
     embed.addField("tools", toolsCommands);
