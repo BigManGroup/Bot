@@ -16,7 +16,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         return;
     }
 
-    middleware.guildMiddleware.setQuoteSubmissionChannel(channel).then(() => message.reply("Quote Submission Channel updated")).catch(error => console.log(error));
+    middleware.guildMiddleware.setQuoteSubmissionChannel(channel).then(() => message.reply("Quote submission channel updated")).catch(error => console.log(error));
 }
 
 export {main};
