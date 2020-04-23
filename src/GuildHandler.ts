@@ -1,9 +1,9 @@
-import CentralizedMiddleware from "./CentralizedMiddleware";
-import CommandHandler from "../commands/CommandHandler";
-import MessageInterceptor from "../commands/MessageInterceptor";
-import VotingHandler from "../voting/VotingHandler";
+import CentralizedMiddleware from "./middleware/CentralizedMiddleware";
+import CommandHandler from "./commands/CommandHandler";
+import MessageInterceptor from "./commands/MessageInterceptor";
+import VotingHandler from "./voting/VotingHandler";
 
-export default class MiddlewareHandler { //todo find another name for this class
+export default class GuildHandler {
     guildMiddleware: Map<string, CentralizedMiddleware>;
     guildCommandHandler: Map<string, CommandHandler>;
     guildMessageInterceptor: Map<string, MessageInterceptor>
