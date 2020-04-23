@@ -81,6 +81,46 @@
             "prefix": true
         },
         {
+            "filename": "ChangeBigManRole.js",
+            "command": "change bigman role",
+            "description": "changes the role of bigman",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "ChangeQuoteChannel.js",
+            "command": "change quote channel",
+            "description": "changes the quote channel",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "ChangeQuoteSubmissionChannel.js",
+            "command": "change quote submission channel",
+            "description": "changes the quote submission channel",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "ChangeInsultSubmissionChannel.js",
+            "command": "change insult submission channel",
+            "description": "changes the insult submission channel",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "ChangeRoastSubmissionChannel.js",
+            "command": "change roast submission channel",
+            "description": "changes the roast channel",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "Sinners.js",
             "command": "sinners",
             "description": "shows the people that have wronged our all-mighty plock god",
