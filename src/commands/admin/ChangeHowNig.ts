@@ -25,7 +25,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     else user = message.mentions.users.first();
 
 
-    middleware.nigMiddleware.updateNigAmount(user.id, true, amount);
+    middleware.nigMiddleware.updateNigAmount(user.id, message.guild.id, true, amount);
     message.reply("nig updated").catch((error) => console.log(error));
 }
 
