@@ -23,29 +23,29 @@ export default class BadManMiddleware extends BaseMiddleware{
         this.cacheBuilt = true;
     }
 
-    async addBadMan(userId : string) : Promise <void>{
-        let badMan = new BadMan(userId, new Date(), undefined, false);
+    get amountSinners(): number {
+        return this.badManCache.badMan.size;
+    }
+
+    get sinners(): BadMan[] {
+        return Array.from(this.badManCache.badMan.values());
+    }
+
+    async addBadMan(user: string, guild: string): Promise<void> {
+        let badMan = new BadMan(user, guild, new Date(), undefined, false);
         badMan._id = new ObjectId();
 
         this.badManCache.addBadMan(badMan);
         await this.badManWrapper.addBadMan(badMan);
     }
 
-    async forgiveBadMan(userId : string) : Promise <void>{
-        let badMan = this.badManCache.badMan.get(userId);
+    async forgiveBadMan(user: string): Promise<void> {
+        let badMan = this.badManCache.badMan.get(user);
         this.badManCache.forgiveBadMan(badMan);
         await this.badManWrapper.forgiveBadMan(badMan); //Update DB
     }
 
-     isBadMan(userId : string) : boolean{
-        return this.badManCache.badMan.has(userId);
-    }
-
-    get amountSinners() : number{
-        return this.badManCache.badMan.size;
-    }
-
-    get sinners() : BadMan[]{
-        return Array.from(this.badManCache.badMan.values());
+    isBadMan(user: string): boolean {
+        return this.badManCache.badMan.has(user);
     }
 }

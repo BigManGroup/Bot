@@ -14,7 +14,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
 
     if (isBigMan) {
         message.reply("your roast was automatically submitted because you are **BIGMAN**").then(async (sentMessage) => {
-            let submittedRoast = new Roast(roastText, undefined, message.author.id, new Date(), true, false);
+            let submittedRoast = new Roast(roastText, message.guild.id, undefined, message.author.id, new Date(), true, false);
             submittedRoast.updatedTimestamp = new Date();
             submittedRoast._id = new ObjectId();
             await middleware.roastMiddleware.addRoast(submittedRoast);
@@ -29,7 +29,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             await submissionMessage.react(VotingHandler.approveReaction);
             await submissionMessage.react(VotingHandler.declineReaction);
 
-            let roast = new Roast(roastText, submissionMessage.id, message.author.id, new Date(), false, true);
+            let roast = new Roast(roastText, message.guild.id, submissionMessage.id, message.author.id, new Date(), false, true);
             roast._id = new ObjectId();
             await middleware.roastMiddleware.addRoast(roast)
 

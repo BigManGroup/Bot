@@ -16,6 +16,7 @@ let centralizedMiddleware: CentralizedMiddleware;
 let votingHandler: VotingHandler;
 
 client.on("ready", async () => {
+    console.log(await client.generateInvite(['ADMINISTRATOR']));
     Command.prefixes = properties.bot.prefixes;
 
     //Init the centralizedMiddleware

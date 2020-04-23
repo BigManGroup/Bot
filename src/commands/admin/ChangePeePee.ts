@@ -26,7 +26,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     else user = message.mentions.users.first();
 
 
-    middleware.peePeeMiddleware.updatePeePeeSize(user.id, true, +size);
+    middleware.peePeeMiddleware.updatePeePeeSize(user.id, message.guild.id, true, +size);
     message.reply("peepee updated").catch((error) => console.log(error));
 }
 

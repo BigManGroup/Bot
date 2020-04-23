@@ -38,7 +38,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             .then(async (sentMessage) => {
                 let embedMessage = await (<TextChannel>message.guild.channels.resolve(QuoteVoteHandler.quoteChannel)).send(embed)
 
-                let submittedQuote = new Quote(quoteText, String(quoteYear), quoteUser, embedMessage.id, message.author.id, new Date(), true, false);
+                let submittedQuote = new Quote(quoteText, String(quoteYear), quoteUser, message.guild.id, embedMessage.id, message.author.id, new Date(), true, false);
                 submittedQuote.updatedTimestamp = submittedQuote.submittedTimestamp;
                 submittedQuote._id = new ObjectId();
                 await middleware.quoteMiddleware.addQuote(submittedQuote); //Adds the quote to database and cache
@@ -55,7 +55,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
                 await submissionMessage.react(VotingHandler.approveReaction);
                 await submissionMessage.react(VotingHandler.declineReaction);
 
-                let quote = new Quote(quoteText, String(quoteYear), quoteUser, submissionMessage.id, message.author.id, new Date(), false, true);
+                let quote = new Quote(quoteText, String(quoteYear), quoteUser, message.guild.id, submissionMessage.id, message.author.id, new Date(), false, true);
                 quote._id = new ObjectId();
                 await middleware.quoteMiddleware.addQuote(quote)
 

@@ -1,31 +1,33 @@
 import {ObjectId} from 'mongodb'
 
-export default class PeePee{
-    _id : ObjectId;
-    readonly userId : string;
+export default class PeePee {
+    _id: ObjectId;
+    readonly guild: string;
+    readonly user: string;
     size: number;
-    readonly generatedDate : Date;
+    readonly generatedDate: Date;
 
-    constructor(userId: string, size: number, generatedDate: Date) {
-        this.userId = userId;
+    constructor(user: string, guild: string, size: number, generatedDate: Date) {
+        this.user = user;
         this.size = size;
         this.generatedDate = generatedDate;
     }
 
-    toString() : object{
-        return {
-            _id : this._id,
-            user : this.userId,
-            size : this.size,
-            generatedDate : this.generatedDate
-        }
-    }
-
-    static modelBuilder(object : any) : PeePee{
-        let peepee = new PeePee(object.userId, object.size, object.generatedDate);
-        if(object._id !== undefined) peepee._id = new ObjectId(object._id);
+    static modelBuilder(object: any): PeePee {
+        let peepee = new PeePee(object.user, object.guild, object.size, object.generatedDate);
+        if (object._id !== undefined) peepee._id = new ObjectId(object._id);
         else peepee._id = new ObjectId();
 
         return peepee;
+    }
+
+    toString(): object {
+        return {
+            _id: this._id,
+            user: this.user,
+            guild: this.guild,
+            size: this.size,
+            generatedDate: this.generatedDate
+        }
     }
 }

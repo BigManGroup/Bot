@@ -29,7 +29,7 @@ export default class QuoteVoteHandler {
         for (let i = 0; i !== likedUsers.length; i++) if (Tools.isBigMan(guild, likedUsers[i])) valid++; //If they are bigman, vote is valid
         for (let i = 0; i !== dislikedUsers.length; i++) {
             if (Tools.isBigMan(guild, dislikedUsers[i])) valid--; //If they are bigman, vote is valid
-            if (dislikedUsers[i].id === currentQuote.userSubmitted) deleteQuote = true; //If the user that submitted presses x, the quote is deleted
+            if (dislikedUsers[i].id === currentQuote.user) deleteQuote = true; //If the user that submitted presses x, the quote is deleted
         }
 
         if (valid >= 3) await this.approve(message, guild);
@@ -41,7 +41,7 @@ export default class QuoteVoteHandler {
         let quote = this.centralizedMiddleware.quoteMiddleware.getApprovedQuote(message.id);
         await message.delete();
 
-        let embed = new MessageEmbed().setAuthor(`${guild.members.cache.get(quote.quoteUser).displayName} - ${quote.quoteYear}`, guild.members.cache.get(quote.quoteUser).user.avatarURL()).setTitle(quote.quoteText).setFooter(`Submitted by ${guild.members.cache.get(quote.userSubmitted).displayName}`);
+        let embed = new MessageEmbed().setAuthor(`${guild.members.cache.get(quote.quoteUser).displayName} - ${quote.quoteYear}`, guild.members.cache.get(quote.quoteUser).user.avatarURL()).setTitle(quote.quoteText).setFooter(`Submitted by ${guild.members.cache.get(quote.user).displayName}`);
         await (<TextChannel>(await guild.channels.resolve(QuoteVoteHandler.quoteChannel))).send(embed);
     }
 

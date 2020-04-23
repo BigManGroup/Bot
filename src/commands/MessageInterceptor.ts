@@ -50,7 +50,7 @@ export default class MessageInterceptor {
         //If he said p-word
         if (hasUsedPWord.intercepted) {
             await message.member.roles.add(message.guild.roles.cache.get("540859279197077504"))
-            await this.centralizedMiddleware.badManMiddleware.addBadMan(message.author.id);
+            await this.centralizedMiddleware.badManMiddleware.addBadMan(message.author.id, message.guild.id);
 
             message.delete()
                 .then(() => message.reply(`It's not ${hasUsedPWord.usedWord}, it's plock, ${this.centralizedMiddleware.insultMiddleware.randomInsult}`))

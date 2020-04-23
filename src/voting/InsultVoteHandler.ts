@@ -1,5 +1,5 @@
 import CentralizedMiddleware from "../middleware/CentralizedMiddleware";
-import {Guild, Message, MessageReaction, User} from "discord.js";
+import {Message, MessageReaction, User} from "discord.js";
 import VotingHandler from "./VotingHandler";
 import Tools from "../tools";
 
@@ -27,14 +27,14 @@ export default class InsultVoteHandler {
         for (let i = 0; i !== likedUsers.length; i++) if (Tools.isBigMan(guild, likedUsers[i])) valid++; //If they are bigman, vote is valid
         for (let i = 0; i !== dislikedUsers.length; i++) {
             if (Tools.isBigMan(guild, dislikedUsers[i])) valid--; //If they are bigman, vote is valid
-            if (dislikedUsers[i].id === currentInsult.userSubmitted) deleteInsult = true; //If the user that submitted presses x, the quote is deleted
+            if (dislikedUsers[i].id === currentInsult.user) deleteInsult = true; //If the user that submitted presses x, the quote is deleted
         }
 
-        if (valid >= 3) await this.approve(message, guild);
+        if (valid >= 3) await this.approve(message);
         else if (valid <= -3 || deleteInsult) await this.decline(message);
     }
 
-    private async approve(message: Message, guild: Guild): Promise<void> {
+    private async approve(message: Message): Promise<void> {
         await this.centralizedMiddleware.insultMiddleware.approveInsult(message.id);
         await message.delete();
     }

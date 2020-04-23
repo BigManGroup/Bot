@@ -18,7 +18,7 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
         changed = true;
     }
 
-    let peePee = middleware.peePeeMiddleware.getPeePee(user.id, Tools.isBigMan(message.guild, user));
+    let peePee = middleware.peePeeMiddleware.getPeePee(user.id, message.guild.id, Tools.isBigMan(message.guild, user));
 
     let printPeePee: string = '8';
     for (let i = 0; i != peePee.size; i++) {

@@ -21,26 +21,26 @@ export default class NigMiddleware extends BaseMiddleware{
         this.cacheBuilt = true
     }
 
-    getNig(userId : string, isBigMan : boolean) : Nig {
-        if (this.nigCache.generatedNig.has(userId)) return this.nigCache.generatedNig.get(userId);
+    getNig(user: string, guild: string, isBigMan: boolean): Nig {
+        if (this.nigCache.generatedNig.has(user)) return this.nigCache.generatedNig.get(user);
 
         //Generate the nig
         let randomNumber: number;
         if (isBigMan) randomNumber = Tools.getRandomNumber(0, 100);
         else randomNumber = Tools.getRandomNumber(0, 50);
 
-        let newNig = new Nig(userId, randomNumber, new Date());
+        let newNig = new Nig(user, guild, randomNumber, new Date());
         newNig._id = new ObjectId();
         //Generate the nig
 
-        this.nigCache.generatedNig.set(userId, newNig);
+        this.nigCache.generatedNig.set(user, newNig);
         this.nigWrapper.addNig(newNig).catch(error => console.log(error));
 
         return newNig;
     }
 
-    updateNigAmount(userId : string, isBigMan : boolean, newAmount : number) : void{
-        let nig = this.getNig(userId, isBigMan); //Get the PeePee
+    updateNigAmount(user: string, guild: string, isBigMan: boolean, newAmount: number): void {
+        let nig = this.getNig(user, guild, isBigMan); //Get the PeePee
 
         //New PeePee size
         nig.amount = newAmount;

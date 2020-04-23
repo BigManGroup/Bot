@@ -21,26 +21,26 @@ export default class PeePeeMiddleware extends BaseMiddleware{
         this.cacheBuilt = true
     }
 
-    getPeePee(userId : string, isBigMan : boolean) : PeePee {
-        if (this.peePeeCache.generatedPeePee.has(userId)) return this.peePeeCache.generatedPeePee.get(userId);
+    getPeePee(user: string, guild: string, isBigMan: boolean): PeePee {
+        if (this.peePeeCache.generatedPeePee.has(user)) return this.peePeeCache.generatedPeePee.get(user);
 
         //Generate the peepee
         let randomNumber: number;
         if (isBigMan) randomNumber = Tools.getRandomNumber(1, 10);
         else randomNumber = Tools.getRandomNumber(1, 5);
 
-        let peePee = new PeePee(userId, randomNumber, new Date());
+        let peePee = new PeePee(user, guild, randomNumber, new Date());
         peePee._id = new ObjectId();
         //Generate the peepee
 
-        this.peePeeCache.generatedPeePee.set(userId, peePee);
+        this.peePeeCache.generatedPeePee.set(user, peePee);
         this.peePeeWrapper.addPeePee(peePee).catch(error => console.log(error));
 
         return peePee;
     }
 
-    updatePeePeeSize(userId : string, isBigMan : boolean, newSize : number) : void{
-        let peePee = this.getPeePee(userId, isBigMan); //Get the PeePee
+    updatePeePeeSize(user: string, guild: string, isBigMan: boolean, newSize: number): void {
+        let peePee = this.getPeePee(user, guild, isBigMan); //Get the PeePee
 
         //New PeePee size
         peePee.size = newSize;

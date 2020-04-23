@@ -14,7 +14,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
 
     if (isBigMan) {
         message.reply("your insult was automatically submitted because you are **BIGMAN**").then(async (sentMessage) => {
-            let submittedInsult = new Insult(insultText, undefined, message.author.id, new Date(), true, false);
+            let submittedInsult = new Insult(insultText, message.guild.id, undefined, message.author.id, new Date(), true, false);
             submittedInsult.updatedTimestamp = new Date();
             submittedInsult._id = new ObjectId();
             await middleware.insultMiddleware.addInsult(submittedInsult)
@@ -29,7 +29,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             await submissionMessage.react(VotingHandler.approveReaction);
             await submissionMessage.react(VotingHandler.declineReaction);
 
-            let insult = new Insult(insultText, submissionMessage.id, message.author.id, new Date(), false, true);
+            let insult = new Insult(insultText, message.guild.id, submissionMessage.id, message.author.id, new Date(), false, true);
             insult._id = new ObjectId();
             await middleware.insultMiddleware.addInsult(insult)
 
