@@ -27,9 +27,7 @@ client.on("message", async (message) => {
 client.on("messageUpdate", async (oldMessage: Message, newMessage: Message) => {
     if (newMessage.partial) newMessage = await newMessage.fetch();
     if (newMessage.author.bot || !Saving.initialized) return;
-    let messageInterceptor = await guildHandler.getGuildMessageInterceptor(newMessage.guild.id);
-
-    await messageInterceptor.intercepted(newMessage, true);
+    await (await guildHandler.getGuildMessageInterceptor(newMessage.guild.id)).intercepted(newMessage, true);
 });
 
 client.on("messageDelete", async (message: Message | PartialMessage) => {
