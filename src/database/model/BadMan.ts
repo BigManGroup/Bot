@@ -18,11 +18,12 @@ export default class BadMan {
 
     toString(): Object {
         return {
-            _id : this._id,
-            user : this.user,
-            timestampStart : this.timestampStart,
-            timestampEnd : this.timestampEnd,
-            forgiven : this.forgiven
+            _id: this._id,
+            user: this.user,
+            guild: this.guild,
+            timestampStart: this.timestampStart,
+            timestampEnd: this.timestampEnd,
+            forgiven: this.forgiven
         }
     }
 
