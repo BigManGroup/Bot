@@ -18,4 +18,29 @@ export default class GuildMiddleware extends BaseMiddleware {
         this.guildCache.setCache(await this.guildWrapper.getGuild());
         this.cacheBuilt = true;
     }
+
+    async setQuoteSubmissionChannel(channel: string): Promise<void> {
+        this.guildCache.setQuoteSubmissionChannel(channel);
+        await this.guildWrapper.setQuoteSubmissionChannel(channel);
+    }
+
+    async setQuoteChannel(channel: string): Promise<void> {
+        this.guildCache.setQuoteChannel(channel);
+        await this.guildWrapper.setQuoteChannel(channel);
+    }
+
+    async setRoastSubmissionChannel(channel: string): Promise<void> {
+        this.guildCache.setRoastSubmissionChannel(channel);
+        await this.guildWrapper.setRoastSubmissionChannel(channel);
+    }
+
+    async setInsultSubmissionChannel(channel: string): Promise<void> {
+        this.guildCache.setInsultSubmissionChannel(channel);
+        await this.guildWrapper.setInsultSubmissionChannel(channel);
+    }
+
+    async setBigmanRole(role: string): Promise<void> {
+        this.guildCache.setBigmanRole(role);
+        await this.guildWrapper.setBigmanRole(role);
+    }
 }
