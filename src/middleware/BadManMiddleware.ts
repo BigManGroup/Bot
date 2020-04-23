@@ -4,15 +4,15 @@ import BadManWrapper from "../database/wrapper/BadManWrapper";
 import BadMan from "../database/model/BadMan";
 import {ObjectId} from 'mongodb'
 
-export default class BadManMiddleware extends BaseMiddleware{
-    readonly badManCache : BadManCache;
-    readonly badManWrapper : BadManWrapper;
-    cacheBuilt : boolean;
+export default class BadManMiddleware extends BaseMiddleware {
+    readonly badManCache: BadManCache;
+    readonly badManWrapper: BadManWrapper;
+    cacheBuilt: boolean;
 
-    constructor() {
-        super();
+    constructor(guild: string) {
+        super(guild);
         this.badManCache = new BadManCache();
-        this.badManWrapper = new BadManWrapper();
+        this.badManWrapper = new BadManWrapper(guild);
     }
 
     async buildCache(): Promise<void> {

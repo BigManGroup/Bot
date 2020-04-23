@@ -5,15 +5,15 @@ import NigCache from "../cache/NigCache";
 import NigWrapper from "../database/wrapper/NigWrapper";
 import Nig from "../database/model/Nig";
 
-export default class NigMiddleware extends BaseMiddleware{
-    readonly nigCache : NigCache;
-    readonly nigWrapper : NigWrapper;
-    cacheBuilt : boolean;
+export default class NigMiddleware extends BaseMiddleware {
+    readonly nigCache: NigCache;
+    readonly nigWrapper: NigWrapper;
+    cacheBuilt: boolean;
 
-    constructor() {
-        super();
+    constructor(guild: string) {
+        super(guild)
         this.nigCache = new NigCache();
-        this.nigWrapper = new NigWrapper();
+        this.nigWrapper = new NigWrapper(guild);
     }
 
     async buildCache(): Promise<void> {

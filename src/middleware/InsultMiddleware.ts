@@ -9,9 +9,9 @@ export default class InsultMiddleware extends BaseMiddleware {
     readonly insultWrapper: InsultWrapper;
     cacheBuilt: boolean;
 
-    constructor() {
-        super();
-        this.insultWrapper = new InsultWrapper();
+    constructor(guild: string) {
+        super(guild);
+        this.insultWrapper = new InsultWrapper(guild);
         this.insultCache = new InsultCache();
     }
 

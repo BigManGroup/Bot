@@ -5,15 +5,15 @@ import PeePee from "../database/model/PeePee";
 import {ObjectId} from "mongodb";
 import Tools from "../tools";
 
-export default class PeePeeMiddleware extends BaseMiddleware{
-    readonly peePeeCache : PeePeeCache;
-    readonly peePeeWrapper : PeePeeWrapper;
-    cacheBuilt : boolean;
+export default class PeePeeMiddleware extends BaseMiddleware {
+    readonly peePeeCache: PeePeeCache;
+    readonly peePeeWrapper: PeePeeWrapper;
+    cacheBuilt: boolean;
 
-    constructor() {
-        super();
+    constructor(guild: string) {
+        super(guild)
         this.peePeeCache = new PeePeeCache();
-        this.peePeeWrapper = new PeePeeWrapper();
+        this.peePeeWrapper = new PeePeeWrapper(guild);
     }
 
     async buildCache(): Promise<void> {

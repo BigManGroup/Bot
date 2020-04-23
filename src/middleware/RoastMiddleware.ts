@@ -4,18 +4,18 @@ import BaseMiddleware from "./BaseMiddleware";
 import Tools from "../tools";
 import Roast from "../database/model/Roast";
 
-export default class RoastMiddleware extends BaseMiddleware{
-    readonly roastCache : RoastCache;
-    readonly roastWrapper : RoastWrapper;
-    cacheBuilt : boolean;
+export default class RoastMiddleware extends BaseMiddleware {
+    readonly roastCache: RoastCache;
+    readonly roastWrapper: RoastWrapper;
+    cacheBuilt: boolean;
 
-    constructor() {
-        super();
-        this.roastWrapper = new RoastWrapper();
+    constructor(guild: string) {
+        super(guild)
+        this.roastWrapper = new RoastWrapper(guild);
         this.roastCache = new RoastCache();
     }
 
-    async buildCache() : Promise <void>{
+    async buildCache(): Promise<void> {
         let accepted = await this.roastWrapper.getApprovedRoasts();
         let pending = await this.roastWrapper.getPendingRoasts();
         let declined = await this.roastWrapper.getDeclinedRoasts();
@@ -51,7 +51,7 @@ export default class RoastMiddleware extends BaseMiddleware{
         await this.roastWrapper.approveRoast(approvedRoast); //Update database
     }
 
-    async deleteApprovedRoast(message: string): Promise<void> {
+    async deleteApprovedRoast(message: string): Promise<void> { //todo remove duplicate code
         let deletedRoast: Roast;
         let index: number;
 

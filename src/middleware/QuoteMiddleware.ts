@@ -3,16 +3,16 @@ import QuoteCache from "../cache/QuoteCache";
 import QuoteWrapper from "../database/wrapper/QuoteWrapper";
 import Quote from "../database/model/Quote";
 
-export default class QuoteMiddleware extends BaseMiddleware{
-    quoteCache : QuoteCache;
-    quoteWrapper : QuoteWrapper;
+export default class QuoteMiddleware extends BaseMiddleware {
+    quoteCache: QuoteCache;
+    quoteWrapper: QuoteWrapper;
     cacheBuilt: boolean;
 
-    constructor() {
-        super();
+    constructor(guild: string) {
+        super(guild)
 
         this.quoteCache = new QuoteCache();
-        this.quoteWrapper = new QuoteWrapper();
+        this.quoteWrapper = new QuoteWrapper(guild);
     }
 
     async buildCache(): Promise<void> {

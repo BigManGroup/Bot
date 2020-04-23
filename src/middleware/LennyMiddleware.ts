@@ -3,18 +3,18 @@ import LennyCache from "../cache/LennyCache";
 import LennyWrapper from "../database/wrapper/LennyWrapper";
 import Tools from "../tools";
 
-export default class LennyMiddleware extends BaseMiddleware{
-    readonly lennyCache : LennyCache;
-    readonly lennyWrapper : LennyWrapper;
-    cacheBuilt : boolean;
+export default class LennyMiddleware extends BaseMiddleware {
+    readonly lennyCache: LennyCache;
+    readonly lennyWrapper: LennyWrapper;
+    cacheBuilt: boolean;
 
-    constructor() {
-        super();
-        this.lennyWrapper = new LennyWrapper();
+    constructor(guild: string) {
+        super(guild)
+        this.lennyWrapper = new LennyWrapper(guild);
         this.lennyCache = new LennyCache();
     }
 
-    async buildCache() : Promise <void>{
+    async buildCache(): Promise<void> {
         let accepted = await this.lennyWrapper.getApprovedLennys();
         let pending = await this.lennyWrapper.getPendingLennys();
         let declined = await this.lennyWrapper.getDeclinedLennys();
