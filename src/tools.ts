@@ -10,4 +10,3 @@ export default class Tools {
         return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     }
 }
-//todo if there is no channels, disable that functionality

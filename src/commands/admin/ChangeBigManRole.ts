@@ -23,4 +23,3 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
 
 export {main};
 
-//todo remove channel on channel delete and remove channel command
