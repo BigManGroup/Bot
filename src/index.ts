@@ -51,7 +51,6 @@ function startBot() {
 export {startBot}
 
 /*
-ASAP: TODO refine the saving structure and stop using the static method in such a bad way
 TODO refine middleware stuff and dynamic loading of cache
         * Unload cache if a guild is not used for x amount of time for the sake of RAM
         * Don't get all the cache at once, only get the needed cache and unload it when finished from it
