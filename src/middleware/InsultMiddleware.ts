@@ -33,7 +33,7 @@ export default class InsultMiddleware extends BaseMiddleware {
         if (insult.accepted) this.insultCache.acceptedInsult.push(insult);
         else this.insultCache.pendingInsult.set(insult.message, insult);
 
-        await this.insultWrapper.submitInsult(insult); //todo fix?
+        await this.insultWrapper.submitInsult(insult);
     }
 
     async approveInsult(message: string): Promise<void> {
