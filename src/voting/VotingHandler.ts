@@ -37,6 +37,13 @@ export default class VotingHandler {
         else if (this.centralizedMiddleware.insultMiddleware.isInsultPending(messageId)) return new PendingReaction(true, "insult")
         return new PendingReaction(false, undefined);
     }
+
+    async handleMessageDelete(centralizedMiddleware: CentralizedMiddleware, message: string) {
+        if (centralizedMiddleware.quoteMiddleware.isQuoteApproved(message)) await centralizedMiddleware.quoteMiddleware.deleteApprovedQuote(message);
+        else if (centralizedMiddleware.quoteMiddleware.isQuotePending(message)) await centralizedMiddleware.quoteMiddleware.declineQuote(message);
+        else if (centralizedMiddleware.roastMiddleware.isRoastPending(message)) await centralizedMiddleware.roastMiddleware.declineRoast(message);
+        else if (centralizedMiddleware.insultMiddleware.isInsultPending(message)) await centralizedMiddleware.insultMiddleware.declineInsult(message);
+    }
 }
 
 class PendingReaction {
