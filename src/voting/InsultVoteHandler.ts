@@ -26,7 +26,7 @@ export default class InsultVoteHandler {
         let valid: number = 0;
         for (let i = 0; i !== likedUsers.length; i++) if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.guild, likedUsers[i].id)) valid++; //If they are bigman, vote is valid
         for (let i = 0; i !== dislikedUsers.length; i++) {
-            if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.guild, dislikedUsers[i].id)) valid--; //If they are bigman, vote is valid
+            if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.bigmanRole, dislikedUsers[i].id)) valid--; //If they are bigman, vote is valid
             if (dislikedUsers[i].id === currentInsult.user) deleteInsult = true; //If the user that submitted presses x, the quote is deleted
         }
 
