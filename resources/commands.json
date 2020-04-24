@@ -121,6 +121,14 @@
             "prefix": true
         },
         {
+            "filename": "Purge.js",
+            "command": "purge",
+            "description": "purge as many messages as you would like out of existence (default 5)",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "Sinners.js",
             "command": "sinners",
             "description": "shows the people that have wronged our all-mighty plock god",
