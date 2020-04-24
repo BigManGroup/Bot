@@ -30,7 +30,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let quoteText = roast.join(" ");
     //Remove the last 3 things in array (year, user, -)
 
-    let isBigMan = Tools.isBigMan(message.guild, middleware.guildMiddleware.guild, message.author.id);
+    let isBigMan = Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, message.author.id);
 
     if (isBigMan) {
         let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);

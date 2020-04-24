@@ -43,4 +43,8 @@ export default class GuildMiddleware extends BaseMiddleware {
         this.guildCache.setBigmanRole(role);
         await this.guildWrapper.setBigmanRole(role);
     }
+
+    get bigmanRole(): string {
+        return this.guildCache.guild.bigmanRole;
+    }
 }
