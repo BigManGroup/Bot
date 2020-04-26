@@ -9,6 +9,10 @@ import VotingHandler from "../../voting/VotingHandler";
 
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
     let roastText = formattedMessage.parameters.join(" ");
+    if (!roastText.replace(/\s/g, '').length) {
+        message.reply(`You have to actually enter the roast, ${middleware.insultMiddleware.randomInsult}`).catch(error => console.log(error));
+        return;
+    }
 
     let isBigMan = Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, message.author.id);
 
