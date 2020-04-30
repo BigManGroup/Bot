@@ -73,6 +73,14 @@
             "prefix": true
         },
         {
+            "filename": "Black.js",
+            "command": "black",
+            "description": "makes everyone a nig",
+            "folder": "general",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "ChangeHowNig.js",
             "command": "change hownig",
             "description": "changes the nig amount of you or the person you tagged",

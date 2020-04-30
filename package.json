@@ -2,14 +2,17 @@
   "name": "bmg-bot",
   "version": "1.0.0",
   "description": "The Big Man Bot for Big Men",
-  "main": "index.js",
-  "author": "Raven",
+  "main": "out/index.js",
+  "author": "Jamie Stivala",
   "dependencies": {
     "@types/mongodb": "^3.5.5",
     "@types/node": "^13.11.1",
+    "@types/sharp": "^0.25.0",
     "@types/ws": "^7.2.3",
+    "axios": "^0.19.2",
     "discord.js": "^12.1.1",
     "mongodb": "^3.5.5",
+    "sharp": "^0.25.2",
     "typescript": "^3.8.3"
   }
 }
