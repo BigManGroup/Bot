@@ -11,7 +11,6 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
 
     //Check parameters
     let role = formattedMessage.parameters[0];
-    console.log(role);
 
     if (!message.guild.roles.cache.has(role)) {
         message.reply(`you entered an invalid role, ${middleware.insultMiddleware.randomInsult}`).catch(error => console.log(error));
