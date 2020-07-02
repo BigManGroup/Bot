@@ -42,7 +42,7 @@ export default class Quote {
             message: this.message,
             user: this.user,
             submittedTimestamp: this.submittedTimestamp,
-            updateTimestamp: this.updatedTimestamp,
+            updatedTimestamp: this.updatedTimestamp,
             accepted: this.accepted,
             pending: this.pending
         }
