@@ -9,6 +9,7 @@ export default class PeePee {
 
     constructor(user: string, guild: string, size: number, generatedDate: Date) {
         this.user = user;
+        this.guild = guild;
         this.size = size;
         this.generatedDate = generatedDate;
     }
