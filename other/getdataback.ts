@@ -1,6 +1,6 @@
 import * as properties from "../resources/config.json";
 import Discord, {TextChannel} from "discord.js";
-import Command from "./commands/model/Command";
+import Command from "../src/commands/model/Command";
 
 const client = new Discord.Client({partials: ['MESSAGE', 'REACTION']});
 
