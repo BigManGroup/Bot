@@ -12,7 +12,7 @@ export default class DefaultRoleHandler{
         await this.setGeneralRole(member);
     }
 
-    async onGuildAdd (guild : Guild) : Promise <void> {
+    async onCacheLoad (guild : Guild) : Promise <void> {
         let guildMembers = Array.from(guild.members.cache.values());
         for (let i = 0; i !== guildMembers.length; i++) await this.setGeneralRole(guildMembers[i])
     }
