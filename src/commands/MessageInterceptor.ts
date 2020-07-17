@@ -49,7 +49,7 @@ export default class MessageInterceptor {
 
         //If he said p-word
         if (hasUsedPWord.intercepted) {
-            await message.member.roles.add(message.guild.roles.cache.get("540859279197077504"))
+            await message.member.roles.add(message.guild.roles.cache.get("540859279197077504")) //todo put the bad man role in the database (wtf?)
             await this.centralizedMiddleware.badManMiddleware.addBadMan(message.author.id, message.guild.id);
 
             message.delete()
