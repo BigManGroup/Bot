@@ -61,6 +61,6 @@ TODO refine middleware stuff and dynamic loading of cache
         * Don't get all the cache at once, only get the needed cache and unload it when finished from it
 TODO Disable the functionality of the bot if a used channel is not assigned
 ASAP: TODO Have a way of loading general insults and lennys
-TODO onChannelDelete, make sure that it is not a channel used by the bot -> make a way to un-assign a channel as well
+ASAP: TODO onChannelDelete, make sure that it is not a channel used by the bot -> make a way to un-assign a channel as well
 TODO Make sure only that guild's cache is loaded
  */
