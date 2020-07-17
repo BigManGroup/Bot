@@ -71,4 +71,5 @@ TODO Make sure only that guild's cache is loaded
 TODO on guild delete or removed from guild, delete database
 
 Code-review: Split the listeners to their respective handlers
+Code-review: Add comments and proper documentation
  */
