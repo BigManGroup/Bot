@@ -6,6 +6,7 @@ export default class Guild {
 
     generalRole : string;
     bigmanRole: string;
+    badmanRole : string;
 
     quoteSubmission: string;
     roastSubmission: string;
@@ -26,6 +27,7 @@ export default class Guild {
         if (object.insultSubmission !== undefined) guild.insultSubmission = object.insultSubmission;
         if (object.bigmanRole !== undefined) guild.bigmanRole = object.bigmanRole;
         if (object.generalRole !== undefined) guild.generalRole = object.generalRole;
+        if (object.badmanRole !== undefined) guild.badmanRole = object.badmanRole;
 
         if (object._id !== undefined) guild._id = object._id;
         else guild._id = new ObjectId();
@@ -39,6 +41,7 @@ export default class Guild {
             guild: this.guild,
             bigmanRole: this.bigmanRole,
             generalRole : this.generalRole,
+            badmanRole : this.badmanRole,
             quoteSubmission: this.quoteSubmission,
             quoteChannel: this.quoteChannel,
             roastSubmission: this.roastSubmission,

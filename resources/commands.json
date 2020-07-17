@@ -1,7 +1,7 @@
 {
     "commands": [
         {
-            "filename": "Ping.js",
+            "filename": "Ping",
             "command": "ping",
             "description": "pings the bot",
             "folder": "tools",
@@ -9,7 +9,7 @@
             "prefix": true
         },
         {
-            "filename": "ShowAvatar.js",
+            "filename": "ShowAvatar",
             "command": "avatar",
             "description": "check your avatar or the person you mentioned",
             "folder": "tools",
@@ -17,7 +17,7 @@
             "prefix": true
         },
         {
-            "filename": "Help.js",
+            "filename": "Help",
             "command": "help",
             "description": "shows this, dumbass",
             "folder": "tools",
@@ -25,7 +25,7 @@
             "prefix": true
         },
         {
-            "filename": "PrintRoast.js",
+            "filename": "PrintRoast",
             "command": "roast",
             "description": "roast yourself or the person you mentioned",
             "folder": "general",
@@ -33,7 +33,7 @@
             "prefix": true
         },
         {
-            "filename": "PrintLenny.js",
+            "filename": "PrintLenny",
             "command": "lenny",
             "description": "gives you or the person you tagged a random lenny",
             "folder": "general",
@@ -41,7 +41,7 @@
             "prefix": true
         },
         {
-            "filename": "PeePee.js",
+            "filename": "PeePee",
             "command": "peepee",
             "description": "gives you or the person tagged the peepee",
             "folder": "general",
@@ -49,7 +49,7 @@
             "prefix": true
         },
         {
-            "filename": "ChangePeePee.js",
+            "filename": "ChangePeePee",
             "command": "change peepee",
             "description": "changes the peepee size of you or the person you tagged",
             "folder": "admin",
@@ -57,7 +57,7 @@
             "prefix": true
         },
         {
-            "filename": "QuoteLeadership.js",
+            "filename": "QuoteLeadership",
             "command": "quote leadership",
             "description": "prints leadership of quotes",
             "folder": "admin",
@@ -65,7 +65,7 @@
             "prefix": true
         },
         {
-            "filename": "HowNig.js",
+            "filename": "HowNig",
             "command": "hownig",
             "description": "tells you how nig you are",
             "folder": "general",
@@ -73,7 +73,7 @@
             "prefix": true
         },
         {
-            "filename": "Black.js",
+            "filename": "Black",
             "command": "black",
             "description": "makes everyone a nig",
             "folder": "general",
@@ -81,7 +81,7 @@
             "prefix": true
         },
         {
-            "filename": "ChangeHowNig.js",
+            "filename": "ChangeHowNig",
             "command": "change hownig",
             "description": "changes the nig amount of you or the person you tagged",
             "folder": "admin",
@@ -89,7 +89,7 @@
             "prefix": true
         },
         {
-            "filename": "ChangeBigManRole.js",
+            "filename": "ChangeBigManRole",
             "command": "change bigman role",
             "description": "changes the role of bigman",
             "folder": "admin",
@@ -97,7 +97,7 @@
             "prefix": true
         },
         {
-            "filename": "ChangeGeneralRole.js",
+            "filename": "ChangeGeneralRole",
             "command": "change general role",
             "description": "changes the general role",
             "folder": "admin",
@@ -105,7 +105,15 @@
             "prefix": true
         },
         {
-            "filename": "ChangeQuoteChannel.js",
+            "filename": "ChangeBadmanRole",
+            "command": "change badman role",
+            "description": "changes the badman role",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
+            "filename": "ChangeQuoteChannel",
             "command": "change quote channel",
             "description": "changes the quote channel",
             "folder": "admin",
@@ -113,7 +121,7 @@
             "prefix": true
         },
         {
-            "filename": "ChangeQuoteSubmissionChannel.js",
+            "filename": "ChangeQuoteSubmissionChannel",
             "command": "change quote submission channel",
             "description": "changes the quote submission channel",
             "folder": "admin",
@@ -121,7 +129,7 @@
             "prefix": true
         },
         {
-            "filename": "ChangeInsultSubmissionChannel.js",
+            "filename": "ChangeInsultSubmissionChannel",
             "command": "change insult submission channel",
             "description": "changes the insult submission channel",
             "folder": "admin",
@@ -129,7 +137,7 @@
             "prefix": true
         },
         {
-            "filename": "ChangeRoastSubmissionChannel.js",
+            "filename": "ChangeRoastSubmissionChannel",
             "command": "change roast submission channel",
             "description": "changes the roast channel",
             "folder": "admin",
@@ -137,7 +145,7 @@
             "prefix": true
         },
         {
-            "filename": "Purge.js",
+            "filename": "Purge",
             "command": "purge",
             "description": "purge as many messages as you would like out of existence (default 5)",
             "folder": "admin",
@@ -145,7 +153,7 @@
             "prefix": true
         },
         {
-            "filename": "Sinners.js",
+            "filename": "Sinners",
             "command": "sinners",
             "description": "shows the people that have wronged our all-mighty plock god",
             "folder": "general",
@@ -153,7 +161,7 @@
             "prefix": true
         },
         {
-            "filename": "CoinFlip.js",
+            "filename": "CoinFlip",
             "command": "coinflip",
             "description": "you are dumb if you don't understand this",
             "folder": "game",
@@ -161,7 +169,7 @@
             "prefix": true
         },
         {
-            "filename": "TitsOrAss.js",
+            "filename": "TitsOrAss",
             "command": "titsorass",
             "description": "you are dumb if you don't understand this",
             "folder": "game",
@@ -169,7 +177,7 @@
             "prefix": true
         },
         {
-            "filename": "RockPaperScissors.js",
+            "filename": "RockPaperScissors",
             "command": "rps",
             "description": "a simple rock paper scissors game",
             "folder": "game",
@@ -177,7 +185,7 @@
             "prefix": true
         },
         {
-            "filename": "SubmitQuote.js",
+            "filename": "SubmitQuote",
             "command": "submit quote",
             "description": "Submit a quote, that can be accepted only by **BIGMAN**",
             "folder": "submissions",
@@ -185,7 +193,7 @@
             "prefix": true
         },
         {
-            "filename": "SubmitRoast.js",
+            "filename": "SubmitRoast",
             "command": "submit roast",
             "description": "Submit a roast, that can be accepted only by **BIGMAN**",
             "folder": "submissions",
@@ -193,7 +201,7 @@
             "prefix": true
         },
         {
-            "filename": "SubmitInsult.js",
+            "filename": "SubmitInsult",
             "command": "submit insult",
             "description": "Submit an insult, that can be accepted only by **BIGMAN**",
             "folder": "submissions",
@@ -201,7 +209,7 @@
             "prefix": true
         },
         {
-            "filename": "NoU.js",
+            "filename": "NoU",
             "command": "no u",
             "description": "sends no u after every command",
             "folder": "nou",
@@ -209,7 +217,7 @@
             "prefix": false
         },
         {
-            "filename": "UrMumGay.js",
+            "filename": "UrMumGay",
             "command": "urmumgay",
             "description": "sends no u after every command",
             "folder": "nou",
