@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import {GuildMember, Message, MessageReaction, PartialMessage, User} from 'discord.js';
+import {GuildChannel, GuildMember, Message, MessageReaction, PartialMessage, User} from 'discord.js';
 import * as properties from '../resources/config.json'
 import Command from "./commands/model/Command";
 import GuildHandler from "./GuildHandler";
@@ -46,7 +46,13 @@ client.on('messageReactionRemove', async (messageReaction: MessageReaction, user
 
 client.on('guildMemberAdd', async (member : GuildMember) => {
     let defaultRoleHandler = await guildHandler.getDefaultRoleHandler(member.guild.id);
-    await defaultRoleHandler.onChannelJoin(member);
+    await defaultRoleHandler.onChannelJoin(member); //todo on role update, check and give user
+});
+
+client.on('channelDelete', async (channel : GuildChannel) => {
+    if(channel.type !== "text") return;
+    let channelHandler = await guildHandler.getChannelHandler(channel.guild.id);
+    await channelHandler.onChannelDelete(channel.id);
 });
 
 function startBot() {
@@ -61,6 +67,8 @@ TODO refine middleware stuff and dynamic loading of cache
         * Don't get all the cache at once, only get the needed cache and unload it when finished from it
 TODO Disable the functionality of the bot if a used channel is not assigned
 ASAP: TODO Have a way of loading general insults and lennys
-ASAP: TODO onChannelDelete, make sure that it is not a channel used by the bot -> make a way to un-assign a channel as well
 TODO Make sure only that guild's cache is loaded
+TODO on guild delete or removed from guild, delete database
+
+Code-review: Split the listeners to their respective handlers
  */

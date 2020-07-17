@@ -65,4 +65,20 @@ export default class GuildMiddleware extends BaseMiddleware {
     get badmanRole() : string {
         return this.guildCache.guild.badmanRole;
     }
+
+    get insultSubmission() : string {
+        return this.guildCache.guild.insultSubmission
+    }
+
+    get roastSubmission() : string {
+        return this.guildCache.guild.roastSubmission
+    }
+
+    get quoteSubmission() : string {
+        return this.guildCache.guild.quoteSubmission;
+    }
+
+    get quoteChannel() : string {
+        return this.guildCache.guild.quoteChannel;
+    }
 }

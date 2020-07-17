@@ -4,6 +4,7 @@ import MessageInterceptor from "./commands/MessageInterceptor";
 import VotingHandler from "./voting/VotingHandler";
 import DefaultRoleHandler from "./role/DefaultRoleHandler";
 import {Client} from "discord.js";
+import ChannelHandler from "./channel/ChannelHandler";
 
 export default class GuildHandler {
     readonly client : Client;
@@ -13,6 +14,7 @@ export default class GuildHandler {
     guildMessageInterceptor: Map<string, MessageInterceptor>
     guildVotingHandler: Map<string, VotingHandler>;
     guildDefaultRoleHandler : Map<string, DefaultRoleHandler>;
+    guildChannelHandler : Map<string, ChannelHandler>;
 
     constructor(client : Client) {
         this.client = client;
@@ -22,6 +24,7 @@ export default class GuildHandler {
         this.guildMessageInterceptor = new Map<string, MessageInterceptor>();
         this.guildVotingHandler = new Map<string, VotingHandler>();
         this.guildDefaultRoleHandler = new Map<string, DefaultRoleHandler>();
+        this.guildChannelHandler = new Map<string, ChannelHandler>()
     }
 
     async getGuildMiddleware(guild: string): Promise<CentralizedMiddleware> {
@@ -49,6 +52,11 @@ export default class GuildHandler {
         return this.guildDefaultRoleHandler.get(guild);
     }
 
+    async getChannelHandler(guild: string) : Promise<ChannelHandler> {
+        if(this.guildChannelHandler.has(guild)) await this.createGuild(guild);
+        return this.guildChannelHandler.get(guild);
+    }
+
     async unloadGuildMiddleware(guild: string) {
         if (this.guildMiddleware.has(guild)) this.guildMiddleware.delete(guild);
     }
@@ -63,8 +71,14 @@ export default class GuildHandler {
         //Create the general role and make sure they are smol boi
         let defaultRoleHandler = new DefaultRoleHandler(currentMiddleware);
         this.guildDefaultRoleHandler.set(guild, defaultRoleHandler);
-        await defaultRoleHandler.onServerStart(this.client.guilds.cache.get(guild));
+        await defaultRoleHandler.onCacheLoad(this.client.guilds.cache.get(guild));
         //Create the general role and make sure they are smol boi
+
+        //Create the channel handler and make sure the channels that are set to bot are not deleted
+        let channelHandler = new ChannelHandler(currentMiddleware);
+        this.guildChannelHandler.set(guild, channelHandler);
+        await channelHandler.onCacheLoad(this.client.guilds.cache.get(guild));
+        //Create the channel handler and make sure the channels that are set to bot are not deleted
 
         this.guildCommandHandler.set(guild, new CommandHandler(currentMiddleware));
         this.guildMessageInterceptor.set(guild, new MessageInterceptor(currentMiddleware));
