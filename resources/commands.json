@@ -97,6 +97,14 @@
             "prefix": true
         },
         {
+            "filename": "ChangeGeneralRole.js",
+            "command": "change general role",
+            "description": "changes the general role",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "ChangeQuoteChannel.js",
             "command": "change quote channel",
             "description": "changes the quote channel",

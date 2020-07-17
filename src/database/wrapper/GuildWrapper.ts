@@ -39,6 +39,10 @@ export default class GuildWrapper extends BaseWrapper {
         await this.setVariable("bigmanRole", role);
     }
 
+    async setGeneralRole (role: string){
+        await this.setVariable("generalRole", role);
+    }
+
     //todo publicize this and use this for general queries and name it performQuery with (filter, query) and use also pre-made queries
     private async setVariable(varName: string, channel: string) {
         await (this.collection.updateOne({"guild": this.guild}, {$set: {[varName]: channel}}))

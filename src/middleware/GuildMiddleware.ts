@@ -44,7 +44,16 @@ export default class GuildMiddleware extends BaseMiddleware {
         await this.guildWrapper.setBigmanRole(role);
     }
 
+    async setGeneralRole(role: string) : Promise <void>{
+        this.guildCache.setGeneralRole(role);
+        await this.guildWrapper.setGeneralRole(role);
+    }
+
     get bigmanRole(): string {
         return this.guildCache.guild.bigmanRole;
+    }
+
+    get generalRole() : string{
+        return this.guildCache.guild.generalRole;
     }
 }

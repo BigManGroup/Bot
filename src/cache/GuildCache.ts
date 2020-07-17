@@ -26,4 +26,8 @@ export default class GuildCache {
     setBigmanRole(role: string) {
         this.guild.bigmanRole = role;
     }
+
+    setGeneralRole(role: string){
+        this.guild.generalRole = role;
+    }
 }

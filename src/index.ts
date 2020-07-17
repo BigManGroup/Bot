@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import {Message, MessageReaction, PartialMessage, User} from 'discord.js';
+import {GuildMember, Message, MessageReaction, PartialMessage, User} from 'discord.js';
 import * as properties from '../resources/config.json'
 import Command from "./commands/model/Command";
 import GuildHandler from "./GuildHandler";
@@ -10,7 +10,7 @@ let guildHandler: GuildHandler;
 client.on("ready", async () => {
     Command.prefixes = properties.bot.prefixes;
 
-    guildHandler = new GuildHandler(); //Init the GuildHandler
+    guildHandler = new GuildHandler(client); //Init the GuildHandler
 
     client.user.setPresence({activity: {name: 'with Big People!'}, status: 'online'}).catch(console.error); //Setting the bot status
     console.log("Bot has started");
@@ -42,7 +42,12 @@ client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: U
 client.on('messageReactionRemove', async (messageReaction: MessageReaction, user: User) => {
     let votingHandler = await guildHandler.getGuildVotingHandler(messageReaction.message.guild.id);
     await votingHandler.handleVote(messageReaction, user);
-})
+});
+
+client.on('guildMemberAdd', async (member : GuildMember) => {
+    let defaultRoleHandler = await guildHandler.getDefaultRoleHandler(member.guild.id);
+    await defaultRoleHandler.onChannelJoin(member);
+});
 
 function startBot() {
     client.login(properties.bot.token).catch(error => console.log("Error logging in; " + error));
