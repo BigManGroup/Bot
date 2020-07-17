@@ -62,13 +62,7 @@ function startBot() {
 export {startBot}
 
 /*
-TODO refine middleware stuff and dynamic loading of cache
-        * Unload cache if a guild is not used for x amount of time for the sake of RAM
-        * Don't get all the cache at once, only get the needed cache and unload it when finished from it
-TODO Disable the functionality of the bot if a used channel is not assigned
-ASAP: TODO Have a way of loading general insults and lennys
-TODO Make sure only that guild's cache is loaded
-TODO on guild delete or removed from guild, delete database
+TODO Make sure only the needed guild cache is loaded
 
 Code-review: Split the listeners to their respective handlers
 Code-review: Add comments and proper documentation
