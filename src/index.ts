@@ -62,8 +62,6 @@ function startBot() {
 export {startBot}
 
 /*
-TODO Make sure only the needed guild cache is loaded
-
 Code-review: Split the listeners to their respective handlers
 Code-review: Add comments and proper documentation
  */
