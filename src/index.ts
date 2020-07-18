@@ -46,8 +46,15 @@ client.on('messageReactionRemove', async (messageReaction: MessageReaction, user
 
 client.on('guildMemberAdd', async (member : GuildMember) => {
     let defaultRoleHandler = await guildHandler.getDefaultRoleHandler(member.guild.id);
-    await defaultRoleHandler.onChannelJoin(member); //todo on role update, check and give user
+    await defaultRoleHandler.onChannelJoin(member);
 });
+
+client.on('guildMemberUpdate', async (oldMember : GuildMember, newMember : GuildMember) => {
+    if(newMember.roles.cache.size < oldMember.roles.cache.size){
+        let defaultRoleHandler = await guildHandler.getDefaultRoleHandler(newMember.guild.id);
+        await defaultRoleHandler.onChannelJoin(newMember);
+    }
+})
 
 client.on('channelDelete', async (channel : GuildChannel) => {
     if(channel.type !== "text") return;
