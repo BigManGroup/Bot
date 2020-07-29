@@ -2,7 +2,7 @@ import RoastMiddleware from "./RoastMiddleware";
 import LennyMiddleware from "./LennyMiddleware";
 import BadManMiddleware from "./BadManMiddleware";
 import PeePeeMiddleware from "./PeePeeMiddleware";
-import NigMiddleware from "./NigMiddleware";
+import BigMiddleware from "./BigMiddleware";
 import QuoteMiddleware from "./QuoteMiddleware";
 import InsultMiddleware from "./InsultMiddleware";
 import GuildMiddleware from "./GuildMiddleware";
@@ -13,7 +13,7 @@ export default class CentralizedMiddleware {
     readonly lennyMiddleware: LennyMiddleware;
     readonly badManMiddleware: BadManMiddleware;
     readonly peePeeMiddleware: PeePeeMiddleware;
-    readonly nigMiddleware: NigMiddleware;
+    readonly bigMiddleware: BigMiddleware;
     readonly quoteMiddleware: QuoteMiddleware;
     readonly insultMiddleware: InsultMiddleware;
 
@@ -23,7 +23,7 @@ export default class CentralizedMiddleware {
         this.lennyMiddleware = new LennyMiddleware(guild);
         this.badManMiddleware = new BadManMiddleware(guild);
         this.peePeeMiddleware = new PeePeeMiddleware(guild);
-        this.nigMiddleware = new NigMiddleware(guild);
+        this.bigMiddleware = new BigMiddleware(guild);
         this.quoteMiddleware = new QuoteMiddleware(guild);
         this.insultMiddleware = new InsultMiddleware(guild);
     }
@@ -34,7 +34,7 @@ export default class CentralizedMiddleware {
         await this.lennyMiddleware.buildCache();
         await this.badManMiddleware.buildCache();
         await this.peePeeMiddleware.buildCache();
-        await this.nigMiddleware.buildCache();
+        await this.bigMiddleware.buildCache();
         await this.quoteMiddleware.buildCache();
         await this.insultMiddleware.buildCache();
     }

@@ -2,12 +2,12 @@
 
 ## Features/Commands
 #### Admin Features:
-    - [x] Change How Nig
+    - [x] Change How Big
     - [x] Change PeePee size
     - [x] Print quote submission leaderboard
     
 #### General Features
-    - [x] HowNig -> Generates or gets a nig number from database
+    - [x] HowBig -> Generates or gets a big number from database
     - [x] PeePee -> Generates or gets peepee size from database
     - [x] Print Lenny -> Gets a random lenny from database and submits it
     - [x] Print Roast -> Gets a random roast from database and sends it 

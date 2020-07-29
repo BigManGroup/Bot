@@ -1,6 +1,6 @@
 import {ObjectId} from 'mongodb'
 
-export default class Nig {
+export default class Big {
     _id: ObjectId;
     readonly guild: string;
     readonly user: string;
@@ -14,12 +14,12 @@ export default class Nig {
         this.generatedDate = generatedDate;
     }
 
-    static modelBuilder(object: any): Nig {
-        let peepee = new Nig(object.user, object.guild, object.amount, object.generatedDate);
-        if (object._id !== undefined) peepee._id = new ObjectId(object._id);
-        else peepee._id = new ObjectId();
+    static modelBuilder(object: any): Big {
+        let big = new Big(object.user, object.guild, object.amount, object.generatedDate);
+        if (object._id !== undefined) big._id = new ObjectId(object._id);
+        else big._id = new ObjectId();
 
-        return peepee;
+        return big;
     }
 
     toString(): object {

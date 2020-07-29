@@ -65,9 +65,9 @@
             "prefix": true
         },
         {
-            "filename": "HowNig",
-            "command": "hownig",
-            "description": "tells you how nig you are",
+            "filename": "HowBig",
+            "command": "howbig",
+            "description": "tells you how big of a man you are",
             "folder": "general",
             "hidden": false,
             "prefix": true
@@ -75,15 +75,15 @@
         {
             "filename": "Black",
             "command": "black",
-            "description": "makes everyone a nig",
+            "description": "makes the person tagged black",
             "folder": "general",
             "hidden": false,
             "prefix": true
         },
         {
-            "filename": "ChangeHowNig",
-            "command": "change hownig",
-            "description": "changes the nig amount of you or the person you tagged",
+            "filename": "ChangeHowBig",
+            "command": "change howbig",
+            "description": "changes the big amount of you or the person you tagged",
             "folder": "admin",
             "hidden": false,
             "prefix": true

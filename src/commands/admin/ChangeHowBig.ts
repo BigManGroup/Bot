@@ -15,7 +15,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         message.reply(`i need a number ${middleware.insultMiddleware.randomInsult}`).catch((error) => console.log(error));
         return;
     } else if (amount < 0 || amount > 100) {
-        message.reply("max nig size is 100").catch((error) => console.log(error));
+        message.reply("max big size is 100").catch((error) => console.log(error));
         return;
     }
     //Check parameters
@@ -25,8 +25,8 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     else user = message.mentions.users.first();
 
 
-    middleware.nigMiddleware.updateNigAmount(user.id, message.guild.id, true, amount);
-    message.reply("nig updated").catch((error) => console.log(error));
+    middleware.bigMiddleware.updateBigAmount(user.id, message.guild.id, true, amount);
+    message.reply("big updated").catch((error) => console.log(error));
 }
 
 export {main}
