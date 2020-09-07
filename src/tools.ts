@@ -11,4 +11,8 @@ export default class Tools {
     static getRandomNumber(minimum: number, maximum: number): number {
         return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     }
+
+    static titleCase(string : string) {
+        return string.charAt(0).toUpperCase() + string.substr(1).toLowerCase();
+    }
 }
