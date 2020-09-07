@@ -1,4 +1,4 @@
-import {Message, MessageEmbed, TextChannel} from "discord.js";
+import {Message, MessageEmbed} from "discord.js";
 import FormattedMessage from "../model/FormattedMessage";
 import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 
