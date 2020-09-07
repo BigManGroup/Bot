@@ -54,6 +54,11 @@ export default class GuildMiddleware extends BaseMiddleware {
         await this.guildWrapper.setBadmanRole(role);
     }
 
+    async setMusicChannel (channel : string) : Promise <void>{
+        this.guildCache.setMusicChannel(channel);
+        await this.guildWrapper.setMusicChannel(channel);
+    }
+
     get bigmanRole(): string {
         return this.guildCache.guild.bigmanRole;
     }
@@ -80,5 +85,9 @@ export default class GuildMiddleware extends BaseMiddleware {
 
     get quoteChannel() : string {
         return this.guildCache.guild.quoteChannel;
+    }
+
+    get musicChannel() : string {
+        return this.guildCache.guild.musicChannel;
     }
 }

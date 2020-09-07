@@ -34,4 +34,8 @@ export default class GuildCache {
     setBadmanRole(role: string){
         this.guild.badmanRole = role;
     }
+
+    setMusicChannel(channel : string){
+        this.guild.musicChannel = channel;
+    }
 }

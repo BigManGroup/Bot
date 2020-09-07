@@ -145,6 +145,14 @@
             "prefix": true
         },
         {
+            "filename": "ChangeMusicChannel",
+            "command": "change music channel",
+            "description": "changes the music channel",
+            "folder": "admin",
+            "hidden": false,
+            "prefix": true
+        },
+        {
             "filename": "Purge",
             "command": "purge",
             "description": "purge as many messages as you would like out of existence (default 5)",

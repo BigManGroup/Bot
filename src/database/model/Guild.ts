@@ -13,6 +13,7 @@ export default class Guild {
     insultSubmission: string;
 
     quoteChannel: string;
+    musicChannel : string;
 
     constructor(guild: string) {
         this.guild = guild;
@@ -28,6 +29,7 @@ export default class Guild {
         if (object.bigmanRole !== undefined) guild.bigmanRole = object.bigmanRole;
         if (object.generalRole !== undefined) guild.generalRole = object.generalRole;
         if (object.badmanRole !== undefined) guild.badmanRole = object.badmanRole;
+        if(object.musicChannel !== undefined) guild.musicChannel = object.musicChannel;
 
         if (object._id !== undefined) guild._id = object._id;
         else guild._id = new ObjectId();
@@ -45,7 +47,8 @@ export default class Guild {
             quoteSubmission: this.quoteSubmission,
             quoteChannel: this.quoteChannel,
             roastSubmission: this.roastSubmission,
-            insultSubmission: this.insultSubmission
+            insultSubmission: this.insultSubmission,
+            musicChannel: this.musicChannel
         }
     }
 }
