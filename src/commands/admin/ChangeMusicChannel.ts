@@ -18,3 +18,5 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
 
     middleware.guildMiddleware.setMusicChannel(channel).then(() => message.reply("Music channel updated")).catch(error => console.log(error));
 }
+
+export {main}
