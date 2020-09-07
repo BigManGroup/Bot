@@ -92,7 +92,7 @@
             "filename": "ChangeBigManRole",
             "command": "change bigman role",
             "description": "changes the role of bigman",
-            "folder": "admin",
+            "folder": "admin/role",
             "hidden": false,
             "prefix": true
         },
@@ -100,7 +100,7 @@
             "filename": "ChangeGeneralRole",
             "command": "change general role",
             "description": "changes the general role",
-            "folder": "admin",
+            "folder": "admin/role",
             "hidden": false,
             "prefix": true
         },
@@ -108,7 +108,7 @@
             "filename": "ChangeBadmanRole",
             "command": "change badman role",
             "description": "changes the badman role",
-            "folder": "admin",
+            "folder": "admin/role",
             "hidden": false,
             "prefix": true
         },
@@ -116,7 +116,7 @@
             "filename": "ChangeQuoteChannel",
             "command": "change quote channel",
             "description": "changes the quote channel",
-            "folder": "admin",
+            "folder": "admin/channel",
             "hidden": false,
             "prefix": true
         },
@@ -124,7 +124,7 @@
             "filename": "ChangeQuoteSubmissionChannel",
             "command": "change quote submission channel",
             "description": "changes the quote submission channel",
-            "folder": "admin",
+            "folder": "admin/channel",
             "hidden": false,
             "prefix": true
         },
@@ -132,7 +132,7 @@
             "filename": "ChangeInsultSubmissionChannel",
             "command": "change insult submission channel",
             "description": "changes the insult submission channel",
-            "folder": "admin",
+            "folder": "admin/channel",
             "hidden": false,
             "prefix": true
         },
@@ -140,7 +140,7 @@
             "filename": "ChangeRoastSubmissionChannel",
             "command": "change roast submission channel",
             "description": "changes the roast channel",
-            "folder": "admin",
+            "folder": "admin/channel",
             "hidden": false,
             "prefix": true
         },
@@ -148,7 +148,7 @@
             "filename": "ChangeMusicChannel",
             "command": "change music channel",
             "description": "changes the music channel",
-            "folder": "admin",
+            "folder": "admin/channel",
             "hidden": false,
             "prefix": true
         },

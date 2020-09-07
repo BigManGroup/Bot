@@ -17,6 +17,7 @@ export default class Command{
         this.hidden = hidden;
         this.prefix = prefix;
 
+        console.log(folder);
         this.run = require(`../${folder}/${fileName}`).main;
     }
 }

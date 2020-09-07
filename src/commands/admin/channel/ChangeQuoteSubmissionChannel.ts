@@ -1,7 +1,7 @@
 import {Message} from "discord.js";
-import FormattedMessage from "../model/FormattedMessage";
-import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
-import Tools from "../../tools";
+import FormattedMessage from "../../model/FormattedMessage";
+import CentralizedMiddleware from "../../../middleware/CentralizedMiddleware";
+import Tools from "../../../tools";
 
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
     if (!Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, message.author.id)) {
@@ -16,7 +16,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         return;
     }
 
-    middleware.guildMiddleware.setQuoteChannel(channel).then(() => message.reply("Quote channel updated")).catch(error => console.log(error));
+    middleware.guildMiddleware.setQuoteSubmissionChannel(channel).then(() => message.reply("Quote submission channel updated")).catch(error => console.log(error));
 }
 
 export {main};
