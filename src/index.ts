@@ -3,14 +3,15 @@ import {Guild, GuildChannel, GuildMember, Message, MessageReaction, PartialMessa
 import * as properties from '../resources/config.json'
 import Command from "./commands/model/Command";
 import GuildHandler from "./GuildHandler";
+import {deleteGuild} from "./GuildTools";
 
 const client = new Discord.Client({partials: ['MESSAGE', 'REACTION']});
 let guildHandler: GuildHandler;
 
 client.on("ready", async () => {
     Command.prefixes = properties.bot.prefixes;
-
     guildHandler = new GuildHandler(client); //Init the GuildHandler
+    deleteGuild(client, guildHandler).catch(error => console.error ("Unable to delete guild on start " + error));
 
     client.user.setPresence({activity: {name: 'with Big People!'}, status: 'online'}).catch(console.error); //Setting the bot status
     console.log("Bot has started");
