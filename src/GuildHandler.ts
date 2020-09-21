@@ -57,10 +57,6 @@ export default class GuildHandler {
         return this.guildChannelHandler.get(guild);
     }
 
-    async unloadGuildMiddleware(guild: string) {
-        if (this.guildMiddleware.has(guild)) this.guildMiddleware.delete(guild);
-    }
-
     private async createGuild(guild: string): Promise<CentralizedMiddleware> {
         //Create the middleware
         let currentMiddleware = new CentralizedMiddleware(guild);
@@ -86,7 +82,21 @@ export default class GuildHandler {
         return currentMiddleware;
     }
 
-    /*
-    Maybe delete guild
-     */
+    private unloadGuildMiddleware(guild: string) {
+        if (this.guildMiddleware.has(guild)) this.guildMiddleware.delete(guild);
+    }
+
+    deleteGuild(guild : string) : void{
+        if (!this.guildMiddleware.has(guild)) return;
+        this.guildMiddleware.get(guild).badManMiddleware.badManWrapper.delete().catch(error => console.log(error));
+        this.guildMiddleware.get(guild).bigMiddleware.bigWrapper.delete().catch(error => console.log(error));
+        this.guildMiddleware.get(guild).guildMiddleware.guildWrapper.delete().catch(error => console.log(error));
+        this.guildMiddleware.get(guild).insultMiddleware.insultWrapper.delete().catch(error => console.log(error));
+        this.guildMiddleware.get(guild).lennyMiddleware.lennyWrapper.delete().catch(error => console.log(error));
+        this.guildMiddleware.get(guild).peePeeMiddleware.peePeeWrapper.delete().catch(error => console.log(error));
+        this.guildMiddleware.get(guild).quoteMiddleware.quoteWrapper.delete().catch(error => console.log(error));
+        this.guildMiddleware.get(guild).roastMiddleware.roastWrapper.delete().catch(error => console.log(error));
+
+        this.unloadGuildMiddleware(guild);
+    }
 }
