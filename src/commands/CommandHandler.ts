@@ -18,8 +18,9 @@ export default class CommandHandler{
         this.loadCommands();
     }
 
-    private static hasPrefix(content: string): boolean {
-        for (let i = 0; i !== Command.prefixes.length; i++) if (content.startsWith(Command.prefixes[i])) return true;
+    private hasPrefix(content: string): boolean {
+        let prefixes = this.centralizedMiddleware.guildMiddleware.prefixes;
+        for (let i = 0; i !== prefixes.length; i++) if (content.startsWith(prefixes[i])) return true;
         return false;
     }
 
@@ -80,7 +81,7 @@ export default class CommandHandler{
         let command: string;
 
         //Check if commands exists, and if it doesn't cancel
-        if (CommandHandler.hasPrefix(message.content)) {
+        if (this.hasPrefix(message.content)) {
             content = (message.content.split(" ")).splice(1);
             command = this.extractCommand(undefined, content.slice(), 0, true); //Slice to pass by reference
         } else {
