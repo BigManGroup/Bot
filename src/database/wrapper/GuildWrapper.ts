@@ -1,5 +1,6 @@
 import BaseWrapper from "./BaseWrapper";
 import Guild from "../model/Guild";
+import Saving from "../DatabaseHandler";
 
 export default class GuildWrapper extends BaseWrapper {
     constructor(guild: string) {
@@ -54,5 +55,10 @@ export default class GuildWrapper extends BaseWrapper {
     //todo publicize this and use this for general queries and name it performQuery with (filter, query) and use also pre-made queries
     private async setVariable(varName: string, channel: string) {
         await (this.collection.updateOne({"guild": this.guild}, {$set: {[varName]: channel}}))
+    }
+
+
+    static async getAllGuilds() : Promise <string[]>{
+        return await Saving.clientPool.db().collection("guild").find({}, {projection:{guild:1, _id:0}}).toArray();
     }
 }
