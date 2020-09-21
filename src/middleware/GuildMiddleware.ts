@@ -49,25 +49,37 @@ export default class GuildMiddleware extends BaseMiddleware {
         await this.guildWrapper.setGeneralRole(role);
     }
 
-    async setBadmanRole (role: string) : Promise <void>{
+    async setBadmanRole(role: string): Promise<void> {
         this.guildCache.setBadmanRole(role);
         await this.guildWrapper.setBadmanRole(role);
     }
 
-    async setMusicChannel (channel : string) : Promise <void>{
+    async setMusicChannel(channel: string): Promise<void> {
         this.guildCache.setMusicChannel(channel);
         await this.guildWrapper.setMusicChannel(channel);
+    }
+
+    get prefixes(): string[] {
+        return this.guildCache.guild.prefixes;
+    }
+
+    async addPrefix(prefix: string): Promise<void> {
+        let currentPrefixes = this.prefixes;
+        currentPrefixes.push(prefix);
+
+        await this.guildWrapper.setPrefixes(currentPrefixes);
+        this.guildCache.setPrefixes(currentPrefixes)
     }
 
     get bigmanRole(): string {
         return this.guildCache.guild.bigmanRole;
     }
 
-    get generalRole() : string{
+    get generalRole(): string {
         return this.guildCache.guild.generalRole;
     }
 
-    get badmanRole() : string {
+    get badmanRole(): string {
         return this.guildCache.guild.badmanRole;
     }
 
@@ -83,11 +95,21 @@ export default class GuildMiddleware extends BaseMiddleware {
         return this.guildCache.guild.quoteSubmission;
     }
 
-    get quoteChannel() : string {
+    get quoteChannel(): string {
         return this.guildCache.guild.quoteChannel;
     }
 
-    get musicChannel() : string {
+    get musicChannel(): string {
         return this.guildCache.guild.musicChannel;
+    }
+
+    async removePrefix(prefix: string): Promise<void> {
+        let currentPrefixes = this.prefixes;
+        for (let i = 0; i !== currentPrefixes.length; i++) {
+            if (currentPrefixes[i] === prefix) currentPrefixes.splice(i, 1);
+        }
+
+        await this.guildWrapper.setPrefixes(currentPrefixes);
+        this.guildCache.setPrefixes(currentPrefixes)
     }
 }

@@ -44,21 +44,25 @@ export default class GuildWrapper extends BaseWrapper {
         await this.setVariable("generalRole", role);
     }
 
-    async setBadmanRole (role : string) {
+    async setBadmanRole(role: string) {
         await this.setVariable("bigmanRole", role);
     }
 
-    async setMusicChannel (channel : string){
+    async setMusicChannel(channel: string) {
         await this.setVariable("musicChannel", channel);
     }
 
+    async setPrefixes(prefixes: string[]) {
+        await this.setVariable("prefixes", prefixes)
+    }
+
     //todo publicize this and use this for general queries and name it performQuery with (filter, query) and use also pre-made queries
-    private async setVariable(varName: string, channel: string) {
-        await (this.collection.updateOne({"guild": this.guild}, {$set: {[varName]: channel}}))
+    private async setVariable(varName: string, value: string | string[]) {
+        await (this.collection.updateOne({"guild": this.guild}, {$set: {[varName]: value}}))
     }
 
 
-    static async getAllGuilds() : Promise <string[]>{
-        return await Saving.clientPool.db().collection("guild").find({}, {projection:{guild:1, _id:0}}).toArray();
+    static async getAllGuilds(): Promise<string[]> {
+        return await Saving.clientPool.db().collection("guild").find({}, {projection: {guild: 1, _id: 0}}).toArray();
     }
 }

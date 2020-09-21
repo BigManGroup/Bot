@@ -31,11 +31,15 @@ export default class GuildCache {
         this.guild.generalRole = role;
     }
 
-    setBadmanRole(role: string){
+    setBadmanRole(role: string) {
         this.guild.badmanRole = role;
     }
 
-    setMusicChannel(channel : string){
+    setMusicChannel(channel: string) {
         this.guild.musicChannel = channel;
+    }
+
+    setPrefixes(prefixes: string[]) {
+        this.guild.prefixes = prefixes;
     }
 }
