@@ -59,13 +59,23 @@ export default class GuildMiddleware extends BaseMiddleware {
         await this.guildWrapper.setMusicChannel(channel);
     }
 
+    async addPrefix(prefix: string): Promise<void> {
+        let currentPrefixes = this.prefixes;
+        currentPrefixes.push(prefix);
+
+        await this.guildWrapper.setPrefixes(currentPrefixes);
+        this.guildCache.setPrefixes(currentPrefixes)
+    }
+
     get prefixes(): string[] {
         return this.guildCache.guild.prefixes;
     }
 
-    async addPrefix(prefix: string): Promise<void> {
+    async removePrefix(prefix: string): Promise<void> {
         let currentPrefixes = this.prefixes;
-        currentPrefixes.push(prefix);
+        for (let i = 0; i !== currentPrefixes.length; i++) {
+            if (currentPrefixes[i] === prefix) currentPrefixes.splice(i, 1);
+        }
 
         await this.guildWrapper.setPrefixes(currentPrefixes);
         this.guildCache.setPrefixes(currentPrefixes)
@@ -101,15 +111,5 @@ export default class GuildMiddleware extends BaseMiddleware {
 
     get musicChannel(): string {
         return this.guildCache.guild.musicChannel;
-    }
-
-    async removePrefix(prefix: string): Promise<void> {
-        let currentPrefixes = this.prefixes;
-        for (let i = 0; i !== currentPrefixes.length; i++) {
-            if (currentPrefixes[i] === prefix) currentPrefixes.splice(i, 1);
-        }
-
-        await this.guildWrapper.setPrefixes(currentPrefixes);
-        this.guildCache.setPrefixes(currentPrefixes)
     }
 }
