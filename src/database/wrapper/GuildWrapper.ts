@@ -13,7 +13,7 @@ export default class GuildWrapper extends BaseWrapper {
             currentGuild = new Guild(this.guild);
             await this.createGuild(currentGuild);
         }
-        return currentGuild;
+        return Guild.modelBuilder(currentGuild);
     }
 
     async createGuild(guild: Guild): Promise<void> {
