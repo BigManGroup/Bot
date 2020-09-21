@@ -5,16 +5,24 @@ import VotingHandler from "./voting/VotingHandler";
 import DefaultRoleHandler from "./role/DefaultRoleHandler";
 import {Client} from "discord.js";
 import ChannelHandler from "./channel/ChannelHandler";
+import BadManWrapper from "./database/wrapper/BadManWrapper";
+import BigWrapper from "./database/wrapper/BigWrapper";
+import GuildWrapper from "./database/wrapper/GuildWrapper";
+import InsultWrapper from "./database/wrapper/InsultWrapper";
+import LennyWrapper from "./database/wrapper/LennyWrapper";
+import PeePeeWrapper from "./database/wrapper/PeePeeWrapper";
+import QuoteWrapper from "./database/wrapper/QuoteWrapper";
+import RoastWrapper from "./database/wrapper/RoastWrapper";
 
 export default class GuildHandler {
-    readonly client : Client;
+    readonly client: Client;
 
     guildMiddleware: Map<string, CentralizedMiddleware>;
     guildCommandHandler: Map<string, CommandHandler>;
     guildMessageInterceptor: Map<string, MessageInterceptor>
     guildVotingHandler: Map<string, VotingHandler>;
-    guildDefaultRoleHandler : Map<string, DefaultRoleHandler>;
-    guildChannelHandler : Map<string, ChannelHandler>;
+    guildDefaultRoleHandler: Map<string, DefaultRoleHandler>;
+    guildChannelHandler: Map<string, ChannelHandler>;
 
     constructor(client : Client) {
         this.client = client;
@@ -86,17 +94,28 @@ export default class GuildHandler {
         if (this.guildMiddleware.has(guild)) this.guildMiddleware.delete(guild);
     }
 
-    async deleteGuild(guild : string) : Promise <void>{
-        if (!this.guildMiddleware.has(guild)) await this.createGuild(guild);
-        this.guildMiddleware.get(guild).badManMiddleware.badManWrapper.delete().catch(error => console.log(error));
-        this.guildMiddleware.get(guild).bigMiddleware.bigWrapper.delete().catch(error => console.log(error));
-        this.guildMiddleware.get(guild).guildMiddleware.guildWrapper.delete().catch(error => console.log(error));
-        this.guildMiddleware.get(guild).insultMiddleware.insultWrapper.delete().catch(error => console.log(error));
-        this.guildMiddleware.get(guild).lennyMiddleware.lennyWrapper.delete().catch(error => console.log(error));
-        this.guildMiddleware.get(guild).peePeeMiddleware.peePeeWrapper.delete().catch(error => console.log(error));
-        this.guildMiddleware.get(guild).quoteMiddleware.quoteWrapper.delete().catch(error => console.log(error));
-        this.guildMiddleware.get(guild).roastMiddleware.roastWrapper.delete().catch(error => console.log(error));
+    async deleteGuild(guild : string) : Promise <void> {
+        if (!this.guildMiddleware.has(guild)) {
+            await new BadManWrapper(guild).delete();
+            await new BigWrapper(guild).delete();
+            await new GuildWrapper(guild).delete();
+            await new InsultWrapper(guild).delete();
+            await new LennyWrapper(guild).delete();
+            await new PeePeeWrapper(guild).delete();
+            await new QuoteWrapper(guild).delete();
+            await new RoastWrapper(guild).delete();
+        } else {
+            this.guildMiddleware.get(guild).badManMiddleware.badManWrapper.delete().catch(error => console.log(error));
+            this.guildMiddleware.get(guild).bigMiddleware.bigWrapper.delete().catch(error => console.log(error));
+            this.guildMiddleware.get(guild).guildMiddleware.guildWrapper.delete().catch(error => console.log(error));
+            this.guildMiddleware.get(guild).insultMiddleware.insultWrapper.delete().catch(error => console.log(error));
+            this.guildMiddleware.get(guild).lennyMiddleware.lennyWrapper.delete().catch(error => console.log(error));
+            this.guildMiddleware.get(guild).peePeeMiddleware.peePeeWrapper.delete().catch(error => console.log(error));
+            this.guildMiddleware.get(guild).quoteMiddleware.quoteWrapper.delete().catch(error => console.log(error));
+            this.guildMiddleware.get(guild).roastMiddleware.roastWrapper.delete().catch(error => console.log(error));
 
-        this.unloadGuildMiddleware(guild);
+            this.unloadGuildMiddleware(guild);
+        }
+
     }
 }
