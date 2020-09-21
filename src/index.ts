@@ -63,7 +63,7 @@ client.on('channelDelete', async (channel : GuildChannel) => {
 });
 
 client.on('guildDelete', async (guild : Guild) => {
-    guildHandler.deleteGuild(guild.id);
+    guildHandler.deleteGuild(guild.id).catch(error => console.log(error));
 });
 
 function startBot() {

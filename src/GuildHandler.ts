@@ -86,8 +86,8 @@ export default class GuildHandler {
         if (this.guildMiddleware.has(guild)) this.guildMiddleware.delete(guild);
     }
 
-    deleteGuild(guild : string) : void{
-        if (!this.guildMiddleware.has(guild)) return;
+    async deleteGuild(guild : string) : Promise <void>{
+        if (!this.guildMiddleware.has(guild)) await this.createGuild(guild);
         this.guildMiddleware.get(guild).badManMiddleware.badManWrapper.delete().catch(error => console.log(error));
         this.guildMiddleware.get(guild).bigMiddleware.bigWrapper.delete().catch(error => console.log(error));
         this.guildMiddleware.get(guild).guildMiddleware.guildWrapper.delete().catch(error => console.log(error));
