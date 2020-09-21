@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import {GuildChannel, GuildMember, Message, MessageReaction, PartialMessage, User} from 'discord.js';
+import {Guild, GuildChannel, GuildMember, Message, MessageReaction, PartialMessage, User} from 'discord.js';
 import * as properties from '../resources/config.json'
 import Command from "./commands/model/Command";
 import GuildHandler from "./GuildHandler";
@@ -60,6 +60,10 @@ client.on('channelDelete', async (channel : GuildChannel) => {
     if(channel.type !== "text") return;
     let channelHandler = await guildHandler.getChannelHandler(channel.guild.id);
     await channelHandler.onChannelDelete(channel.id);
+});
+
+client.on('guildDelete', async (guild : Guild) => {
+    
 });
 
 function startBot() {

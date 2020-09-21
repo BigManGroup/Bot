@@ -11,4 +11,8 @@ export default abstract class BaseWrapper{
         this.collection = this.session.db().collection(collection);
         this.guild = guild;
     }
+
+    protected async deleteGuild() : Promise <void>{
+        await this.collection.deleteMany({guild : this.guild});
+    }
 }
