@@ -71,14 +71,20 @@ export default class GuildMiddleware extends BaseMiddleware {
         return this.guildCache.guild.prefixes;
     }
 
-    async removePrefix(prefix: string): Promise<void> {
+    async removePrefix(prefix: string): Promise<boolean> {
         let currentPrefixes = this.prefixes;
+        let found: boolean = false;
         for (let i = 0; i !== currentPrefixes.length; i++) {
-            if (currentPrefixes[i] === prefix) currentPrefixes.splice(i, 1);
+            if (currentPrefixes[i] === prefix) {
+                currentPrefixes.splice(i, 1);
+                found = true;
+            }
         }
 
         await this.guildWrapper.setPrefixes(currentPrefixes);
-        this.guildCache.setPrefixes(currentPrefixes)
+        this.guildCache.setPrefixes(currentPrefixes);
+
+        return found;
     }
 
     get bigmanRole(): string {
