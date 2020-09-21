@@ -6,7 +6,6 @@ export default class Command{
     readonly folder : string;
     readonly hidden : boolean;
     readonly prefix: boolean;
-    static prefixes: string[];
     readonly run: any;
 
     constructor(fileName : string, command : string, description : string, folder : string, hidden : boolean, prefix : boolean) {

@@ -1,7 +1,6 @@
 import * as Discord from 'discord.js';
 import {Guild, GuildChannel, GuildMember, Message, MessageReaction, PartialMessage, User} from 'discord.js';
 import * as properties from '../resources/config.json'
-import Command from "./commands/model/Command";
 import GuildHandler from "./GuildHandler";
 import {deleteGuild} from "./GuildTools";
 
@@ -9,7 +8,6 @@ const client = new Discord.Client({partials: ['MESSAGE', 'REACTION']});
 let guildHandler: GuildHandler;
 
 client.on("ready", async () => {
-    Command.prefixes = properties.bot.prefixes;
     guildHandler = new GuildHandler(client); //Init the GuildHandler
     deleteGuild(client, guildHandler).catch(error => console.error ("Unable to delete guild on start " + error));
 
