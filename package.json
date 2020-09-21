@@ -5,13 +5,13 @@
   "main": "out/index.js",
   "author": "Jamie Stivala",
   "dependencies": {
-    "@types/mongodb": "^3.5.5",
-    "@types/node": "^14.0.23",
-    "@types/sharp": "^0.25.0",
+    "@types/mongodb": "^3.5.27",
+    "@types/node": "^14.11.1",
+    "@types/sharp": "^0.25.1",
     "@types/ws": "^7.2.6",
     "axios": "^0.19.2",
-    "discord.js": "^12.2.0",
-    "mongodb": "^3.5.5",
+    "discord.js": "^12.3.1",
+    "mongodb": "^3.6.2",
     "sharp": "^0.25.2",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
