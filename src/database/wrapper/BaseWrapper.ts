@@ -12,7 +12,7 @@ export default abstract class BaseWrapper{
         this.guild = guild;
     }
 
-    protected async deleteGuild() : Promise <void>{
+    async delete() : Promise <void>{
         await this.collection.deleteMany({guild : this.guild});
     }
 }
