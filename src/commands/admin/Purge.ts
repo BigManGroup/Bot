@@ -1,4 +1,4 @@
-import {Message} from "discord.js";
+import {Message, TextChannel} from "discord.js";
 import FormattedMessage from "../model/FormattedMessage";
 import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 import Tools from "../../tools";
@@ -9,8 +9,8 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         return;
     }
 
-    if (formattedMessage.parameters[0] === undefined) {
-        message.channel.bulkDelete(5).catch(error => console.log(error));
+    if (formattedMessage.parameters[0] === undefined){
+        (message.channel as TextChannel).bulkDelete(5).catch(error => console.log(error));
         return;
     }
 
@@ -19,7 +19,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         message.reply(`i need a number ${middleware.insultMiddleware.randomInsult}`).catch((error) => console.log(error));
         return;
     }
-    message.channel.bulkDelete(++amount).catch(error => console.log(error));
+    (message.channel as TextChannel).bulkDelete(++amount).catch(error => console.log(error));
 }
 
 export {main}
