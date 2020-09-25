@@ -28,6 +28,11 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let quoteText = roast.join(" ");
     //Remove the last 3 things in array (year, user, -)
 
+    if (middleware.guildMiddleware.quoteSubmission === undefined) {
+        message.reply("Admins have not set the submission channel\nFeature is disabled").catch(error => console.log(error));
+        return;
+    }
+
     let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setDescription("awaiting approval by bigman").setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
     message.reply("your quote was submitted. bigman council will review it and accept/decline it") //Sends the message that the submission has been received
         .then(async (sentMessage) => {
