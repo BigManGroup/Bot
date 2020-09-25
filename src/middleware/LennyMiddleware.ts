@@ -2,6 +2,7 @@ import BaseMiddleware from "./BaseMiddleware";
 import LennyCache from "../cache/LennyCache";
 import LennyWrapper from "../database/wrapper/LennyWrapper";
 import Tools from "../tools";
+import GuildHandler from "../GuildHandler";
 
 export default class LennyMiddleware extends BaseMiddleware {
     readonly lennyCache: LennyCache;
@@ -23,8 +24,9 @@ export default class LennyMiddleware extends BaseMiddleware {
         this.cacheBuilt = true;
     }
 
-    get randomLenny() : string{
+    get randomLenny() : string {
         let lenny = this.lennyCache.acceptedLennys;
-        return lenny[Tools.getRandomNumber(0, lenny.length)].lenny
+        if (lenny.length > 0) return lenny[Tools.getRandomNumber(0, lenny.length)].lenny;
+        return GuildHandler.defaultGuild.lennyMiddleware.randomLenny;
     }
 }

@@ -3,6 +3,7 @@ import Tools from "../tools";
 import InsultCache from "../cache/InsultCache";
 import InsultWrapper from "../database/wrapper/InsultWrapper";
 import Insult from "../database/model/Insult";
+import GuildHandler from "../GuildHandler";
 
 export default class InsultMiddleware extends BaseMiddleware {
     readonly insultCache: InsultCache;
@@ -17,7 +18,8 @@ export default class InsultMiddleware extends BaseMiddleware {
 
     get randomInsult(): string {
         let insults = this.insultCache.acceptedInsult;
-        return insults[Tools.getRandomNumber(0, insults.length - 1)].insult
+        if (insults.length > 0) return insults[Tools.getRandomNumber(0, insults.length - 1)].insult;
+        return GuildHandler.defaultGuild.insultMiddleware.randomInsult;
     }
 
     async buildCache(): Promise<void> {

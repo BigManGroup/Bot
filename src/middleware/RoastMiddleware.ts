@@ -3,6 +3,7 @@ import RoastWrapper from "../database/wrapper/RoastWrapper";
 import BaseMiddleware from "./BaseMiddleware";
 import Tools from "../tools";
 import Roast from "../database/model/Roast";
+import GuildHandler from "../GuildHandler";
 
 export default class RoastMiddleware extends BaseMiddleware {
     readonly roastCache: RoastCache;
@@ -26,7 +27,8 @@ export default class RoastMiddleware extends BaseMiddleware {
 
     get randomRoast(): string {
         let roasts = this.roastCache.acceptedRoasts;
-        return roasts[Tools.getRandomNumber(0, roasts.length - 1)].roast
+        if (roasts.length > 0) return roasts[Tools.getRandomNumber(0, roasts.length - 1)].roast;
+        return GuildHandler.defaultGuild.roastMiddleware.randomRoast;
     }
 
     async addRoast(roast: Roast): Promise<void> {
