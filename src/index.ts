@@ -9,6 +9,8 @@ let guildHandler: GuildHandler;
 
 client.on("ready", async () => {
     guildHandler = new GuildHandler(client); //Init the GuildHandler
+    await guildHandler.setDefaultGuild(properties["default-guild"]); //Load the default guild
+
     GuildTools.deleteGuild(client, guildHandler).catch(error => console.error("Unable to delete guild on start " + error));
 
     client.user.setPresence({activity: {name: 'with Big People!'}, status: 'online'}).catch(console.error); //Setting the bot status
