@@ -4,7 +4,6 @@ import FormattedMessage from "../model/FormattedMessage";
 import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 import Tools from "../../tools";
 import Roast from "../../database/model/Roast";
-import RoastVoteHandler from "../../voting/RoastVoteHandler";
 import VotingHandler from "../../voting/VotingHandler";
 
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
@@ -29,7 +28,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     } else {
         message.reply("your roast was submitted. bigman council will review it and accept/decline it").then(async (sentMessage) => {  //Sends the message that the submission has been received
             let embed = new MessageEmbed().setAuthor(`${message.member.displayName}`, message.member.user.avatarURL()).setTitle(roastText).setDescription("awaiting approval by bigman");
-            let submissionMessage = await (<TextChannel>message.guild.channels.resolve(RoastVoteHandler.roastSubmissionChannel)).send(embed) //Sends the message to submissions channel
+            let submissionMessage = await (<TextChannel>message.guild.channels.resolve(middleware.guildMiddleware.roastSubmission)).send(embed) //Sends the message to submissions channel
             await submissionMessage.react(VotingHandler.approveReaction);
             await submissionMessage.react(VotingHandler.declineReaction);
 

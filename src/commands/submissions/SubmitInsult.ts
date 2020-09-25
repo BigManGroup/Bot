@@ -5,7 +5,6 @@ import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 import Tools from "../../tools";
 import VotingHandler from "../../voting/VotingHandler";
 import Insult from "../../database/model/Insult";
-import InsultVoteHandler from "../../voting/InsultVoteHandler";
 
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
     let insultText = formattedMessage.parameters.join(" ");
@@ -29,7 +28,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     } else {
         message.reply("your insult was submitted. bigman council will review it and accept/decline it").then(async (sentMessage) => {  //Sends the message that the submission has been received
             let embed = new MessageEmbed().setAuthor(`${message.member.displayName}`, message.member.user.avatarURL()).setTitle(insultText).setDescription("awaiting approval by bigman");
-            let submissionMessage = await (<TextChannel>message.guild.channels.resolve(InsultVoteHandler.insultSubmissionsChannel)).send(embed) //Sends the message to submissions channel
+            let submissionMessage = await (<TextChannel>message.guild.channels.resolve(middleware.guildMiddleware.insultSubmission)).send(embed) //Sends the message to submissions channel
             await submissionMessage.react(VotingHandler.approveReaction);
             await submissionMessage.react(VotingHandler.declineReaction);
 

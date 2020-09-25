@@ -4,9 +4,6 @@ import VotingHandler from "./VotingHandler";
 import Tools from "../tools";
 
 export default class QuoteVoteHandler {
-    static quoteSubmissionsChannel: string = "698923581832298617";
-    static quoteChannel: string = "669245652664057867";
-
     centralizedMiddleware: CentralizedMiddleware;
 
     constructor(centralizedMiddleware: CentralizedMiddleware) {
@@ -42,7 +39,7 @@ export default class QuoteVoteHandler {
         await message.delete();
 
         let embed = new MessageEmbed().setAuthor(`${guild.members.cache.get(quote.quoteUser).displayName} - ${quote.quoteYear}`, guild.members.cache.get(quote.quoteUser).user.avatarURL()).setTitle(quote.quoteText).setFooter(`Submitted by ${guild.members.cache.get(quote.user).displayName}`);
-        await (<TextChannel>(await guild.channels.resolve(QuoteVoteHandler.quoteChannel))).send(embed);
+        await (<TextChannel>(await guild.channels.resolve(this.centralizedMiddleware.guildMiddleware.quoteChannel))).send(embed);
     }
 
     private async decline(message: Message): Promise<void> {

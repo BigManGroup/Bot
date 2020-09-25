@@ -4,7 +4,6 @@ import VotingHandler from "./VotingHandler";
 import Tools from "../tools";
 
 export default class InsultVoteHandler {
-    static insultSubmissionsChannel: string = "699754217853943811";
     centralizedMiddleware: CentralizedMiddleware;
 
     constructor(centralizedMiddleware: CentralizedMiddleware) {

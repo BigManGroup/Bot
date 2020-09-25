@@ -4,8 +4,6 @@ import VotingHandler from "./VotingHandler";
 import Tools from "../tools";
 
 export default class RoastVoteHandler {
-    static roastSubmissionChannel: string = "699630344604876871";
-
     centralizedMiddleware: CentralizedMiddleware;
 
     constructor(centralizedMiddleware: CentralizedMiddleware) {

@@ -3,7 +3,6 @@ import FormattedMessage from "../model/FormattedMessage";
 import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 import Quote from "../../database/model/Quote";
 import {ObjectId} from "mongodb";
-import QuoteVoteHandler from "../../voting/QuoteVoteHandler";
 import VotingHandler from "../../voting/VotingHandler";
 
 
@@ -32,7 +31,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let embed = new MessageEmbed().setAuthor(`${message.guild.member(quoteUser).displayName} - ${quoteYear}`, message.guild.member(quoteUser).user.avatarURL()).setTitle(quoteText).setDescription("awaiting approval by bigman").setFooter(`Submitted by ${message.guild.member(message.author.id).displayName}`);
     message.reply("your quote was submitted. bigman council will review it and accept/decline it") //Sends the message that the submission has been received
         .then(async (sentMessage) => {
-            let submissionMessage = await (<TextChannel>message.guild.channels.resolve(QuoteVoteHandler.quoteSubmissionsChannel)).send(embed) //Sends the message to submissions channel
+            let submissionMessage = await (<TextChannel>message.guild.channels.resolve(middleware.guildMiddleware.quoteSubmission)).send(embed) //Sends the message to submissions channel
             await submissionMessage.react(VotingHandler.approveReaction);
             await submissionMessage.react(VotingHandler.declineReaction);
 
