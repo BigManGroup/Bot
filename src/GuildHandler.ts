@@ -24,7 +24,9 @@ export default class GuildHandler {
     guildDefaultRoleHandler: Map<string, DefaultRoleHandler>;
     guildChannelHandler: Map<string, ChannelHandler>;
 
-    constructor(client : Client) {
+    static defaultGuild: CentralizedMiddleware;
+
+    constructor(client: Client) {
         this.client = client;
 
         this.guildMiddleware = new Map<string, CentralizedMiddleware>();
@@ -94,7 +96,11 @@ export default class GuildHandler {
         if (this.guildMiddleware.has(guild)) this.guildMiddleware.delete(guild);
     }
 
-    async deleteGuild(guild : string) : Promise <void> {
+    async setDefaultGuild(id: string): Promise<void> {
+        GuildHandler.defaultGuild = await this.createGuild(id);
+    }
+
+    async deleteGuild(guild: string): Promise<void> {
         if (!this.guildMiddleware.has(guild)) {
             await new BadManWrapper(guild).delete();
             await new BigWrapper(guild).delete();
@@ -116,6 +122,5 @@ export default class GuildHandler {
 
             this.unloadGuildMiddleware(guild);
         }
-
     }
 }
