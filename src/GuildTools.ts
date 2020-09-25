@@ -12,7 +12,7 @@ export default class GuildTools {
             let currentDatabase: string = databaseGuilds[i];
             for (let j = 0; j !== botGuilds.length && !found; j++) {
                 let currentBot = botGuilds[j];
-                if (currentBot === currentBot) found = true;
+                if (currentBot === currentDatabase) found = true;
             }
 
             if (!found) await guildHandler.deleteGuild(currentDatabase);
