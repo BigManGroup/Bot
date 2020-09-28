@@ -76,7 +76,7 @@ function startBot() {
     client.login(properties.bot.token).catch(error => console.log("Error logging in; " + error));
 }
 
-export {startBot, client}
+export {startBot, client, guildHandler}
 
 /*
 Code-review: Split the listeners to their respective handlers
