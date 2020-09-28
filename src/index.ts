@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import {Guild, GuildChannel, GuildMember, Message, MessageReaction, PartialMessage, User} from 'discord.js';
+import {Guild, GuildChannel, GuildMember, Message, MessageReaction, PartialMessage, Role, User} from 'discord.js';
 import * as properties from '../resources/config.json'
 import GuildHandler from "./GuildHandler";
 import GuildTools from "./GuildTools";
@@ -57,13 +57,18 @@ client.on('guildMemberUpdate', async (oldMember : GuildMember, newMember : Guild
     }
 })
 
-client.on('channelDelete', async (channel : GuildChannel) => {
-    if(channel.type !== "text") return;
+client.on('channelDelete', async (channel: GuildChannel) => {
+    if (channel.type !== "text") return;
     let channelHandler = await guildHandler.getChannelHandler(channel.guild.id);
     await channelHandler.onChannelDelete(channel.id);
 });
 
-client.on('guildDelete', async (guild : Guild) => {
+client.on('roleDelete', async (deletedRole: Role) => {
+    if (!guildHandler.guildRoleHandler.has(deletedRole.guild.id)) await guildHandler.getRoleHandler(deletedRole.guild.id);
+    else await (await guildHandler.getRoleHandler(deletedRole.guild.id)).onRoleDelete(deletedRole);
+});
+
+client.on('guildDelete', async (guild: Guild) => {
     guildHandler.deleteGuild(guild.id).catch(error => console.log(error));
 });
 
@@ -71,7 +76,7 @@ function startBot() {
     client.login(properties.bot.token).catch(error => console.log("Error logging in; " + error));
 }
 
-export {startBot}
+export {startBot, client}
 
 /*
 Code-review: Split the listeners to their respective handlers

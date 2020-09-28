@@ -13,6 +13,7 @@ import LennyWrapper from "./database/wrapper/LennyWrapper";
 import PeePeeWrapper from "./database/wrapper/PeePeeWrapper";
 import QuoteWrapper from "./database/wrapper/QuoteWrapper";
 import RoastWrapper from "./database/wrapper/RoastWrapper";
+import RoleHandler from "./role/RoleHandler";
 
 export default class GuildHandler {
     readonly client: Client;
@@ -23,6 +24,7 @@ export default class GuildHandler {
     guildVotingHandler: Map<string, VotingHandler>;
     guildDefaultRoleHandler: Map<string, DefaultRoleHandler>;
     guildChannelHandler: Map<string, ChannelHandler>;
+    guildRoleHandler: Map<string, RoleHandler>;
 
     static defaultGuild: CentralizedMiddleware;
 
@@ -35,6 +37,7 @@ export default class GuildHandler {
         this.guildVotingHandler = new Map<string, VotingHandler>();
         this.guildDefaultRoleHandler = new Map<string, DefaultRoleHandler>();
         this.guildChannelHandler = new Map<string, ChannelHandler>()
+        this.guildRoleHandler = new Map<string, RoleHandler>();
     }
 
     async getGuildMiddleware(guild: string): Promise<CentralizedMiddleware> {
@@ -62,9 +65,14 @@ export default class GuildHandler {
         return this.guildDefaultRoleHandler.get(guild);
     }
 
-    async getChannelHandler(guild: string) : Promise<ChannelHandler> {
-        if(this.guildChannelHandler.has(guild)) await this.createGuild(guild);
+    async getChannelHandler(guild: string): Promise<ChannelHandler> {
+        if (this.guildChannelHandler.has(guild)) await this.createGuild(guild);
         return this.guildChannelHandler.get(guild);
+    }
+
+    async getRoleHandler(guild: string): Promise<RoleHandler> {
+        if (this.guildRoleHandler.has(guild)) await this.createGuild(guild);
+        return this.guildRoleHandler.get(guild);
     }
 
     private async createGuild(guild: string): Promise<CentralizedMiddleware> {
@@ -79,6 +87,10 @@ export default class GuildHandler {
         this.guildDefaultRoleHandler.set(guild, defaultRoleHandler);
         await defaultRoleHandler.onCacheLoad(this.client.guilds.cache.get(guild));
         //Create the general role and make sure they are smol boi
+
+        let guildRoleHandler = new RoleHandler(currentMiddleware);
+        guildRoleHandler.onStart(guild);
+        this.guildRoleHandler.set(guild, guildRoleHandler);
 
         //Create the channel handler and make sure the channels that are set to bot are not deleted
         let channelHandler = new ChannelHandler(currentMiddleware);
