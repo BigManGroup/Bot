@@ -23,12 +23,11 @@ export default class QuoteVoteHandler {
 
         let deleteQuote = false;
         let valid: number = 0;
-        for (let i = 0; i !== likedUsers.length; i++) if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.guild, likedUsers[i].id)) valid++; //If they are bigman, vote is valid
+        for (let i = 0; i !== likedUsers.length; i++) if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.bigmanRole, likedUsers[i].id)) valid++; //If they are bigman, vote is valid
         for (let i = 0; i !== dislikedUsers.length; i++) {
             if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.bigmanRole, dislikedUsers[i].id)) valid--; //If they are bigman, vote is valid
             if (dislikedUsers[i].id === currentQuote.user) deleteQuote = true; //If the user that submitted presses x, the quote is deleted
         }
-
         if (valid >= 3) await this.approve(message, guild);
         else if (valid <= -3 || deleteQuote) await this.decline(message);
     }
