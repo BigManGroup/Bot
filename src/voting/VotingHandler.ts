@@ -26,9 +26,9 @@ export default class VotingHandler {
         let isReactionPending = this.isReactionPending(messageReaction.message.id);
         if (!isReactionPending.pending) return;
 
-        if (isReactionPending.type === "quote") await this.quoteVoteHandler.handle(messageReaction, user);
-        else if (isReactionPending.type === "roast") await this.roastVoteHandler.handle(messageReaction, user);
-        else if (isReactionPending.type === "insult") await this.insultVoteHandler.handle(messageReaction, user);
+        if (isReactionPending.type === "quote") await this.quoteVoteHandler.handleVote(messageReaction, user);
+        else if (isReactionPending.type === "roast") await this.roastVoteHandler.handleVote(messageReaction, user);
+        else if (isReactionPending.type === "insult") await this.insultVoteHandler.handleVote(messageReaction, user);
     }
 
     private isReactionPending(messageId: string): PendingReaction {
