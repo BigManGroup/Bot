@@ -19,6 +19,6 @@ export default class DefaultRoleHandler{
     }
 
     private async setGeneralRole(member : GuildMember) : Promise <void>{
-        if (member.roles.cache.size === 1 && this.centralizedMiddleware.guildMiddleware.generalRole !== undefined) await member.roles.add(member.guild.roles.cache.get(this.centralizedMiddleware.guildMiddleware.generalRole));
+        if (member.roles.cache.size === 1 && this.centralizedMiddleware.guildMiddleware.generalRole !== null) await member.roles.add(member.guild.roles.cache.get(this.centralizedMiddleware.guildMiddleware.generalRole));
     }
 }
