@@ -28,7 +28,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let quoteText = roast.join(" ");
     //Remove the last 3 things in array (year, user, -)
 
-    if (middleware.guildMiddleware.quoteSubmission === undefined) {
+    if (middleware.guildMiddleware.quoteSubmission === undefined || middleware.guildMiddleware.quoteSubmission === null) {
         message.reply("Admins have not set the submission channel\nFeature is disabled").catch(error => console.log(error));
         return;
     }

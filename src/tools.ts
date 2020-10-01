@@ -2,7 +2,7 @@ import {Guild} from "discord.js";
 
 export default class Tools {
     static isBigMan(guild: Guild, bigmanRole: string, user: string): boolean {
-        if (guild.roles.cache.get(bigmanRole) === undefined) return guild.ownerID === user;
+        if (guild.roles.cache.get(bigmanRole) === undefined || guild.roles.cache.get(bigmanRole) === null) return guild.ownerID === user;
         else return guild.ownerID === user || guild.roles.cache.get(bigmanRole).members.has(user);
     }
 

@@ -42,7 +42,7 @@ export default class MessageInterceptor {
             return true;
         } else if (this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && message.content.toLowerCase().includes("plock")) { //If he is forgiven
             await this.centralizedMiddleware.badManMiddleware.forgiveBadMan(message.author.id);
-            if (this.centralizedMiddleware.guildMiddleware.badmanRole !== undefined) await message.member.roles.remove(this.centralizedMiddleware.guildMiddleware.badmanRole)
+            if (this.centralizedMiddleware.guildMiddleware.badmanRole !== undefined && this.centralizedMiddleware.guildMiddleware.badmanRole !== null) await message.member.roles.remove(this.centralizedMiddleware.guildMiddleware.badmanRole)
             message.reply("good job, don't say the p-word in the future... I'll be watching you").catch(error => console.log(error));
         }
         //If he is already a bad man

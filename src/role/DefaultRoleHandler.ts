@@ -13,7 +13,7 @@ export default class DefaultRoleHandler{
     }
 
     async onCacheLoad (guild : Guild) : Promise <void> {
-        if (this.centralizedMiddleware.guildMiddleware.generalRole === undefined) return;
+        if (this.centralizedMiddleware.guildMiddleware.generalRole === undefined || this.centralizedMiddleware.guildMiddleware.generalRole === null) return;
         let guildMembers = Array.from(guild.members.cache.values());
         for (let i = 0; i !== guildMembers.length; i++) await this.setGeneralRole(guildMembers[i])
     }
