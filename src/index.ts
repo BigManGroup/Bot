@@ -17,7 +17,7 @@ client.on("ready", async () => {
         client.user.setPresence({activity: {name: 'with Big People!'}, status: 'online'}).catch(console.error); //Setting the bot status
         console.log("Bot has started");
     } catch (e) {
-        console.error("Error starting bot: " + e);
+        console.error("Error starting bot: " + e.stack);
     }
 });
 
@@ -28,7 +28,7 @@ client.on("message", async (message) => {
         if (message.author.bot || await messageInterceptor.intercepted(message, false)) return;
         commandHandler.execute(message);
     } catch (e) {
-        console.error("Error on message execution: " + e);
+        console.error("Error on message execution: " + e.stack);
     }
 });
 
@@ -38,7 +38,7 @@ client.on("messageUpdate", async (oldMessage: Message, newMessage: Message) => {
         if (newMessage.author.bot) return;
         await (await guildHandler.getGuildMessageInterceptor(newMessage.guild.id)).intercepted(newMessage, true);
     } catch (e) {
-        console.error("Error on message update: " + e);
+        console.error("Error on message update: " + e.stack);
     }
 });
 
@@ -46,7 +46,7 @@ client.on("messageDelete", async (message: Message | PartialMessage) => {
     try {
         await (await guildHandler.getGuildVotingHandler(message.guild.id)).handleMessageDelete(await guildHandler.getGuildMiddleware(message.guild.id), message.id)
     } catch (e) {
-        console.error("Error on message delete: " + e);
+        console.error("Error on message delete: " + e.stack);
     }
 });
 
@@ -56,7 +56,7 @@ client.on('messageReactionAdd', async (messageReaction: MessageReaction, user: U
         let votingHandler = await guildHandler.getGuildVotingHandler(messageReaction.message.guild.id);
         await votingHandler.handleVote(messageReaction, user);
     } catch (e) {
-        console.error("Error on message reaction add: " + e);
+        console.error("Error on message reaction add: " + e.stack);
     }
 })
 
@@ -65,7 +65,7 @@ client.on('messageReactionRemove', async (messageReaction: MessageReaction, user
         let votingHandler = await guildHandler.getGuildVotingHandler(messageReaction.message.guild.id);
         await votingHandler.handleVote(messageReaction, user);
     } catch (e) {
-        console.error("Error on message reaction remove: " + e);
+        console.error("Error on message reaction remove: " + e.stack);
     }
 });
 
@@ -74,7 +74,7 @@ client.on('guildMemberAdd', async (member : GuildMember) => {
         let defaultRoleHandler = await guildHandler.getDefaultRoleHandler(member.guild.id);
         await defaultRoleHandler.onChannelJoin(member);
     } catch (e) {
-        console.error("Error on guild member add: " + e);
+        console.error("Error on guild member add: " + e.stack);
     }
 });
 
@@ -85,7 +85,7 @@ client.on('guildMemberUpdate', async (oldMember : GuildMember, newMember : Guild
             await defaultRoleHandler.onChannelJoin(newMember);
         }
     } catch (e) {
-        console.error("Error on guild member update: " + e);
+        console.error("Error on guild member update: " + e.stack);
     }
 })
 
@@ -95,7 +95,7 @@ client.on('channelDelete', async (channel: GuildChannel) => {
         let channelHandler = await guildHandler.getChannelHandler(channel.guild.id);
         await channelHandler.onChannelDelete(channel.id);
     } catch (e) {
-        console.error("Error on channel delete: " + e);
+        console.error("Error on channel delete: " + e.stack);
     }
 });
 
@@ -104,7 +104,7 @@ client.on('roleDelete', async (deletedRole: Role) => {
         if (!guildHandler.guildRoleHandler.has(deletedRole.guild.id)) await guildHandler.getRoleHandler(deletedRole.guild.id);
         else await (await guildHandler.getRoleHandler(deletedRole.guild.id)).onRoleDelete(deletedRole);
     } catch (e) {
-        console.error("Error on role delete: " + e);
+        console.error("Error on role delete: " + e.stack);
     }
 });
 
