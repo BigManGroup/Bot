@@ -34,7 +34,7 @@ export default class Guild {
         if (object.badmanRole !== undefined) guild.badmanRole = object.badmanRole;
         if (object.musicChannel !== undefined) guild.musicChannel = object.musicChannel;
 
-        if (object.prefixes !== undefined) guild.prefixes = object.prefixes;
+        if (object.prefixes !== undefined && object.prefixes !== null) guild.prefixes = object.prefixes;
         else guild.prefixes = config.bot.prefixes;
 
         if (object._id !== undefined) guild._id = object._id;
