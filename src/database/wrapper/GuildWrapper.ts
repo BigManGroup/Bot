@@ -45,7 +45,7 @@ export default class GuildWrapper extends BaseWrapper {
     }
 
     async setBadmanRole(role: string) {
-        await this.setVariable("bigmanRole", role);
+        await this.setVariable("badmanRole", role);
     }
 
     async setMusicChannel(channel: string) {
