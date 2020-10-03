@@ -12,6 +12,7 @@ export default class RoleHandler {
     async onRoleDelete(deletedRole: Role): Promise<void> {
         if (deletedRole.id === this.centralizedMiddleware.guildMiddleware.badmanRole) await this.centralizedMiddleware.guildMiddleware.setBadmanRole(undefined);
         else if (deletedRole.id === this.centralizedMiddleware.guildMiddleware.generalRole) await this.centralizedMiddleware.guildMiddleware.setGeneralRole(undefined);
+        else if (deletedRole.id === this.centralizedMiddleware.guildMiddleware.bigmanRole) await this.centralizedMiddleware.guildMiddleware.setBigmanRole(undefined);
     }
 
     onStart(guild: string): void {
