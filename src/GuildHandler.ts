@@ -89,7 +89,7 @@ export default class GuildHandler {
         //Create the general role and make sure they are smol boi
 
         let guildRoleHandler = new RoleHandler(currentMiddleware);
-        guildRoleHandler.onStart(guild);
+        await guildRoleHandler.onStart(guild);
         this.guildRoleHandler.set(guild, guildRoleHandler);
 
         //Create the channel handler and make sure the channels that are set to bot are not deleted
