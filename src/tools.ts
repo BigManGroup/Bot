@@ -6,11 +6,16 @@ export default class Tools {
         else return guild.ownerID === user || guild.roles.cache.get(bigmanRole).members.has(user);
     }
 
+    static amountOfBigMan(guild: Guild, bigmanRole: string): number {
+        if (!bigmanRole || guild.roles.cache.get(bigmanRole) === undefined || guild.roles.cache.get(bigmanRole) === null) return 1; //Just the owner
+        else return guild.roles.cache.get(bigmanRole).members.size;
+    }
+
     static getRandomNumber(minimum: number, maximum: number): number {
         return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     }
 
-    static titleCase(string : string) {
+    static titleCase(string: string) {
         return string.charAt(0).toUpperCase() + string.substr(1).toLowerCase();
     }
 }
