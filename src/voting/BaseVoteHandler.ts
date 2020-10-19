@@ -21,17 +21,30 @@ export default abstract class {
         let guild = message.guild;
         let postAuthor = this.getPostAuthor(message);
 
-        let valid: number = 0;
-        let authorDecline: boolean = false;
+        let valid: number = 0; //the number of valid votes
+        let totalValidVotes: number = 0; //the raw number of valid votes
+        let authorDecline: boolean = false; //If the author declined the vote
+        let amountOfBigMan: number = Tools.amountOfBigMan(guild, this.centralizedMiddleware.guildMiddleware.bigmanRole); //The amount of bigman
+        let amountOfVotesNeeded = Math.round(amountOfBigMan / 3); //Amount of voted needed for the vote to be added or removed
 
-        for (let i = 0; i !== likedUsers.length; i++) if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.bigmanRole, likedUsers[i].id)) valid++; //If they are bigman, vote is valid
+        for (let i = 0; i !== likedUsers.length; i++) {
+            if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.bigmanRole, likedUsers[i].id)) {
+                valid++; //If they are bigman, vote is valid
+                totalValidVotes++;
+            }
+        }
+
         for (let i = 0; i !== dislikedUsers.length; i++) {
-            if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.bigmanRole, dislikedUsers[i].id)) valid--; //If they are bigman, vote is valid
+            if (Tools.isBigMan(guild, this.centralizedMiddleware.guildMiddleware.bigmanRole, dislikedUsers[i].id)) {
+                valid--; //If they are bigman, vote is valid
+                totalValidVotes++;
+            }
             if (dislikedUsers[i].id === postAuthor) authorDecline = true; //If the user that submitted presses x, the quote is deleted
         }
 
-        if (valid >= 3) await this.approve(message, guild);
-        else if (valid <= -3 || authorDecline) await this.decline(message);
+        let validSign = Math.sign(valid);
+        if ((valid >= amountOfVotesNeeded) || (totalValidVotes === amountOfBigMan && validSign === 1)) await this.approve(message, guild);
+        else if ((valid <= -Math.abs(amountOfVotesNeeded) || authorDecline) || (totalValidVotes === amountOfBigMan && (validSign === -1 || validSign === 0))) await this.decline(message);
     }
 
     protected abstract getPostAuthor(message: Message): string;
