@@ -3,6 +3,7 @@ import {MessageReaction, User} from "discord.js";
 import QuoteVoteHandler from "./QuoteVoteHandler";
 import RoastVoteHandler from "./RoastVoteHandler";
 import InsultVoteHandler from "./InsultVoteHandler";
+import {CronJob} from "cron";
 
 export default class VotingHandler {
     static approveReaction: string = "✅";
@@ -20,6 +21,7 @@ export default class VotingHandler {
         this.quoteVoteHandler = new QuoteVoteHandler(centralizedMiddleware);
         this.roastVoteHandler = new RoastVoteHandler(centralizedMiddleware);
         this.insultVoteHandler = new InsultVoteHandler(centralizedMiddleware);
+        new CronJob('0 0 * * *', this.submissionTimeout).start();
     }
 
     async handleVote(messageReaction: MessageReaction, user: User): Promise<void> {
@@ -43,6 +45,27 @@ export default class VotingHandler {
         else if (centralizedMiddleware.quoteMiddleware.isQuotePending(message)) await centralizedMiddleware.quoteMiddleware.declineQuote(message);
         else if (centralizedMiddleware.roastMiddleware.isRoastPending(message)) await centralizedMiddleware.roastMiddleware.declineRoast(message);
         else if (centralizedMiddleware.insultMiddleware.isInsultPending(message)) await centralizedMiddleware.insultMiddleware.declineInsult(message);
+    }
+
+    static isDateOneWeekOld(currentDate: Date): boolean {
+        let oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+        return currentDate.getTime() - oneWeekAgo.getTime() <= 0;
+    }
+
+    submissionTimeout() {
+        console.info("Running Submission Timeout");
+        this.centralizedMiddleware.quoteMiddleware.quoteCache.pendingQuotes.forEach(async quote => {
+            if (VotingHandler.isDateOneWeekOld(quote.submittedTimestamp)) await this.centralizedMiddleware.quoteMiddleware.declineQuote(quote.message);
+        });
+
+        this.centralizedMiddleware.roastMiddleware.roastCache.pendingRoasts.forEach(async roast => {
+            if (VotingHandler.isDateOneWeekOld(roast.submittedTimestamp)) await this.centralizedMiddleware.roastMiddleware.declineRoast(roast.message);
+        });
+
+        this.centralizedMiddleware.insultMiddleware.insultCache.pendingInsult.forEach(async insult => {
+            if (VotingHandler.isDateOneWeekOld(insult.submittedTimestamp)) await this.centralizedMiddleware.insultMiddleware.declineInsult(insult.message);
+        });
     }
 }
 

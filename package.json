@@ -5,11 +5,13 @@
   "main": "out/index.js",
   "author": "Jamie Stivala",
   "dependencies": {
+    "@types/cron": "^1.7.2",
     "@types/mongodb": "^3.5.27",
     "@types/node": "^14.11.2",
     "@types/sharp": "^0.25.1",
     "@types/ws": "^7.2.6",
     "axios": "^0.19.2",
+    "cron": "^1.8.2",
     "discord.js": "^12.3.1",
     "mongodb": "^3.6.2",
     "sharp": "^0.25.2",
