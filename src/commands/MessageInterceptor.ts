@@ -1,9 +1,11 @@
 import CentralizedMiddleware from "../middleware/CentralizedMiddleware";
 import {Message} from "discord.js";
 import * as PWords from '../../resources/pwords.json'
+import WhitelistedWordsCache from "../cache/WhitelistedWordsCache";
 
 export default class MessageInterceptor {
     readonly centralizedMiddleware: CentralizedMiddleware;
+    static whitelistedWords : WhitelistedWordsCache = new WhitelistedWordsCache();
 
     constructor(centralizedMiddleware: CentralizedMiddleware) {
         this.centralizedMiddleware = centralizedMiddleware;
@@ -13,8 +15,10 @@ export default class MessageInterceptor {
         for (let i = 0; i !== PWords.list.length; i++) {
             let currentPWord = PWords.list[i];
             let splitMessage = message.content.toLowerCase().split(" ");
-            for (let word in splitMessage) if(word === currentPWord) return new UsedPWord(true, currentPWord);
-
+            for (let j = 0; j !== splitMessage.length ; j++) {
+                let word = splitMessage[j];
+                if(word.includes(currentPWord) && !MessageInterceptor.whitelistedWords.isWordException(word)) return new UsedPWord(true, currentPWord);
+            }
         }
 
         return new UsedPWord(false, undefined);
