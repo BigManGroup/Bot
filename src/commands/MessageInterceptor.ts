@@ -12,9 +12,9 @@ export default class MessageInterceptor {
     usedPWord(message: Message): UsedPWord {
         for (let i = 0; i !== PWords.list.length; i++) {
             let currentPWord = PWords.list[i];
-            if (message.content.toLowerCase().includes(currentPWord)) {
-                return new UsedPWord(true, currentPWord);
-            }
+            let splitMessage = message.content.toLowerCase().split(" ");
+            for (let word in splitMessage) if(word === currentPWord) return new UsedPWord(true, currentPWord);
+
         }
 
         return new UsedPWord(false, undefined);
