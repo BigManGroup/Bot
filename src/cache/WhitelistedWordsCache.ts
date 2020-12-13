@@ -16,7 +16,7 @@ export default class WhitelistedWordsCache{
 
     private extractWords(words : string[]){
         for (let i = 0; i !== words.length ; i++) {
-            let currentWord = words[i];
+            let currentWord = words[i].toLowerCase();
             for (let j = 0; j !== badWords.list.length ; j++) {
                 if(currentWord.includes(badWords.list[j])) this.addCache(currentWord);
             }
