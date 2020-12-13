@@ -2,6 +2,9 @@
   "name": "bmg-bot",
   "version": "1.0.0",
   "description": "The Big Man Bot for Big Men",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
   "main": "out/index.js",
   "author": "Jamie Stivala",
   "dependencies": {
