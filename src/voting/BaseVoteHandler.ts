@@ -49,7 +49,7 @@ export default abstract class {
 
     protected abstract getPostAuthor(message: Message): string;
 
-    protected abstract async approve(message: Message, guild: Guild): Promise<void>;
+    protected abstract approve(message: Message, guild: Guild): Promise<void>;
 
-    protected abstract async decline(message: Message): Promise<void>;
+    protected abstract decline(message: Message): Promise<void>;
 }

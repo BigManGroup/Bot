@@ -6,5 +6,5 @@ export default abstract class BaseMiddleware {
         this.guild = guild;
     }
 
-    abstract async buildCache(): Promise<void>;
+    abstract buildCache(): Promise<void>;
 }
