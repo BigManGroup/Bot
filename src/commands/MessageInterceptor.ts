@@ -12,12 +12,11 @@ export default class MessageInterceptor {
     }
 
     usedPWord(message: Message): UsedPWord {
+        let joinedMessage = message.content.toLowerCase().replace(/ /g, ''); //Separate the messages in spaces
         for (let i = 0; i !== PWords.list.length; i++) {
             let currentPWord = PWords.list[i];
-            let splitMessage = message.content.toLowerCase().split(" ");
-            for (let j = 0; j !== splitMessage.length ; j++) {
-                let word = splitMessage[j];
-                if(word.includes(currentPWord) && !MessageInterceptor.whitelistedWords.isWordException(word)) return new UsedPWord(true, currentPWord);
+            if (joinedMessage.includes(currentPWord) && !MessageInterceptor.whitelistedWords.isWordException(joinedMessage)) {
+                return new UsedPWord(true, currentPWord);
             }
         }
 

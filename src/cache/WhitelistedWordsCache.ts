@@ -2,10 +2,10 @@ import {readFileSync} from "fs";
 import * as badWords from '../../resources/pwords.json';
 
 export default class WhitelistedWordsCache{
-    private wordList : Map<string, boolean>;
+    private readonly wordList: string[];
 
     constructor() {
-        this.wordList = new Map<string, boolean>();
+        this.wordList = [];
         this.buildCache();
     }
 
@@ -23,15 +23,18 @@ export default class WhitelistedWordsCache{
         }
     }
 
-    private addCache(word : string){
-        this.wordList.set(word.trimEnd(), true);
+    private static readFile(fileName: string): string[] {
+        return readFileSync(__dirname + `/../../resources/words/${fileName}`, {encoding: 'utf-8'}).split("\n");
     }
 
-    private static readFile(fileName : string) : string[]{
-        return  readFileSync(__dirname + `/../../resources/words/${fileName}`, {encoding: 'utf-8'}).split("\n");
+    isWordException(word: string): boolean {
+        for (let i = 0; i !== this.wordList.length; i++) {
+            if (word.includes(this.wordList[i])) return true;
+        }
+        return false;
     }
 
-    isWordException(word : string) : boolean{
-        return this.wordList.get(word) || this.wordList.get(word) !== undefined;
+    private addCache(word: string) {
+        this.wordList.push(word.trimEnd());
     }
 }
