@@ -9,9 +9,9 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
         let taggedUser = message.mentions.users.first();
 
         if (taggedUser.id === taggedUser.client.user.id) {
-            message.reply({content: "nice try faggot"}).catch(error => console.log(error));
+            message.reply("nice try faggot").catch(error => console.log(error));
         }else {
-            message.channel.send({content: `${taggedUser}, ${middleware.roastMiddleware.randomRoast}`}).catch(error => console.log(error));
+            message.channel.send(`${taggedUser}, ${middleware.roastMiddleware.randomRoast}`).catch(error => console.log(error));
         }
     }
 }

@@ -16,14 +16,14 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         outputArray.push(++prefix + ". Tools")
         outputArray.push(++prefix + ". Submissions")
 
-        message.channel.send({content: "```" + outputArray.join("\n") + "```"}).then(() => {
+        message.channel.send("```" + outputArray.join("\n") + "```").then(() => {
             message.channel.awaitMessages({filter: m => message.author.id === m.author.id, max: 1, time: 15000})
                 .then(collected => {
                     let message = collected.first();
 
                     let category = (Number(message.content));
                     if(isNaN(category) || category > outputArray.length || category <= 0) {
-                        message.channel.send({content: "That's an invalid number " + middleware.insultMiddleware.randomInsult}).catch(error => console.log(error));
+                        message.channel.send("That's an invalid number " + middleware.insultMiddleware.randomInsult).catch(error => console.log(error));
                         return;
                     }
 
@@ -36,9 +36,9 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     }else if(formattedMessage.parameters[0].toLowerCase() === "admin" && Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, message.author.id)){
         message.channel.send({embeds: [buildEmbed(formattedMessage.parameters[0])]}).catch(error => console.log(error));
     }else if(formattedMessage.parameters[0].toLowerCase() === "admin" && !Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, message.author.id)){
-        message.reply({content: `nice try, unprivileged ${message.member.roles.highest.name}`}).catch(error => console.log(error));
+        message.reply(`nice try, unprivileged ${message.member.roles.highest.name}`).catch(error => console.log(error));
     }else {
-        message.channel.send({content: `How the fuck did you end up in this part of the code ${middleware.insultMiddleware.randomInsult}`}).catch(error => console.log(error));
+        message.channel.send(`How the fuck did you end up in this part of the code ${middleware.insultMiddleware.randomInsult}`).catch(error => console.log(error));
     }
 }
 

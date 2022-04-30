@@ -12,7 +12,7 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
         user = message.mentions.users.first();
 
         if (user.id === message.client.user.id) {
-            message.reply({content: `ask ur mum`}).catch(error => console.log(error));
+            message.reply(`ask ur mum`).catch(error => console.log(error));
             return;
         }
         changed = true;
@@ -26,8 +26,8 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
     }
     printPeePee += 'D';
 
-    if (changed) message.channel.send({content: `here's ${user} peepee\n${printPeePee}`}).catch(error => console.log(error));
-    else message.channel.send({content: `here's your peepee\n${printPeePee}`}).catch(error => console.log(error));
+    if (changed) message.channel.send(`here's ${user} peepee\n${printPeePee}`).catch(error => console.log(error));
+    else message.channel.send(`here's your peepee\n${printPeePee}`).catch(error => console.log(error));
 }
 
 

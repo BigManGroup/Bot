@@ -31,7 +31,7 @@ export default class MessageInterceptor {
         let hasUsedPWord = this.usedPWord(message);
 
         if (hasUsedPWord.intercepted && edited) {
-            message.reply({content: "nice try lmao"})
+            message.reply("nice try lmao")
                 .then(sentMessage => setTimeout(() => sentMessage.delete(), 2000))
                 .catch(error => console.log(error));
         }
@@ -39,14 +39,14 @@ export default class MessageInterceptor {
         //If he is already a bad man
         if (this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && !message.content.toLowerCase().includes("plock")) {
             message.delete()
-                .then(() => message.reply({content: `you still didn't correct yourself, ${this.centralizedMiddleware.insultMiddleware.randomInsult}`}))
+                .then(() => message.reply(`you still didn't correct yourself, ${this.centralizedMiddleware.insultMiddleware.randomInsult}`))
                 .then(sentMessage => setTimeout(() => sentMessage.delete(), 10000))
                 .catch((error) => console.log(error));
             return true;
         } else if (this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && message.content.toLowerCase().includes("plock")) { //If he is forgiven
             await this.centralizedMiddleware.badManMiddleware.forgiveBadMan(message.author.id);
             if (this.centralizedMiddleware.guildMiddleware.badmanRole !== undefined && this.centralizedMiddleware.guildMiddleware.badmanRole !== null) await message.member.roles.remove(this.centralizedMiddleware.guildMiddleware.badmanRole)
-            message.reply({content: "good job, don't say the p-word in the future... I'll be watching you"}).catch(error => console.log(error));
+            message.reply("good job, don't say the p-word in the future... I'll be watching you").catch(error => console.log(error));
         }
         //If he is already a bad man
 
@@ -56,7 +56,7 @@ export default class MessageInterceptor {
             await this.centralizedMiddleware.badManMiddleware.addBadMan(message.author.id, message.guild.id);
 
             message.delete()
-                .then(() => message.reply({content: `It's not ${hasUsedPWord.usedWord}, it's plock, ${this.centralizedMiddleware.insultMiddleware.randomInsult}`}))
+                .then(() => message.reply(`It's not ${hasUsedPWord.usedWord}, it's plock, ${this.centralizedMiddleware.insultMiddleware.randomInsult}`))
                 .catch(error => console.log(error));
 
             return true;
