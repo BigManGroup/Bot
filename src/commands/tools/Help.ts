@@ -17,7 +17,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         outputArray.push(++prefix + ". Submissions")
 
         message.channel.send("```" + outputArray.join("\n") + "```").then(() => {
-            message.channel.awaitMessages(m => message.author.id === m.author.id, {max: 1, time: 15000})
+            message.channel.awaitMessages({filter: m => message.author.id === m.author.id, max: 1, time: 15000})
                 .then(collected => {
                     let message = collected.first();
 
@@ -28,13 +28,13 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
                     }
 
                     let categoryFormatted = outputArray[--category].substring(3);
-                    message.channel.send(buildEmbed(categoryFormatted)).catch(error => console.log(error))
+                    message.channel.send({embeds: [buildEmbed(categoryFormatted)]}).catch(error => console.log(error))
                 });
         });
     }else if(formattedMessage.parameters[0].toLowerCase() === "general" || formattedMessage.parameters[0].toLowerCase() === "game" || formattedMessage.parameters[0].toLowerCase() === "tools" || formattedMessage.parameters[0].toLowerCase() === "submissions"){
-        message.channel.send(buildEmbed(formattedMessage.parameters[0])).catch(error => console.log(error));
+        message.channel.send({embeds: [buildEmbed(formattedMessage.parameters[0])]}).catch(error => console.log(error));
     }else if(formattedMessage.parameters[0].toLowerCase() === "admin" && Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, message.author.id)){
-        message.channel.send(buildEmbed(formattedMessage.parameters[0])).catch(error => console.log(error));
+        message.channel.send({embeds: [buildEmbed(formattedMessage.parameters[0])]}).catch(error => console.log(error));
     }else if(formattedMessage.parameters[0].toLowerCase() === "admin" && !Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, message.author.id)){
         message.reply(`nice try, unprivileged ${message.member.roles.highest.name}`).catch(error => console.log(error));
     }else {
