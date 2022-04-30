@@ -4,8 +4,8 @@ import CentralizedMiddleware from "../../middleware/CentralizedMiddleware";
 
 function main(message : Message, formattedMessage : FormattedMessage, middleware : CentralizedMiddleware) : void{
     let timestamp = new Date();
-    message.channel.send("Pong Motherfucker").then(message => {
-        message.edit(`Pong Motherfucker *(${(new Date().getTime() - timestamp.getTime())}ms)*`).catch(error => console.log(error));
+    message.channel.send({content: "Pong Motherfucker"}).then(message => {
+        message.edit({content: `Pong Motherfucker *(${(new Date().getTime() - timestamp.getTime())}ms)*`}).catch(error => console.log(error));
     });
 }
 

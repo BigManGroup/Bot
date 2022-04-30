@@ -5,7 +5,7 @@ import Tools from "../../../tools";
 
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
     if (!Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, message.author.id)) {
-        message.reply(`nice try, unprivileged ${message.member.roles.highest.name}`).catch(error => console.log(error));
+        message.reply({content: `nice try, unprivileged ${message.member.roles.highest.name}`}).catch(error => console.log(error));
         return;
     }
 
@@ -13,12 +13,12 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let role = formattedMessage.parameters[0];
 
     if (!message.guild.roles.cache.has(role)) {
-        message.reply(`you entered an invalid role, ${middleware.insultMiddleware.randomInsult}`).catch(error => console.log(error));
+        message.reply({content: `you entered an invalid role, ${middleware.insultMiddleware.randomInsult}`}).catch(error => console.log(error));
         return;
     }
     //Check parameters
 
-    middleware.guildMiddleware.setBigmanRole(role).then(() => message.reply("BigMan role updated")).catch(error => console.log(error));
+    middleware.guildMiddleware.setBigmanRole(role).then(() => message.reply({content: "BigMan role updated"})).catch(error => console.log(error));
 }
 
 export {main};

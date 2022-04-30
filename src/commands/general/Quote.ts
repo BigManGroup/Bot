@@ -22,9 +22,9 @@ async function main(message: Message, formattedMessage: FormattedMessage, middle
         let taggedUser = message.mentions.users.first();
 
         if (taggedUser.id === taggedUser.client.user.id) {
-            message.reply("nice try faggot").catch(error => console.log(error));
+            message.reply({content: "nice try faggot"}).catch(error => console.log(error));
         } else {
-            message.channel.send(`${taggedUser}, ${formattedQuote}`).catch(error => console.log(error));
+            message.channel.send({content: `${taggedUser}, ${formattedQuote}`}).catch(error => console.log(error));
         }
     }
 }

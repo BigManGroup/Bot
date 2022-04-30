@@ -9,14 +9,14 @@ import Insult from "../../database/model/Insult";
 function main(message: Message, formattedMessage: FormattedMessage, middleware: CentralizedMiddleware): void {
     let insultText = formattedMessage.parameters.join(" ");
     if (!insultText.replace(/\s/g, '').length) {
-        message.reply(`You have to actually enter the insult, ${middleware.insultMiddleware.randomInsult}`).catch(error => console.log(error));
+        message.reply({content: `You have to actually enter the insult, ${middleware.insultMiddleware.randomInsult}`}).catch(error => console.log(error));
         return;
     }
 
     let isBigMan = Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, message.author.id);
 
     if (isBigMan) {
-        message.reply("your insult was automatically submitted because you are **BIGMAN**").then(async (sentMessage) => {
+        message.reply({content: "your insult was automatically submitted because you are **BIGMAN**"}).then(async (sentMessage) => {
             let submittedInsult = new Insult(insultText, message.guild.id, undefined, message.author.id, new Date(), true, false);
             submittedInsult.updatedTimestamp = new Date();
             submittedInsult._id = new ObjectId();
@@ -26,7 +26,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             await message.delete(); //Deletes the user message
         });
     } else if (!isBigMan && middleware.guildMiddleware.insultSubmission !== undefined && middleware.guildMiddleware.insultSubmission !== null) {
-        message.reply("your insult was submitted. bigman council will review it and accept/decline it").then(async (sentMessage) => {  //Sends the message that the submission has been received
+        message.reply({content: "your insult was submitted. bigman council will review it and accept/decline it"}).then(async (sentMessage) => {  //Sends the message that the submission has been received
             let embed = new MessageEmbed()
                 .setAuthor({name: `${message.member.displayName}`, iconURL: message.member.user.avatarURL()})
                 .setTitle(insultText)
@@ -44,7 +44,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             await message.delete();
         });
     } else if (!isBigMan && (middleware.guildMiddleware.insultSubmission === undefined || middleware.guildMiddleware.insultSubmission === null)) {
-        message.reply("Admins have not set the submission channel\nFeature is disabled").catch(error => console.log(error));
+        message.reply({content: "Admins have not set the submission channel\nFeature is disabled"}).catch(error => console.log(error));
     }
 }
 

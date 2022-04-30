@@ -12,7 +12,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
         user = message.mentions.users.first();
 
         if (user.id === message.client.user.id) {
-            message.reply(`ask ur dad`).catch(error => console.log(error));
+            message.reply({content: `ask ur dad`}).catch(error => console.log(error));
             return;
         }
         changed = true;
@@ -20,8 +20,8 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
 
     let big = middleware.bigMiddleware.getBig(user.id, message.guild.id, Tools.isBigMan(message.guild, middleware.guildMiddleware.bigmanRole, user.id));
 
-    if (changed) message.channel.send(`here's ${user} big amount\n**${big.amount}%**`).catch(error => console.log(error));
-    else message.channel.send(`here's your big amount\n**${big.amount}%**`).catch(error => console.log(error));
+    if (changed) message.channel.send({content: `here's ${user} big amount\n**${big.amount}%**`}).catch(error => console.log(error));
+    else message.channel.send({content: `here's your big amount\n**${big.amount}%**`}).catch(error => console.log(error));
 }
 
 

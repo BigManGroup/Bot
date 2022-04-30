@@ -11,7 +11,7 @@ async function main(message: Message, formattedMessage: FormattedMessage, middle
 
     //Make sure that the quote is in the correct template
     if (message.mentions.users.size === 0 || isNaN(Number(roast[roast.length - 2] || roast[roast.length - 3] !== '-'))) {
-        message.reply(`Template: 'quote-text' - 'year' 'author'`)
+        message.reply({content: `Template: 'quote-text' - 'year' 'author'`})
             .then(messageReply => setTimeout(() => messageReply.delete(), 10000))
             .then(() => message.delete())
             .catch(error => console.log(error));
@@ -29,7 +29,7 @@ async function main(message: Message, formattedMessage: FormattedMessage, middle
     //Remove the last 3 things in array (year, user, -)
 
     if (middleware.guildMiddleware.quoteSubmission === undefined || middleware.guildMiddleware.quoteSubmission === null) {
-        message.reply("Admins have not set the submission channel\nFeature is disabled").catch(error => console.log(error));
+        message.reply({content: "Admins have not set the submission channel\nFeature is disabled"}).catch(error => console.log(error));
         return;
     }
 
@@ -45,7 +45,7 @@ async function main(message: Message, formattedMessage: FormattedMessage, middle
         .setFooter({text: `Submitted by ${submitter.displayName}`}); //`Submitted by ${message.guild.member(message.author.id).displayName}`
 
 
-    message.reply("your quote was submitted. bigman council will review it and accept/decline it") //Sends the message that the submission has been received
+    message.reply({content: "your quote was submitted. bigman council will review it and accept/decline it"}) //Sends the message that the submission has been received
         .then(async (sentMessage) => {
             let submissionMessage = await (<TextChannel>message.guild.channels.resolve(middleware.guildMiddleware.quoteSubmission)).send({embeds: [embed]}) //Sends the message to submissions channel
             await submissionMessage.react(VotingHandler.approveReaction);
