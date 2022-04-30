@@ -2,6 +2,8 @@ import BaseMiddleware from "./BaseMiddleware";
 import QuoteCache from "../cache/QuoteCache";
 import QuoteWrapper from "../database/wrapper/QuoteWrapper";
 import Quote from "../database/model/Quote";
+import GuildHandler from "../GuildHandler";
+import Tools from "../tools";
 
 export default class QuoteMiddleware extends BaseMiddleware {
     quoteCache: QuoteCache;
@@ -74,6 +76,16 @@ export default class QuoteMiddleware extends BaseMiddleware {
         //Update Cache
 
         await this.quoteWrapper.declineQuote(declinedQuote); //Update database
+    }
+
+    get randomQuote(): Quote {
+        let quotes = this.quoteCache.approvedQuotes;
+        if (quotes.size > 0) {
+            //return quotes.[Tools.getRandomNumber(0, roasts.length - 1)].roast;
+            let randomQuote = Array.from(quotes.values());
+            return randomQuote[Tools.getRandomNumber(0, quotes.size - 1)];
+        }
+        return GuildHandler.defaultGuild.quoteMiddleware.randomQuote;
     }
 
     isQuotePending(message: string): boolean {
