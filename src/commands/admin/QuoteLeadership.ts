@@ -20,11 +20,11 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
     let counter = 0;
     sortedLeaderboard.forEach((value, key) => {
         if (counter === 24) return;
-        embed.addField(message.guild.members.cache.get(key).displayName, String(value));
+        embed.addField(message.guild.members.cache.get(key).displayName, value);
         counter++;
     })
 
-    message.channel.send({embeds: [embed]}).catch(error => console.log(error));
+    message.channel.send(embed).catch(error => console.log(error));
 }
 
 export {main}

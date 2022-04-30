@@ -9,7 +9,7 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
             .setTitle(`${message.author.username}'s avatar`)
             .setImage(message.author.avatarURL());
 
-        message.channel.send({embeds: [embed]}).catch(error => console.log(error));
+        message.channel.send(embed).catch(error => console.log(error));
         return;
     }
 
@@ -19,7 +19,7 @@ function main(message : Message, formattedMessage : FormattedMessage, middleware
         .setTitle(`${taggedUser.username}'s avatar`)
         .setImage(taggedUser.avatarURL());
 
-    message.channel.send({embeds: [embed]}).catch(error => console.log(error));
+    message.channel.send(embed).catch(error => console.log(error));
 }
 
 export {main};

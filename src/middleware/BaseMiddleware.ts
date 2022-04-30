@@ -1,6 +1,6 @@
 export default abstract class BaseMiddleware {
     readonly guild: string;
-    cacheBuilt : boolean = false;
+    abstract cacheBuilt: boolean = false;
 
     protected constructor(guild: string) {
         this.guild = guild;

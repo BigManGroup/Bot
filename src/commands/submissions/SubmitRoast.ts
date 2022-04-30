@@ -22,17 +22,13 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             submittedRoast._id = new ObjectId();
             await middleware.roastMiddleware.addRoast(submittedRoast);
 
-            await setTimeout(() => sentMessage.delete(), 10000) //Deletes the message to avoid bot spam
+            await sentMessage.delete({timeout: 10000}) //Deletes the message to avoid bot spam
             await message.delete(); //Deletes the user message
         });
     } else if (!isBigMan && middleware.guildMiddleware.quoteSubmission !== undefined && middleware.guildMiddleware.quoteSubmission !== null) {
         message.reply("your roast was submitted. bigman council will review it and accept/decline it").then(async (sentMessage) => {  //Sends the message that the submission has been received
-            let embed = new MessageEmbed()
-                .setAuthor({name: `${message.member.displayName}`, iconURL: message.member.user.avatarURL()})
-                .setTitle(roastText)
-                .setDescription("awaiting approval by bigman");
-
-            let submissionMessage = await (<TextChannel>message.guild.channels.resolve(middleware.guildMiddleware.roastSubmission)).send({embeds: [embed]}) //Sends the message to submissions channel
+            let embed = new MessageEmbed().setAuthor(`${message.member.displayName}`, message.member.user.avatarURL()).setTitle(roastText).setDescription("awaiting approval by bigman");
+            let submissionMessage = await (<TextChannel>message.guild.channels.resolve(middleware.guildMiddleware.roastSubmission)).send(embed) //Sends the message to submissions channel
             await submissionMessage.react(VotingHandler.approveReaction);
             await submissionMessage.react(VotingHandler.declineReaction);
 
@@ -40,7 +36,7 @@ function main(message: Message, formattedMessage: FormattedMessage, middleware: 
             roast._id = new ObjectId();
             await middleware.roastMiddleware.addRoast(roast)
 
-            await setTimeout(() => sentMessage.delete(), 10000) //Remove the message to avoid bot-spam
+            await sentMessage.delete({timeout: 10000}) //Remove the message to avoid bot-spam
             await message.delete();
         });
     } else if (!isBigMan && (middleware.guildMiddleware.insultSubmission === undefined || middleware.guildMiddleware.insultSubmission === null)) {

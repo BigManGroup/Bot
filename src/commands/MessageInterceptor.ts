@@ -32,7 +32,7 @@ export default class MessageInterceptor {
 
         if (hasUsedPWord.intercepted && edited) {
             message.reply("nice try lmao")
-                .then(sentMessage => setTimeout(() => sentMessage.delete(), 2000))
+                .then(sentMessage => sentMessage.delete({timeout: 2000}))
                 .catch(error => console.log(error));
         }
 
@@ -40,7 +40,7 @@ export default class MessageInterceptor {
         if (this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && !message.content.toLowerCase().includes("plock")) {
             message.delete()
                 .then(() => message.reply(`you still didn't correct yourself, ${this.centralizedMiddleware.insultMiddleware.randomInsult}`))
-                .then(sentMessage => setTimeout(() => sentMessage.delete(), 10000))
+                .then(sentMessage => sentMessage.delete({timeout: 10000}))
                 .catch((error) => console.log(error));
             return true;
         } else if (this.centralizedMiddleware.badManMiddleware.isBadMan(message.author.id) && message.content.toLowerCase().includes("plock")) { //If he is forgiven
