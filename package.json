@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The Big Man Bot for Big Men",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "node out/src/index.js"
   },
   "main": "out/index.js",
   "author": "Jamie Stivala",
