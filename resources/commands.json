@@ -49,14 +49,6 @@
             "prefix": true
         },
         {
-            "filename": "Quote",
-            "command": "get quote",
-            "description": "gets a random quote",
-            "folder": "general",
-            "hidden": false,
-            "prefix": true
-        },
-        {
             "filename": "ChangePeePee",
             "command": "change peepee",
             "description": "changes the peepee size of you or the person you tagged",
