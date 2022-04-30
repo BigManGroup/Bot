@@ -11,12 +11,10 @@ export default abstract class {
     }
 
     async handleVote(messageReaction: MessageReaction, user: User): Promise<void> {
-        let message: Message;
-        if (messageReaction.message.partial) message = await messageReaction.message.fetch(); //if the message is not in cache load it
-        else message = messageReaction.message; //if the message is in cache, just load the one in cache
+        let message: Message = await messageReaction.message.fetch();
 
-        let likedUsers = (await message.reactions.resolve(VotingHandler.approveReaction).users.fetch()).array(); //Get the amount of liked users
-        let dislikedUsers = (await message.reactions.resolve(VotingHandler.declineReaction).users.fetch()).array(); //Get the amount of disliked users
+        let likedUsers = Array.from((await message.reactions.resolve(VotingHandler.approveReaction).users.fetch()).values()); //Get the amount of liked users
+        let dislikedUsers = Array.from((await message.reactions.resolve(VotingHandler.declineReaction).users.fetch()).values()); //Get the amount of disliked users
 
         let guild = message.guild;
         let postAuthor = this.getPostAuthor(message);

@@ -11,7 +11,7 @@ export default class GuildWrapper extends BaseWrapper {
         let currentGuild = await this.collection.findOne({"guild": this.guild});
         if (currentGuild === null) {
             currentGuild = new Guild(this.guild);
-            await this.createGuild(currentGuild);
+            await this.createGuild(currentGuild as Guild);
         }
         return Guild.modelBuilder(currentGuild);
     }
@@ -62,6 +62,6 @@ export default class GuildWrapper extends BaseWrapper {
 
 
     static async getAllGuilds(): Promise<string[]> {
-        return await Saving.clientPool.db().collection("guild").find({}, {projection: {guild: 1, _id: 0}}).toArray();
+        return (await Saving.clientPool.db().collection("guild").find({}, {projection: {guild: 1, _id: 0}}).toArray()) as unknown as string[];
     }
 }

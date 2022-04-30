@@ -7,18 +7,19 @@
   },
   "main": "out/index.js",
   "author": "Jamie Stivala",
-  "dependencies": {
+  "devDependencies": {
     "@types/cron": "^1.7.2",
-    "@types/mongodb": "^3.6.3",
-    "@types/node": "^14.14.19",
-    "@types/sharp": "^0.26.1",
-    "@types/ws": "^7.4.0",
-    "axios": "^0.21.1",
-    "cron": "^1.8.2",
-    "discord.js": "^12.5.1",
-    "mongodb": "^3.6.3",
-    "sharp": "^0.27.0",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.3"
+    "@types/node": "^17.0.30",
+    "@types/sharp": "^0.30.2",
+    "@types/ws": "^8.5.3",
+    "typescript": "^4.6.4",
+    "ts-node": "^10.7.0"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cron": "^1.8.3",
+    "discord.js": "^13.6.0",
+    "mongodb": "^4.5.0",
+    "sharp": "^0.30.4"
   }
 }

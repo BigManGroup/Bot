@@ -1,10 +1,19 @@
 import * as Discord from 'discord.js';
-import {Guild, GuildChannel, GuildMember, Message, MessageReaction, PartialMessage, Role, User} from 'discord.js';
+import {
+    DMChannel,
+    Guild,
+    GuildMember,
+    Message,
+    MessageReaction, NonThreadGuildBasedChannel,
+    PartialMessage,
+    Role,
+    User
+} from 'discord.js';
 import * as properties from '../resources/config.json'
 import GuildHandler from "./GuildHandler";
 import GuildTools from "./GuildTools";
 
-const client = new Discord.Client({partials: ['MESSAGE', 'REACTION']});
+const client = new Discord.Client({intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES"], partials: ['MESSAGE', 'REACTION']});
 let guildHandler: GuildHandler;
 
 client.on("ready", async () => {
@@ -14,7 +23,7 @@ client.on("ready", async () => {
 
         GuildTools.deleteGuild(client, guildHandler).catch(error => console.error("Unable to delete guild on start " + error));
 
-        client.user.setPresence({activity: {name: 'with Big People!'}, status: 'online'}).catch(console.error); //Setting the bot status
+        client.user.setPresence({activities: [{name: "with Big People!", url: "https://bigman.group/"}], status: 'online'}); //Setting the bot status
         console.log("Bot has started");
     } catch (e) {
         console.error("Error starting bot: " + e.stack);
@@ -89,9 +98,9 @@ client.on('guildMemberUpdate', async (oldMember : GuildMember, newMember : Guild
     }
 })
 
-client.on('channelDelete', async (channel: GuildChannel) => {
+client.on('channelDelete', async (channel: DMChannel | NonThreadGuildBasedChannel) => {
     try {
-        if (channel.type !== "text") return;
+        if (channel.type !== "GUILD_TEXT") return;
         let channelHandler = await guildHandler.getChannelHandler(channel.guild.id);
         await channelHandler.onChannelDelete(channel.id);
     } catch (e) {

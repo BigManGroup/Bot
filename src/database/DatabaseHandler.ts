@@ -6,7 +6,7 @@ export default class Saving {
     static clientPool : MongoClient;
 
     static async initPool() : Promise<void> {
-        this.clientPool = await new MongoClient(properties.database, {useUnifiedTopology:true, useNewUrlParser:true, poolSize: 15, keepAlive: true}).connect();
+        this.clientPool = await new MongoClient(properties.database, {minPoolSize:5, maxPoolSize: 15, keepAlive: true}).connect();
     }
 }
 

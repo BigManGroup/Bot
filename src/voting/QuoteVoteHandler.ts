@@ -19,8 +19,13 @@ export default class QuoteVoteHandler extends BaseVoteHandler {
         await message.delete();
 
         if (this.centralizedMiddleware.guildMiddleware.quoteChannel !== undefined && this.centralizedMiddleware.guildMiddleware.quoteChannel !== null) {
-            let embed = new MessageEmbed().setAuthor(`${guild.members.cache.get(quote.quoteUser).displayName} - ${quote.quoteYear}`, guild.members.cache.get(quote.quoteUser).user.avatarURL()).setTitle(quote.quoteText).setFooter(`Submitted by ${guild.members.cache.get(quote.user).displayName}`);
-            await (<TextChannel>(await guild.channels.resolve(this.centralizedMiddleware.guildMiddleware.quoteChannel))).send(embed);
+            let embed = new MessageEmbed()
+                .setAuthor({name: `${guild.members.cache.get(quote.quoteUser).displayName} - ${quote.quoteYear}`, iconURL: guild.members.cache.get(quote.quoteUser).user.avatarURL()})
+                .setTitle(quote.quoteText)
+                .setFooter({text: `Submitted by ${guild.members.cache.get(quote.user).displayName}`});
+
+
+            await (<TextChannel>(await guild.channels.resolve(this.centralizedMiddleware.guildMiddleware.quoteChannel))).send({embeds: [embed]});
         }
     }
 
