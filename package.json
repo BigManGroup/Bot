@@ -1,24 +1,19 @@
 {
   "name": "bmg-bot",
-  "version": "1.0.0",
-  "description": "The Big Man Bot for Big Men",
+  "version": "2.0.0",
+  "description": "The BigMan Bot for Big Men but much more stable (and dockerised)!",
   "scripts": {
-    "start": "node out/src/index.js"
+    "start": "ts-node -r dotenv/config src/index.ts"
   },
   "main": "out/index.js",
   "author": "Jamie Stivala",
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4"
+  },
   "dependencies": {
-    "@types/cron": "^1.7.2",
-    "@types/mongodb": "^3.6.3",
-    "@types/node": "^14.14.19",
-    "@types/sharp": "^0.26.1",
-    "@types/ws": "^7.4.0",
-    "axios": "^0.21.1",
-    "cron": "^1.8.2",
-    "discord.js": "^12.5.1",
-    "mongodb": "^3.6.3",
-    "sharp": "^0.27.0",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.1.3"
+    "discord.js": "^13.6.0",
+    "mongodb": "^4.5.0"
   }
 }
