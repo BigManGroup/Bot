@@ -14,6 +14,9 @@ export default class Guild{
     badWordInformation: BadWordInformation; //Information for when someone is "bad"
     submissionGroups : SubmissionGroup[]; //Stores the information of different types of submission
     prefixes: string[]; //Stores the prefixes the bot activates with
+
+    readonly dateCreated : Date;
+    lastAccessed : Date;
 }
 
 /**
@@ -28,31 +31,8 @@ export class SubmissionGroup{
     showcaseChannelId: string;
     votingRequired: boolean;
     outputFormat? : string; //todo figure this one out!
-
-    submissions : Submission[];
 }
 
-/**
- * Stores a submission
- */
-export class Submission{
-    _id : ObjectId;
-    readonly messageId: string;
-    readonly text : string;
-    readonly submissionUser: string;
-    readonly submittedTimestamp: Date;
-    updatedTimestamp: Date;
-    state : SubmissionState;
-}
-
-/**
- * Stores the state of the submission
- */
-export enum SubmissionState{
-    ACCEPTED,
-    PENDING,
-    DENIED
-}
 
 export class BadWordInformation{
     _id : ObjectId;
