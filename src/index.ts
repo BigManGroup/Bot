@@ -1,14 +1,9 @@
-import {Client, GatewayIntentBits, Partials} from "discord.js";
+import {default as startDiscord} from "./discord/app";
+import BaseDatabaseWrapper from "./database/wrapper/BaseDatabaseWrapper";
 
-const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessageReactions], partials: [Partials.Reaction, Partials.Message]});
+async function starter(){
+    await BaseDatabaseWrapper.start();
+    await startDiscord();
+}
 
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
-});
-
-client.on("messageCreate", async (message) => {
-    if(message.partial) await message.fetch(); //If the message is a partial, fetch the message
-
-})
-
-client.login(process.env["BOT_TOKEN"]).catch(error => console.dir("Unable to start with error: " + error, {depth: null}))
+starter().catch(e => console.error(e));
