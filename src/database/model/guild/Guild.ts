@@ -7,9 +7,10 @@ import {ObjectId} from "mongodb";
 export default class Guild{
     _id : ObjectId;
     readonly guildId: string;
+    enableSlashCommands : boolean;
 
     minimumAdminRoleId: string; //The minimum admin role
-    defaultRole : string; //The default role (given to every new member)
+    newMemberRoleId : string; //The default role (given to every new member)
 
     badWordInformation: BadWordInformation; //Information for when someone is "bad"
     submissionGroups : SubmissionGroup[]; //Stores the information of different types of submission
