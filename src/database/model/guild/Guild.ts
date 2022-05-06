@@ -18,6 +18,15 @@ export default class Guild{
 
     readonly dateCreated : Date;
     lastAccessed : Date;
+
+    constructor(guildId: string) {
+        this.guildId = guildId;
+        this.enableSlashCommands = false;
+        this.submissionGroups = [];
+        this.prefixes = ["p", "plock"];
+        this.dateCreated = new Date();
+        this.lastAccessed = new Date();
+    }
 }
 
 /**
