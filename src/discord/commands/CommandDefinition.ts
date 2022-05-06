@@ -31,7 +31,7 @@ export default class CommandDefinition {
     }
 
     get runner(): Command{
-        return require(`../${this.folder}/${this.filename}`);
+        return require(`${this.folder}/${this.filename}`);
     }
 }
 
