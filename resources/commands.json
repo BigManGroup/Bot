@@ -1,10 +1,9 @@
 {
-    "commands": [
+    "tools": [
         {
             "filename": "Ping",
             "command": "ping",
             "description": "pings the bot",
-            "folder": "tools",
             "hidden": false,
             "prefix": true,
             "permissions": ["SEND_MESSAGES"]
@@ -13,7 +12,6 @@
             "filename": "ShowAvatar",
             "command": "avatar",
             "description": "check your avatar or the person you mentioned",
-            "folder": "tools",
             "hidden": false,
             "prefix": true,
             "permissions": ["SEND_MESSAGES"]
@@ -22,25 +20,16 @@
             "filename": "Help",
             "command": "help",
             "description": "shows this, dumbass",
-            "folder": "tools",
             "hidden": false,
             "prefix": true,
             "permissions": ["SEND_MESSAGES"]
-        },
+        }
+    ],
+    "general": [
         {
-            "filename": "PrintRoast",
-            "command": "roast",
-            "description": "roast yourself or the person you mentioned",
-            "folder": "general",
-            "hidden": false,
-            "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
-        },
-        {
-            "filename": "PrintLenny",
-            "command": "lenny",
-            "description": "gives you or the person you tagged a random lenny",
-            "folder": "general",
+            "filename": "HowBig",
+            "command": "howbig",
+            "description": "tells you how big of a man you are",
             "hidden": false,
             "prefix": true,
             "permissions": ["SEND_MESSAGES"]
@@ -55,32 +44,41 @@
             "permissions": ["SEND_MESSAGES"]
         },
         {
-            "filename": "QuoteLeadership",
-            "command": "quote leadership",
-            "description": "prints leadership of quotes",
-            "folder": "admin",
-            "hidden": false,
-            "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
-        },
-        {
-            "filename": "HowBig",
-            "command": "howbig",
-            "description": "tells you how big of a man you are",
-            "folder": "general",
-            "hidden": false,
-            "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
-        },
-        {
             "filename": "Black",
             "command": "black",
             "description": "makes the person tagged black",
-            "folder": "general",
+            "hidden": false,
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
+        }
+    ],
+    "game": [
+        {
+            "filename": "CoinFlip",
+            "command": "coinflip",
+            "description": "you are dumb if you don't understand this",
             "hidden": false,
             "prefix": true,
             "permissions": ["SEND_MESSAGES"]
         },
+        {
+            "filename": "TitsOrAss",
+            "command": "titsorass",
+            "description": "you are dumb if you don't understand this",
+            "hidden": false,
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
+        },
+        {
+            "filename": "RockPaperScissors",
+            "command": "rps",
+            "description": "a simple rock paper scissors game",
+            "hidden": false,
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
+        }
+    ],
+    "admin": [
         {
             "filename": "Purge",
             "command": "purge",
@@ -94,54 +92,8 @@
             "filename": "Sinners",
             "command": "sinners",
             "description": "shows the people that have wronged our all-mighty plock god",
-            "folder": "general",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
-        },
-        {
-            "filename": "CoinFlip",
-            "command": "coinflip",
-            "description": "you are dumb if you don't understand this",
-            "folder": "game",
-            "hidden": false,
-            "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
-        },
-        {
-            "filename": "TitsOrAss",
-            "command": "titsorass",
-            "description": "you are dumb if you don't understand this",
-            "folder": "game",
-            "hidden": false,
-            "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
-        },
-        {
-            "filename": "RockPaperScissors",
-            "command": "rps",
-            "description": "a simple rock paper scissors game",
-            "folder": "game",
-            "hidden": false,
-            "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
-        },
-        {
-            "filename": "NoU",
-            "command": "no u",
-            "description": "sends no u after every command",
-            "folder": "nou",
-            "hidden": true,
-            "prefix": false,
-            "permissions": ["SEND_MESSAGES"]
-        },
-        {
-            "filename": "UrMumGay",
-            "command": "urmumgay",
-            "description": "sends no u after every command",
-            "folder": "nou",
-            "hidden": true,
-            "prefix": false,
             "permissions": ["SEND_MESSAGES"]
         }
     ]
