@@ -1,6 +1,7 @@
 {
     "tools": [
         {
+            "id": "ping",
             "filename": "Ping",
             "command": "ping",
             "description": "pings the bot",
@@ -9,6 +10,7 @@
             "permissions": ["SEND_MESSAGES"]
         },
         {
+            "id": "showavatar",
             "filename": "ShowAvatar",
             "command": "avatar",
             "description": "check your avatar or the person you mentioned",
@@ -17,6 +19,7 @@
             "permissions": ["SEND_MESSAGES"]
         },
         {
+            "id": "help",
             "filename": "Help",
             "command": "help",
             "description": "shows this, dumbass",
@@ -27,6 +30,7 @@
     ],
     "general": [
         {
+            "id": "howbig",
             "filename": "HowBig",
             "command": "howbig",
             "description": "tells you how big of a man you are",
@@ -35,6 +39,7 @@
             "permissions": ["SEND_MESSAGES"]
         },
         {
+            "id": "peepee",
             "filename": "PeePee",
             "command": "peepee",
             "description": "gives you or the person tagged the peepee",
@@ -44,6 +49,7 @@
             "permissions": ["SEND_MESSAGES"]
         },
         {
+            "id": "black",
             "filename": "Black",
             "command": "black",
             "description": "makes the person tagged black",
@@ -54,6 +60,7 @@
     ],
     "game": [
         {
+            "id": "coinflip",
             "filename": "CoinFlip",
             "command": "coinflip",
             "description": "you are dumb if you don't understand this",
@@ -62,6 +69,7 @@
             "permissions": ["SEND_MESSAGES"]
         },
         {
+            "id": "titsorass",
             "filename": "TitsOrAss",
             "command": "titsorass",
             "description": "you are dumb if you don't understand this",
@@ -70,6 +78,7 @@
             "permissions": ["SEND_MESSAGES"]
         },
         {
+            "id": "rockpaperscissors",
             "filename": "RockPaperScissors",
             "command": "rps",
             "description": "a simple rock paper scissors game",
@@ -80,15 +89,16 @@
     ],
     "admin": [
         {
+            "id": "purge",
             "filename": "Purge",
             "command": "purge",
             "description": "purge as many messages as you would like out of existence (default 5)",
-            "folder": "admin",
             "hidden": false,
             "prefix": true,
             "permissions": ["SEND_MESSAGES", "MANAGE_MESSAGES"]
         },
         {
+            "id": "sinners",
             "filename": "Sinners",
             "command": "sinners",
             "description": "shows the people that have wronged our all-mighty plock god",
