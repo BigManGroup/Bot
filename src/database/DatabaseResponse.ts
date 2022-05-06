@@ -43,8 +43,8 @@ export default class DatabaseResponse{
     /**
      * The response for when a field is properly added
      */
-    static fieldAdded(id: ObjectId): Response {
-        return new Response(201, "Field added");
+    static fieldAdded<T>(type?: T): DetailedResponse<T> {
+        return new Response(201, "Field added", type);
     }
 
     /**
