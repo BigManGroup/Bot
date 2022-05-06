@@ -1,12 +1,13 @@
 import {ObjectId} from "mongodb";
+import BaseObject from "../../../tools/BaseObject";
 
 /**
  * Stores all the information about the guild
  * TODO Poll?
  */
-export default class Guild{
+export default class Guild extends BaseObject{
     _id : ObjectId;
-    readonly guildId: string;
+    readonly id: string;
     enableSlashCommands : boolean;
 
     minimumAdminRoleId: string; //The minimum admin role
@@ -19,8 +20,9 @@ export default class Guild{
     readonly dateCreated : Date;
     lastAccessed : Date;
 
-    constructor(guildId: string) {
-        this.guildId = guildId;
+    constructor(id: string) {
+        super();
+        this.id = id;
         this.enableSlashCommands = false;
         this.submissionGroups = [];
         this.prefixes = ["p", "plock"];
