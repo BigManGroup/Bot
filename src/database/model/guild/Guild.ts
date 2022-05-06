@@ -15,6 +15,8 @@ export default class Guild extends BaseObject{
 
     badWordInformation: BadWordInformation; //Information for when someone is "bad"
     submissionGroups : SubmissionGroup[]; //Stores the information of different types of submission
+    commandOptions : CommandOptions[]; //Stores command options such as if a command is disabled, custom command string, etc
+
     prefixes: string[]; //Stores the prefixes the bot activates with
 
     readonly dateCreated : Date;
@@ -25,6 +27,7 @@ export default class Guild extends BaseObject{
         this.id = id;
         this.enableSlashCommands = false;
         this.submissionGroups = [];
+        this.commandOptions = [];
         this.prefixes = ["p", "plock"];
         this.dateCreated = new Date();
         this.lastAccessed = new Date();
@@ -39,16 +42,37 @@ export default class Guild extends BaseObject{
 export class SubmissionGroup{
     _id : ObjectId;
     submissionGroupName: string;
+
     votingChannelId: string;
     showcaseChannelId: string;
-    votingRequired: boolean;
+
+    randomPrintCommand: RegExp | string;
+    canBeDirected: boolean;
+
+    type: SubmissionType;
+
     outputFormat? : string; //todo figure this one out!
 }
 
+enum SubmissionType{
+    VOTING,
+    VOTING_BYPASS_ADMIN,
+    NO_VOTE
+}
 
 export class BadWordInformation{
     _id : ObjectId;
     badRoleId: string;
     badWords: string[];
     wordExceptions: string[];
+}
+
+export class CommandOptions{
+    _id : ObjectId;
+    _guildReference: ObjectId;
+
+    commandId: string;
+    customCommand: RegExp | string;
+    description: string;
+    disabled: boolean;
 }
