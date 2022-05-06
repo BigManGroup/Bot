@@ -3,7 +3,7 @@
         {
             "id": "ping",
             "filename": "Ping",
-            "command": "ping",
+            "commands": ["ping"],
             "description": "pings the bot",
             "hidden": false,
             "prefix": true,
@@ -12,7 +12,7 @@
         {
             "id": "showavatar",
             "filename": "ShowAvatar",
-            "command": "avatar",
+            "commands": ["avatar", "show avatar"],
             "description": "check your avatar or the person you mentioned",
             "hidden": false,
             "prefix": true,
@@ -21,7 +21,7 @@
         {
             "id": "help",
             "filename": "Help",
-            "command": "help",
+            "commands": ["help"],
             "description": "shows this, dumbass",
             "hidden": false,
             "prefix": true,
@@ -32,7 +32,7 @@
         {
             "id": "howbig",
             "filename": "HowBig",
-            "command": "howbig",
+            "commands": ["howbig", "how big"],
             "description": "tells you how big of a man you are",
             "hidden": false,
             "prefix": true,
@@ -41,7 +41,7 @@
         {
             "id": "peepee",
             "filename": "PeePee",
-            "command": "peepee",
+            "commands": ["peepee"],
             "description": "gives you or the person tagged the peepee",
             "folder": "general",
             "hidden": false,
@@ -51,7 +51,7 @@
         {
             "id": "black",
             "filename": "Black",
-            "command": "black",
+            "commands": ["black"],
             "description": "makes the person tagged black",
             "hidden": false,
             "prefix": true,
@@ -62,7 +62,7 @@
         {
             "id": "coinflip",
             "filename": "CoinFlip",
-            "command": "coinflip",
+            "commands": ["coinflip", "coin flip"],
             "description": "you are dumb if you don't understand this",
             "hidden": false,
             "prefix": true,
@@ -71,7 +71,7 @@
         {
             "id": "titsorass",
             "filename": "TitsOrAss",
-            "command": "titsorass",
+            "commands": ["titsorass", "tits or ass"],
             "description": "you are dumb if you don't understand this",
             "hidden": false,
             "prefix": true,
@@ -80,7 +80,7 @@
         {
             "id": "rockpaperscissors",
             "filename": "RockPaperScissors",
-            "command": "rps",
+            "commands": ["rps", "rock paper scissors", "rockpaperscissors"],
             "description": "a simple rock paper scissors game",
             "hidden": false,
             "prefix": true,
@@ -91,19 +91,21 @@
         {
             "id": "purge",
             "filename": "Purge",
-            "command": "purge",
+            "commands": ["purge"],
             "description": "purge as many messages as you would like out of existence (default 5)",
             "hidden": false,
             "prefix": true,
+            "adminOnly": true,
             "permissions": ["SEND_MESSAGES", "MANAGE_MESSAGES"]
         },
         {
             "id": "sinners",
             "filename": "Sinners",
-            "command": "sinners",
+            "commands": ["sinners"],
             "description": "shows the people that have wronged our all-mighty plock god",
             "hidden": false,
             "prefix": true,
+            "adminOnly": true,
             "permissions": ["SEND_MESSAGES"]
         }
     ]
