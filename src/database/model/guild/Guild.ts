@@ -68,11 +68,8 @@ export class BadWordInformation{
 }
 
 export class CommandOptions{
-    _id : ObjectId;
-    _guildReference: ObjectId;
-
     commandId: string;
-    customCommand: RegExp | string;
+    customCommands: string[];
     description: string;
     disabled: boolean;
 }
