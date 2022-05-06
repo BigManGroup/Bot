@@ -1,35 +1,44 @@
 # BigMan Bot 
 
 ## Features/Commands
-#### Admin Features:
-    - [x] Change How Big
-    - [x] Change PeePee size
-    - [x] Print quote submission leaderboard
-    
+
 #### General Features
-    - [x] HowBig -> Generates or gets a big number from database
-    - [x] PeePee -> Generates or gets peepee size from database
-    - [x] Print Lenny -> Gets a random lenny from database and submits it
-    - [x] Print Roast -> Gets a random roast from database and sends it 
-    - [x] Sinners -> Prints out the people that said the P Word
+    - [ ] HowBig -> Generates or gets a big number from database
+    - [ ] PeePee -> Generates or gets peepee size from database
+    - [ ] Print Lenny -> Gets a random lenny from database and submits it
+    - [ ] Print Roast -> Gets a random roast from database and sends it 
+    - [ ] Sinners -> Prints out the people that said the P Word
 
 #### Submission Features
-    - [x] Submit Quote -> Ability to submit a quote, and have bigman vote if it gets approved
-        - [x] -> If the user that submitted the quote, presses X, it will automatically decline and delete the quote
-        - [x] -> If a message is deleted from the big-man-quotes or big-man-quotes-submissions, it will automatically decline and delete the quote 
-    - [x] Submit Roast -> Ability to submit a roast, and have bigman vote if it gets approved
-    - [x] Submit Insult -> Ability to submit an insult, and have bigman vote if it gets approved
+    - [ ] Submit Quote -> Ability to submit a quote, and have bigman vote if it gets approved
+        - [ ] -> If the user that submitted the quote, presses X, it will automatically decline and delete the quote
+        - [ ] -> If a message is deleted from the big-man-quotes or big-man-quotes-submissions, it will automatically decline and delete the quote 
+    - [ ] Submit Roast -> Ability to submit a roast, and have bigman vote if it gets approved
+    - [ ] Submit Insult -> Ability to submit an insult, and have bigman vote if it gets approved
     
 #### Tools
-    - [x] Help -> Prints out a list of commands
-    - [x] Ping -> Pings the bot
-    - [x] Avatar -> Shows a user's avatar
+    - [ ] Help -> Prints out a list of commands
+    - [ ] Ping -> Pings the bot
+    - [ ] Avatar -> Shows a user's avatar
     
 #### Other Features
-    - [x] Message Interceptor, so that when people say the P Word they are muted until they say plock
-    - [x] Message Interceptor on edit
-    - [x] Multiple Prefixes
+    - [ ] Message Interceptor, so that when people say the P Word they are muted until they say plock
+    - [ ] Message Interceptor on edit
+    - [ ] Multiple Prefixes
     
 #### Notable technical features
-    - Ability to reset bot and still recieve reactions for messages and vote
-    - Dynamically loaded commands
+    - [ ] Permission loading and checking if feature possible per guild 
+
+### Front-end Features:
+
+#### Admin Side
+    - [ ] Change How Big
+    - [ ] Change PeePee size
+    - [ ] Enable/Disable commands
+    - [ ] Update submission channels
+    - [ ] Change minimum admin role
+    - [ ] Statistics of amount of [certian] submssion
+
+#### General User Side
+    - [ ] View the commands available to a server
+    - [ ] View a nice leaderboard of bad people/submissions/etc with filtering
