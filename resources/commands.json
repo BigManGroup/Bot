@@ -6,7 +6,8 @@
             "description": "pings the bot",
             "folder": "tools",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "ShowAvatar",
@@ -14,7 +15,8 @@
             "description": "check your avatar or the person you mentioned",
             "folder": "tools",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "Help",
@@ -22,7 +24,8 @@
             "description": "shows this, dumbass",
             "folder": "tools",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "PrintRoast",
@@ -30,7 +33,8 @@
             "description": "roast yourself or the person you mentioned",
             "folder": "general",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "PrintLenny",
@@ -38,7 +42,8 @@
             "description": "gives you or the person you tagged a random lenny",
             "folder": "general",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "PeePee",
@@ -46,15 +51,8 @@
             "description": "gives you or the person tagged the peepee",
             "folder": "general",
             "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangePeePee",
-            "command": "change peepee",
-            "description": "changes the peepee size of you or the person you tagged",
-            "folder": "admin",
-            "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "QuoteLeadership",
@@ -62,7 +60,8 @@
             "description": "prints leadership of quotes",
             "folder": "admin",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "HowBig",
@@ -70,7 +69,8 @@
             "description": "tells you how big of a man you are",
             "folder": "general",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "Black",
@@ -78,103 +78,8 @@
             "description": "makes the person tagged black",
             "folder": "general",
             "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangeHowBig",
-            "command": "change howbig",
-            "description": "changes the big amount of you or the person you tagged",
-            "folder": "admin",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangeBigManRole",
-            "command": "change bigman role",
-            "description": "changes the role of bigman",
-            "folder": "admin/role",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangeGeneralRole",
-            "command": "change general role",
-            "description": "changes the general role",
-            "folder": "admin/role",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangeBadmanRole",
-            "command": "change badman role",
-            "description": "changes the badman role",
-            "folder": "admin/role",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangeQuoteChannel",
-            "command": "change quote channel",
-            "description": "changes the quote channel",
-            "folder": "admin/channel",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangeQuoteSubmissionChannel",
-            "command": "change quote submission channel",
-            "description": "changes the quote submission channel",
-            "folder": "admin/channel",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangeInsultSubmissionChannel",
-            "command": "change insult submission channel",
-            "description": "changes the insult submission channel",
-            "folder": "admin/channel",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangeRoastSubmissionChannel",
-            "command": "change roast submission channel",
-            "description": "changes the roast channel",
-            "folder": "admin/channel",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ChangeMusicChannel",
-            "command": "change music channel",
-            "description": "changes the music channel",
-            "folder": "admin/channel",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "ListPrefixes",
-            "command": "list prefixes",
-            "description": "lists all the prefixes",
-            "folder": "admin/prefixes",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "AddPrefix",
-            "command": "add prefix",
-            "description": "add a prefix",
-            "folder": "admin/prefixes",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "RemovePrefix",
-            "command": "remove prefix",
-            "description": "remove a prefix",
-            "folder": "admin/prefixes",
-            "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "Purge",
@@ -182,7 +87,8 @@
             "description": "purge as many messages as you would like out of existence (default 5)",
             "folder": "admin",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES", "MANAGE_MESSAGES"]
         },
         {
             "filename": "Sinners",
@@ -190,7 +96,8 @@
             "description": "shows the people that have wronged our all-mighty plock god",
             "folder": "general",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "CoinFlip",
@@ -198,7 +105,8 @@
             "description": "you are dumb if you don't understand this",
             "folder": "game",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "TitsOrAss",
@@ -206,7 +114,8 @@
             "description": "you are dumb if you don't understand this",
             "folder": "game",
             "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "RockPaperScissors",
@@ -214,31 +123,8 @@
             "description": "a simple rock paper scissors game",
             "folder": "game",
             "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "SubmitQuote",
-            "command": "submit quote",
-            "description": "Submit a quote, that can be accepted only by **BIGMAN**",
-            "folder": "submissions",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "SubmitRoast",
-            "command": "submit roast",
-            "description": "Submit a roast, that can be accepted only by **BIGMAN**",
-            "folder": "submissions",
-            "hidden": false,
-            "prefix": true
-        },
-        {
-            "filename": "SubmitInsult",
-            "command": "submit insult",
-            "description": "Submit an insult, that can be accepted only by **BIGMAN**",
-            "folder": "submissions",
-            "hidden": false,
-            "prefix": true
+            "prefix": true,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "NoU",
@@ -246,7 +132,8 @@
             "description": "sends no u after every command",
             "folder": "nou",
             "hidden": true,
-            "prefix": false
+            "prefix": false,
+            "permissions": ["SEND_MESSAGES"]
         },
         {
             "filename": "UrMumGay",
@@ -254,7 +141,8 @@
             "description": "sends no u after every command",
             "folder": "nou",
             "hidden": true,
-            "prefix": false
+            "prefix": false,
+            "permissions": ["SEND_MESSAGES"]
         }
     ]
 }
