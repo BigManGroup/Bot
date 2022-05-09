@@ -46,6 +46,7 @@ export class SubmissionGroup{
     votingChannelId: string;
     showcaseChannelId: string;
 
+    //todo custom emojis
     randomPrintCommand: RegExp | string;
     canBeDirected: boolean;
 
