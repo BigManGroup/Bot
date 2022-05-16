@@ -1,7 +1,8 @@
 import * as jsonCommands from './commands.json'
-import CommandDefinition, {ICommandDefinition} from "./CommandDefinition";
+import CommandDefinition, {ICommandDefinition} from "./definitions/CommandDefinition";
 import GuildCache from "../../database/cache/GuildCache";
 import {Message} from "discord.js";
+import FormattedMessage from "./definitions/FormattedMessage";
 
 class CommandRunner{
     private commandDefinitions : CommandDefinition[];
@@ -53,10 +54,13 @@ class CommandRunner{
             let command = this.extractCommand(content, prefix !== undefined);
 
             if(!command) return; //no command was found
+            let formattedMessage = new FormattedMessage(message, prefix, content);
 
-
+            command.runner.run(formattedMessage).catch(error => {
+                console.error("Error thrown during running of command: ", formattedMessage);
+                console.error(error);
+            });
         });
-        //Check if the command has a prefix right now
     }
 }
 
