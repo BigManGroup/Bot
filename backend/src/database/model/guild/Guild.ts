@@ -28,7 +28,7 @@ export default class Guild extends BaseObject{
         this.enableSlashCommands = false;
         this.submissionGroups = [];
         this.commandOptions = [];
-        this.prefixes = ["p", "plock"];
+        this.prefixes = process.env["BOT_DEFAULT_PREFIXES"].split(" ");
         this.dateCreated = new Date();
         this.lastAccessed = new Date();
     }
