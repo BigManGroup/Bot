@@ -54,6 +54,11 @@ class CommandRunner{
             let command = this.extractCommand(content, prefix !== undefined);
 
             if(!command) return; //no command was found
+            /**
+             * TODO:
+             *  Build custom guild command definition
+             *  Make sure there are permissions (incl Internal Admin Permissions & External discord permisisons)
+             */
             let formattedMessage = new FormattedMessage(message, prefix, content);
 
             command.runner.run(formattedMessage).catch(error => {
