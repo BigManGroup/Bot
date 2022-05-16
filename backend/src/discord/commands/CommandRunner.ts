@@ -8,8 +8,15 @@ export class CommandRunner{
         this.commandDefinitions = CommandRunner.extractCommandDefinition();
     }
 
-    private hasPrefix(content: string){
+    private async extractPrefix(message: Message) : Promise <string|undefined>{
+        let guild = await GuildCache.getGuild(message.guild.id);
+        let guildPrefix = guild.additionalInformation.prefixes;
 
+        let prefixFound = guildPrefix
+            .filter(value => message.content.startsWith(value))
+            .sort((a,b) => b.length - a.length)[0]; //Get the longest item in the array
+
+        return prefixFound ?? undefined;
     }
 
     //Extracts the command by searching for it using recursion
