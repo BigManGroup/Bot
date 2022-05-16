@@ -1,9 +1,11 @@
-import Command from "../Command";
+import Command from "../definitions/Command";
 import {Message} from "discord.js";
+import FormattedMessage from "../definitions/FormattedMessage";
 
-export default class Ping extends Command{
-    run(message: Message): Promise<void> {
-        return Promise.resolve(undefined);
+class Ping extends Command{
+    async run(formattedMessage: FormattedMessage): Promise<void> {
+        console.log("waw!")
     }
-
 }
+
+export default (new Ping());
