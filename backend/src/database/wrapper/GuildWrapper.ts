@@ -10,7 +10,7 @@ class GuildWrapper extends BaseDatabaseWrapper{
     }
 
     async getGuild(guildId: string) : Promise<DetailedResponse<Guild>>{
-        let currentGuild = await this.collection.findOne<Guild>({"guild": guildId});
+        let currentGuild = await this.collection.findOne<Guild>({"id": guildId});
 
         if(!currentGuild){
             let createdGuild = await this.createGuild(guildId);
