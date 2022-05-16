@@ -59,3 +59,5 @@ class CommandRunner{
         //Check if the command has a prefix right now
     }
 }
+
+export default (new CommandRunner());
