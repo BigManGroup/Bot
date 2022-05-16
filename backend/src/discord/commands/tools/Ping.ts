@@ -4,7 +4,9 @@ import FormattedMessage from "../definitions/FormattedMessage";
 
 class Ping extends Command{
     async run(formattedMessage: FormattedMessage): Promise<void> {
-        console.log("waw!")
+        let timestamp = new Date();
+        formattedMessage.message.channel.send("Pong")
+            .then(message => message.edit(`Pong *(${(new Date().getTime() - timestamp.getTime())}ms)*`))
     }
 }
 
