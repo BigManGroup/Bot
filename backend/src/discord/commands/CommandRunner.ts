@@ -1,7 +1,9 @@
 import * as jsonCommands from './commands.json'
 import CommandDefinition, {ICommandDefinition} from "./CommandDefinition";
+import GuildCache from "../../database/cache/GuildCache";
+import {Message} from "discord.js";
 
-export class CommandRunner{
+class CommandRunner{
     private commandDefinitions : CommandDefinition[];
 
     constructor() {
@@ -20,8 +22,10 @@ export class CommandRunner{
     }
 
     //Extracts the command by searching for it using recursion
-    private extractCommand(messageContent: string): CommandDefinition | undefined {
-        let validCommands = this.commandDefinitions.filter(value => value.commandRegex.test(messageContent));
+    private extractCommand(messageContent: string, prefix: boolean): CommandDefinition | undefined {
+        let validCommands = this.commandDefinitions
+            .filter(value => (value.commandRegex.test(messageContent)) && (value.prefix === prefix));
+
         return validCommands[0];
     }
 
@@ -40,5 +44,18 @@ export class CommandRunner{
         });
 
         return commands;
+    }
+
+    public runCommand(message: Message) : Promise<void>{
+        return new Promise<void>(async () => {
+            let prefix = await this.extractPrefix(message);
+            let content = prefix ? message.content.substring(prefix.length + 1, message.content.length) : message.content;
+            let command = this.extractCommand(content, prefix !== undefined);
+
+            if(!command) return; //no command was found
+
+
+        });
+        //Check if the command has a prefix right now
     }
 }
