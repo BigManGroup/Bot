@@ -1,6 +1,7 @@
 import {Client, GatewayIntentBits, Partials} from "discord.js";
+import CommandRunner from "./commands/CommandRunner";
 
-const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessageReactions], partials: [Partials.Reaction, Partials.Message]});
+const client = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessageReactions, GatewayIntentBits.MessageContent], partials: [Partials.Reaction, Partials.Message]});
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
@@ -9,6 +10,7 @@ client.on('ready', () => {
 client.on("messageCreate", async (message) => {
     if(message.partial) await message.fetch(); //If the message is a partial, fetch the message
 
+    CommandRunner.runCommand(message).catch(error => console.log("Failed to run command due to error: " + error));
 })
 
 export default async function start(){
