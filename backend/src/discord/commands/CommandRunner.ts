@@ -1,10 +1,10 @@
 import * as jsonCommands from './commands.json'
 import CommandDefinition, {ICommandDefinition} from "./definitions/CommandDefinition";
 import GuildCache from "../../database/cache/GuildCache";
-import {Message} from "discord.js";
+import {Message, PermissionResolvable, PermissionsBitField} from "discord.js";
 import FormattedMessage from "./definitions/FormattedMessage";
-import {CommandOptions} from "../../database/model/guild/Guild";
 import GuildCommandDefinition from "./definitions/GuildCommandDefinition";
+import isAdminMember from "../helpers/IsAdminMember";
 
 class CommandRunner{
     private readonly defaultCommandDefinitions : CommandDefinition[];
@@ -54,27 +54,35 @@ class CommandRunner{
 
     public runCommand(message: Message) : Promise<void>{
         return new Promise<void>(async () => {
+            //Check if the command has a prefix or not
             let prefix = await this.extractPrefix(message);
             let content = prefix ? message.content.substring(prefix.length + 1, message.content.length) : message.content;
+            //Check if the command has a prefix or not
 
             //Get the guild command definitions
             let guild = await GuildCache.getGuild(message.guildId);
             let customCommandDefinitions = guild.additionalInformation.getFormattedCommandOptions(this.defaultCommandDefinitions);
             //Get the guild command definitions
 
+            //Extract the command (checking for prefix) and custom command definitions
             let command = this.extractCommand(content, prefix !== undefined, customCommandDefinitions);
             if(!command) return; //no command was found
+            //Extract the command (checking for prefix)
 
-            /**
-             * TODO:
-             *  Make sure there are permissions (incl Internal Admin Permissions & External discord permisisons)
-             */
+            if(command.adminOnly && !(await isAdminMember(message.member, message.guild))) return; //If command admin only and the command does not exist, return
+
+            //If the bot does not have permission to run the command, return
+            let permissionResolvable = PermissionsBitField.resolve(command.permissions as PermissionResolvable);
+            if(!(message.guild.me.permissions.has(permissionResolvable))) return;
+            //If the bot does not have permission to run the command, return
+
+            //Run the command
             let formattedMessage = new FormattedMessage(message, prefix, content, command);
-
             command.runner.run(formattedMessage).catch(error => {
                 console.error("Error thrown during running of command: ", formattedMessage);
                 console.error(error);
             });
+            //Run the command
         });
     }
 }
