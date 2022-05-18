@@ -3,12 +3,14 @@ import CommandDefinition, {ICommandDefinition} from "./definitions/CommandDefini
 import GuildCache from "../../database/cache/GuildCache";
 import {Message} from "discord.js";
 import FormattedMessage from "./definitions/FormattedMessage";
+import {CommandOptions} from "../../database/model/guild/Guild";
+import GuildCommandDefinition from "./definitions/GuildCommandDefinition";
 
 class CommandRunner{
-    private commandDefinitions : CommandDefinition[];
+    private readonly defaultCommandDefinitions : CommandDefinition[];
 
     constructor() {
-        this.commandDefinitions = CommandRunner.extractCommandDefinition();
+        this.defaultCommandDefinitions = CommandRunner.extractCommandDefinition();
     }
 
     private async extractPrefix(message: Message) : Promise <string|undefined>{
@@ -23,9 +25,12 @@ class CommandRunner{
     }
 
     //Extracts the command by searching for it using recursion
-    private extractCommand(messageContent: string, prefix: boolean): CommandDefinition | undefined {
-        let validCommands = this.commandDefinitions
-            .filter(value => (value.commandRegex.test(messageContent)) && (value.prefix === prefix));
+    private extractCommand(messageContent: string, prefix: boolean, commandDefinitions? : CommandDefinition[]): CommandDefinition | undefined {
+        let query = commandDefinitions ?? this.defaultCommandDefinitions;
+
+        let validCommands = query
+            .filter(value => (value.commandRegex.test(messageContent)) && (value.prefix === prefix))
+            .filter(value => (!(value instanceof GuildCommandDefinition)) || (value instanceof GuildCommandDefinition && !value.disabled));
 
         return validCommands[0];
     }
@@ -51,15 +56,20 @@ class CommandRunner{
         return new Promise<void>(async () => {
             let prefix = await this.extractPrefix(message);
             let content = prefix ? message.content.substring(prefix.length + 1, message.content.length) : message.content;
-            let command = this.extractCommand(content, prefix !== undefined);
 
+            //Get the guild command definitions
+            let guild = await GuildCache.getGuild(message.guildId);
+            let customCommandDefinitions = guild.additionalInformation.getFormattedCommandOptions(this.defaultCommandDefinitions);
+            //Get the guild command definitions
+
+            let command = this.extractCommand(content, prefix !== undefined, customCommandDefinitions);
             if(!command) return; //no command was found
+
             /**
              * TODO:
-             *  Build custom guild command definition
              *  Make sure there are permissions (incl Internal Admin Permissions & External discord permisisons)
              */
-            let formattedMessage = new FormattedMessage(message, prefix, content);
+            let formattedMessage = new FormattedMessage(message, prefix, content, command);
 
             command.runner.run(formattedMessage).catch(error => {
                 console.error("Error thrown during running of command: ", formattedMessage);
