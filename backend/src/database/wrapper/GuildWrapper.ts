@@ -1,5 +1,5 @@
 import BaseDatabaseWrapper from "./BaseDatabaseWrapper";
-import Guild from "../model/guild/Guild";
+import Guild, {IDatabaseGuild} from "../model/guild/Guild";
 import {MongoError, ObjectId} from "mongodb";
 import DetailedResponse from "../../tools/response/DetailedResponse";
 import DatabaseResponse from "../DatabaseResponse";
@@ -10,7 +10,7 @@ class GuildWrapper extends BaseDatabaseWrapper{
     }
 
     async getGuild(guildId: string) : Promise<DetailedResponse<Guild>>{
-        let currentGuild = await this.collection.findOne<Guild>({"id": guildId});
+        let currentGuild = await this.collection.findOne<IDatabaseGuild>({"id": guildId});
 
         if(!currentGuild){
             let createdGuild = await this.createGuild(guildId);
@@ -18,15 +18,15 @@ class GuildWrapper extends BaseDatabaseWrapper{
             else currentGuild = createdGuild.additionalInformation;
         }
 
-        return DatabaseResponse.fieldsFound<Guild>(currentGuild);
+        return DatabaseResponse.fieldsFound<Guild>(new Guild(currentGuild));
     }
 
     private async createGuild(guildId: string) : Promise<DetailedResponse<Guild>>{
-        let creatingGuild : Guild = new Guild(guildId);
+        let creatingGuild : Guild = new Guild({_id: undefined, id: guildId});
         try {
             let createdGuild = await this.collection.insertOne(creatingGuild);
             creatingGuild._id = createdGuild.insertedId;
-            return DatabaseResponse.fieldAdded<Guild>(creatingGuild);
+            return DatabaseResponse.fieldAdded<Guild>(new Guild(createdGuild as unknown as IDatabaseGuild));
         }catch (error){
             if(error instanceof MongoError) return DatabaseResponse.errorMapper(error);
         }
