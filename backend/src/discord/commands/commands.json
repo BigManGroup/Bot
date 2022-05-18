@@ -7,7 +7,7 @@
             "description": "pings the bot",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         },
         {
             "id": "showavatar",
@@ -16,7 +16,7 @@
             "description": "check your avatar or the person you mentioned",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         },
         {
             "id": "help",
@@ -25,7 +25,7 @@
             "description": "shows this, dumbass",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         }
     ],
     "general": [
@@ -36,7 +36,7 @@
             "description": "tells you how big of a man you are",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         },
         {
             "id": "peepee",
@@ -46,7 +46,7 @@
             "folder": "general",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         },
         {
             "id": "black",
@@ -55,7 +55,7 @@
             "description": "makes the person tagged black",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         }
     ],
     "game": [
@@ -66,7 +66,7 @@
             "description": "you are dumb if you don't understand this",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         },
         {
             "id": "titsorass",
@@ -75,7 +75,7 @@
             "description": "you are dumb if you don't understand this",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         },
         {
             "id": "rockpaperscissors",
@@ -84,7 +84,7 @@
             "description": "a simple rock paper scissors game",
             "hidden": false,
             "prefix": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         }
     ],
     "admin": [
@@ -96,7 +96,7 @@
             "hidden": false,
             "prefix": true,
             "adminOnly": true,
-            "permissions": ["SEND_MESSAGES", "MANAGE_MESSAGES"]
+            "permissions": ["SendMessages", "ManageMessages"]
         },
         {
             "id": "sinners",
@@ -106,7 +106,7 @@
             "hidden": false,
             "prefix": true,
             "adminOnly": true,
-            "permissions": ["SEND_MESSAGES"]
+            "permissions": ["SendMessages"]
         }
     ]
 }
